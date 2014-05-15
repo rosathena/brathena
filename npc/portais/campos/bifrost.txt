@@ -1,0 +1,52 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |	
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: bifrost.txt                            |	
+//   |--------------------------------------------------------|
+//   | Criado por: brA Dev. Team                              |
+//   |--------------------------------------------------------|
+//   | Versões brA: 1.2                                       |
+//   |--------------------------------------------------------|
+//   | Descrição: Portais dos Campos de Bifrost.              |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Protimus]                        |
+//   | 1.1 Adicionados todos os portais. [Protimus]           |
+//   | 1.2 Removidos portais duplicados de 1@mist [Hold]      |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+// Entrada para Bifrost
+splendide,275,390,0	warp	bifrost_field0001	1,1,bif_fild01,316,50
+bif_fild01,318,48,0	warp	bifrost_field0002	1,1,splendide,275,387
+mora,182,74,0	warp	bifrost_field0003	1,1,bif_fild02,285,330
+mora,20,159,0	warp	bifrost_field0004	1,1,bif_fild02,98,309
+mora,56,25,0	warp	bifrost_field0005	1,1,bif_fild02,177,162
+
+-	script	bifrost_field0000	-1,{
+	mes "At the end of the small path through the bright flower garden";
+	mes "is an entrance to something that looks like a small hill.";
+	next;
+	if (select("Knock-knock:Is this a wormhole?") == 1) {
+		mes "When you knock on the door-like thing just for fun,";
+		mes "the door clicks open and you feel some mysterious force pulling you inside.";
+		close2;
+		switch(atoi(charat(strnpcinfo(2),9))) {
+			case 1: warp "mora",179,74; end;
+			case 2: warp "mora",22,157; end;
+			case 3: warp "mora",58,27; end;
+		}
+	}
+	close;
+}
+bif_fild02,285,333,0	duplicate(bifrost_field0000)	Small Hole#ep14_mora1	CLEAR_NPC
+bif_fild02,95,310,0	duplicate(bifrost_field0000)	Small Hole#ep14_mora2	CLEAR_NPC
+bif_fild02,174,162,0	duplicate(bifrost_field0000)	Small Hole#ep14_mora3	CLEAR_NPC

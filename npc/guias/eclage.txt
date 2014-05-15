@@ -1,0 +1,70 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: eclage.txt                             |
+//   |--------------------------------------------------------|
+//   | Criado por: rA/brA Dev. Team                           |
+//   |--------------------------------------------------------|
+//   | Versões rA/brA: 1.0/1.2                                |
+//   |--------------------------------------------------------|
+//   | Descrição: Guias da Cidade de Eclage.                  |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Megasantos]                      |
+//   | 1.1 Tradução PT-BR [Holy & lututuiBR]                  |
+//   | 1.2 Formatação nos Diálogos [Holy & lututuiBR]         |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+ecl_in01,48,60,4	script	Guarda de Eclage#obb	4_M_FAIRYSOLDIER,{
+	mes "[Guarda de Eclage]";
+	mes "Bem-vindo, aventureiro.";
+	mes "Esta é a praça de Eclage, uma grande e ságrada árvore. Posso ajudá-lo?";
+	next;
+	switch(select("Palácio:Globo:Armazém:Prisão:Clínica:Área Residencial:Encerrar conversa")) {
+	case 1:
+		mes "[Guarda de Eclage]";
+		mes "Nosso grande rei, generais corajosos e estudiosos estão hospedados no palácio.";
+		mes "O palácio está situado no topo de Eclage.";
+		mes "Costumamos voar para lá, mas percebo que você não possui asas.";
+		mes "Siga o caminho a direita. Ele irá levar você até o palácio.";
+		close;
+	case 2:
+		mes "[Guarda de Eclage]";
+		mes "O globo está atrás de mim, ele é como um símbolo para nós os Laphines.";
+		mes "Ele acumula um grande e misterioso poder.";
+		mes "Nós sempre o vigiamos e o protegemos com cuidado.";
+		close;
+	case 3:
+		mes "[Guarda de Eclage]";
+		mes "Esta é a praça de Eclage.";
+		mes "Você pode encontrar tudo o que precisa aqui.";
+		close;
+	case 4:
+		mes "[Guarda de Eclage]";
+		mes "A Prisão é o lugar onde ficam os prisioneiros.";
+		mes "Por que um aventureir"+((Sex) ? "o":"a")+" como você quer ir até lá? Bem, é um pouco suspeito...";
+		mes "Mas irei te dizer a localização. Siga o caminho à sua esquerda. Eles não confundem ninguém.";
+		close;
+	case 5:
+		mes "[Guarda de Eclage]";
+		mes "Toda a sua dor e cansaço serão curados nos braços da natureza.";
+		mes "Siga o caminho para esquerda.";
+		close;
+	case 6:
+		mes "[Guarda de Eclage]";
+		mes "Você não viu as nossas decorações?";
+		mes "Faça uma visita. Você verá a nossa área residencial.";
+		close;
+	case 7:
+		close;
+	}
+}

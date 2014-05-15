@@ -1,0 +1,329 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: aeroplanos_entradas.txt                |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: ??/??/1.2                           |
+//   |--------------------------------------------------------|
+//   | Descrição: Entradas para os aeroplanos                 |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Cabeçalho e União dos Arquivos [Hold & Holy]       |
+//   | 1.1 Script otimizado [Hold & Holy, lututuiBR]          |
+//   | 1.2 Formatação nos Diálogos [lututuiBR]                |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+// ==============================
+// Entradas Simples (Izlude)
+// ==============================
+izlude,202,75,3	script#re	Equipe do Aeroporto#Izlude	4_F_01,{
+	OnTouch:
+	set .@npc$, strnpcinfo(2);
+	
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao aeroplano de "+.@npc$+".";
+	mes "Gostaria de embarcar no vôo "+((.@npc$ == "Hugel") ? "de Hugel":"que parte para "+((.@npc$ == "Izlude") ? "Juno e Rachel":"Izlude e Juno"))+"?";
+	next;
+	mes "[Equipe do Aeroporto]";
+	mes "Para usar o aeroplano, você precisa pagar uma taxa de 1,200 Zenys ou possuir um Bilhete para Aeroplano.";
+	mes "Você deseja usar o serviço?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	if (!countitem(7311) && Zeny < 1200) {
+		mes "[Equipe do Aeroporto]";
+		mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e nem a quantia necessária de Zenys para embarcar.";
+		mes "Lembre-se, a taxa de embarque é de 1,200 Zenys.";
+		close;
+	}
+	if (countitem(7311))
+		delitem 7311,1;
+	else if (Zeny >= 1200)
+		set Zeny, Zeny - 1200;
+	warp "airplane_01",245,60;
+	end;
+}
+
+izlude_b,202,75,3	duplicatr(Equipe do Aeroporto#Izlude)	Equipe do Aeroporto#izlude_b	4_F_01
+izlude_c,202,75,3	duplicatr(Equipe do Aeroporto#Izlude)	Equipe do Aeroporto#izlude_c	4_F_01
+izlude_d,202,75,3	duplicatr(Equipe do Aeroporto#Izlude)	Equipe do Aeroporto#izlude_d	4_F_01,{}
+
+izlude,206,55,3	script#pre	Equipe do Aeroporto#Izlude	4_F_01,{
+	OnTouch:
+	set .@npc$, strnpcinfo(2);
+	
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao aeroplano de "+.@npc$+".";
+	mes "Gostaria de embarcar no vôo "+((.@npc$ == "Hugel") ? "de Hugel":"que parte para "+((.@npc$ == "Izlude") ? "Juno e Rachel":"Izlude e Juno"))+"?";
+	next;
+	mes "[Equipe do Aeroporto]";
+	mes "Para usar o aeroplano, você precisa pagar uma taxa de 1,200 Zenys ou possuir um Bilhete para Aeroplano.";
+	mes "Você deseja usar o serviço?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	if (!countitem(7311) && Zeny < 1200) {
+		mes "[Equipe do Aeroporto]";
+		mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e nem a quantia necessária de Zenys para embarcar.";
+		mes "Lembre-se, a taxa de embarque é de 1,200 Zenys.";
+		close;
+	}
+	if (countitem(7311))
+		delitem 7311,1;
+	else if (Zeny >= 1200)
+		set Zeny, Zeny - 1200;
+	warp "airplane_01",245,60;
+	end;
+}
+
+// Rachel
+ra_fild12,295,208,0	duplicate(Equipe do Aeroporto#Izlude)	Equipe do Aeroporto#Rachel	WARPNPC,1,1
+
+// Hugel
+hugel,178,142,0	duplicate(Equipe do Aeroporto#Izlude)	paraoaeroplano#Hugel	WARPNPC,1,1
+
+// Aeroporto de Einbroch
+// =====================================
+airport,143,43,5	script	Equipe do Aeroporto#aeroporto1a::aeroporto1	4_F_01,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Einbroch, onde oferecemos constantes voos para as cidades de Juno, Lighthalzen e Hugel.";
+	next;
+	if (select("Embarcar no Dirigível:Cancelar") == 2) {
+		mes "[Equipe do Aeroporto]";
+		mes "Obrigado e tenha um bom dia.";
+		close;
+	}
+	mes "[Equipe do Aeroporto]";
+	mes "A taxa de embarque do Dirigível é 1,200 zeny, mas se você possuir um Bilhete para Aeroplano, a taxa não será cobrada.";
+	mes "Você deseja embarcar no Dirigível?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	if (!countitem(7311) && Zeny < 1200) {
+		mes "[Equipe do Aeroporto]";
+		mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e você não possui a quantidade de zenys suficientes para embarcar.";
+		mes "Lembre, a taxa de embarque é 1,200 zeny.";
+		close;
+	}
+	if (countitem(7311))
+		delitem 7311,1; // Bilhete para Aeroplano
+	else if (Zeny >= 1200)
+		set Zeny, Zeny - 1200;
+	warp "airport",148,51;
+	end;
+}
+
+airport,158,43,5	duplicate(aeroporto1)	Equipe do Aeroporto#aeroporto1b	4_F_01
+airport,126,43,5	duplicate(aeroporto1)	Equipe do Aeroporto#aeroporto1c	4_F_01
+
+airport,143,49,3	script	Equipe de Recepção#aeroportoa::aeroporto	4_F_01,{
+	mes "[Equipe de Recepção]";
+	mes "Bem-vindo ao Aeroporto de Einbroch.";
+	mes "Se você acaba de chegar do seu voo, deixe-me guiá-lo até seu terminal principal.";
+	mes "Caso contrário, por favor embarque no Dirigível para ir até Juno, Lighthalzen ou Hugel.";
+	next;
+	if (select("Sair do terminal principal.:Cancelar.") == 2) {
+		mes "[Equipe de Recepção]";
+		mes "Certo, obrigado pelo seu apoio, e espero que você tenha um voo agradável~";
+		close;
+	}
+	mes "[Equipe de Recepção]";
+	mes "Uma vez no terminal principal, você terá que pagar a taxa novamente para embarcar no Dirigível.";
+	mes "Você só deve sair se a cidade de Einbroch for seu destino final.";
+	mes "Deseja prosseguir para o terminal principal?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	warp "airport",142,40;
+	end;
+}
+
+airport,126,51,3	duplicate(aeroporto)	Equipe de Recepção#aeroportob	4_F_01
+airport,158,50,3	duplicate(aeroporto)	Equipe de Recepção#aeroportoc	4_F_01
+
+einbroch,94,267,3	script	Equipe do Aeroporto#ein01	4_F_02,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Einbroch.";
+	mes "Por favor utilize esta porta para embarcar no dirigível que irá partir até Juno, Lighthalzen e Hugel na República de Schwarzwald.";
+	next;
+	mes "[Equipe do Aeroporto]";
+	mes "Caso contrário, se é Einbroch seu destino pretendido, por favor, desça as escadas e perça a Equipe de Recepção para levar você até o terminal.";
+	mes "Te agradeço, e tenha uma boa viagem.";
+	close;
+}
+
+// Aeroporto de Juno
+// =====================================
+y_airport,143,43,5	script	Equipe do Aeroporto#juno	4_F_01,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Juno onde oferecemos voos domésticos para Einbroch, Lighthalzen e Hugel, e internacionais para Izlude e Rachel.";
+	mes "Gostaria de usar algum serviço?";
+	next;
+	if (select("Embarcar no Dirigível.:Cancelar.") == 2) {
+		mes "[Equipe do Aeroporto]";
+		mes "Obrigado e por favor volte novamente.";
+		mes "Tenha um bom dia~";
+		close;
+	}
+	mes "[Equipe do Aeroporto]";
+	mes "A taxa de embarque do Dirigível é 1,200 zeny, mas se você possuir um Bilhete para Aeroplano, a taxa não será cobrada.";
+	mes "Você deseja embarcar?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	if (!countitem(7311) && Zeny < 1200) {
+		mes "[Equipe do Aeroporto]";
+		mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e você não possui a quantidade de zenys suficientes para embarcar.";
+		mes "Lembre, a taxa de embarque é 1,200 zeny.";
+		close;
+	}
+	if (countitem(7311))
+		delitem 7311,1; // Bilhete para Aeroplano
+	else if (Zeny >= 1200)
+		set Zeny, Zeny - 1200;
+	warp "y_airport",148,51;
+	end;
+}
+
+y_airport,158,43,5	duplicate(Equipe do Aeroporto#juno)	Equipe do Aeroporto#y_air1b	4_F_01
+y_airport,126,43,5	duplicate(Equipe do Aeroporto#juno)	Equipe do Aeroporto#y_air1c	4_F_01
+
+y_airport,143,49,3	script	Equipe de Recepção#y_ar2a::aeroportoy	4_F_01,{
+	mes "[Equipe de Recepção]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Se você acabou de chegar de seu voo, deixe-me guiá-lo até o terminal.";
+	mes "Caso contrário, por favor embarque no dirigível para voar até seu destino.";
+	next;
+	if (select("Sair do terminal principal.:Cancelar") == 2) {
+		mes "[Equipe de Recepção]";
+		mes "Certo, obrigado pelo seu apoio, e espero que você tenha um voo agradável~";
+		close;
+	}
+	mes "[Equipe de Recepção]";
+	mes "Uma vez no terminal principal, você terá que pagar a taxa novamente para embarcar no Dirigível.";
+	mes "Você só deve sair se a cidade de Juno for seu destino final.";
+	mes "Deseja prosseguir para o terminal principal?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	warp "y_airport",142,40;
+	end;
+}
+
+y_airport,126,51,3	duplicate(aeroportoy)	Equipe de Recepção#y_ar2b	4_F_01
+y_airport,158,50,3	duplicate(aeroportoy)	Equipe de Recepção#y_ar2c	4_F_01
+
+y_airport,145,63,5	script	Voos Domésticos	4_F_02,{
+	mes "[Equipe de Bordo]";
+	mes "Você deseja embarcar no Dirigível que voa até Einbroch, Lighthalzen e Hugel?";
+	mes "Se sim, por favor deixe-me guiá-lo até a área de embarque do Dirigível.";
+	next;
+	if (select("Sim:Não") == 1) {
+		warp "yuno",59,244;
+		end;
+	}
+	mes "[Equipe de Bordo]";
+	mes "Muito bem, então.";
+	mes "Obrigado por seu clientismo, e espero que você se divirta na viagem~";
+	close;
+}
+
+y_airport,140,63,5	script	Voos Internacionais	4_F_02,{
+	mes "[Equipe de Bordo]";
+	mes "Você deseja embarcar no Dirigível que voa até Juno, Izlude e Rachel?";
+	mes "Se sim, por favor deixe-me guiá-lo até a área de embarque do Dirigível.";
+	next;
+	if (select("Sim:Não") == 1) {
+		warp "yuno",47,244;
+		end;
+	}
+	mes "[Equipe de Bordo]";
+	mes "Certo, então.";
+	mes "Obrigado por voar conosco, e espero que você se divirta enquanto estiver viajando.";
+	close;
+}
+
+yuno,14,262,5	script	Equipe do Aeroporto#yuno01	4_F_02,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Utilize este porta para embarcar no Dirigível que voa até Izlude dentro do Reino de Rune-Midgard, e para Rachel na República de Arunafeltz.";
+	next;
+	mes "[Equipe do Aeroporto]";
+	mes "Caso contrário, se seu destino pretendido é Juno, por favor, desça as escadas e peça a Equipe de Recepção para levar você até o terminal.";
+	mes "Te agradeço, e tenha uma boa viagem.";
+	close;
+}
+
+yuno,88,263,3	script	Equipe do Aeroporto#yuno02	4_F_02,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Utilize este porta para embarcar no Dirigível que vai até Einbroch, Lighthalzen e Hugel na República de Schwartzwald.";
+	next;
+	mes "[Equipe do Aeroporto]";
+	mes "Caso contrário, se seu destino pretendido é Juno, por favor, desça as escadas e pergunte a Equipe de Recepção para levar você até o terminal.";
+	mes "Te agradeço, e tenha uma boa viagem.";
+	close;
+}
+
+// Aeroporto de Lighthalzen
+// =====================================
+lhz_airport,143,43,5	script	Equipe do Aeroporto#lhz_ar1a::lhz_aeroporto1	4_F_01,{
+	mes "[Equipe do Aeroporto]";
+	mes "Bem-vindo ao Aeroporto de Lighthalzen, onde oferecemos constantes voos para as cidades de Einbroch, Juno e Hugel.";
+	next;
+	if (select("Embarcar no Dirigível:Cancelar.") == 2) {
+		mes "[Equipe do Aeroporto]";
+		mes "Obrigado e por favor volte novamente.";
+		mes "Tenha um bom dia~";
+		close;
+	}
+	mes "[Equipe do Aeroporto]";
+	mes "A taxa de embarque do Dirigível é 1,200 zeny, mas se você possuir um Bilhete para Aeroplano, a taxa não será cobrada.";
+	mes "Você deseja embarcar no Dirigível?";
+	next;
+	if (select("Sim:Não") == 2) close;
+	if (!countitem(7311) && Zeny < 1220) {
+		mes "[Equipe do Aeroporto]";
+		mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e você não possui a quantidade de zenys suficientes para embarcar.";
+		mes "Lembre, a taxa de embarque é 1,200 zeny.";
+		close;
+	}
+	if (!countitem(7311))
+		delitem 7311,1; // Bilhete para Aeroplano
+	else if (Zeny >= 1200)
+		set Zeny, Zeny - 1200;
+	warp "lhz_airport",148,51;
+	end;
+}
+
+lhz_airport,158,43,5	duplicate(lhz_aeroporto1)	Equipe do Aeroporto#lhz_ar1b	4_F_01
+lhz_airport,126,43,5	duplicate(lhz_aeroporto1)	Equipe do Aeroporto#lhz_ar1c	4_F_01
+
+lhz_airport,143,49,3	script	Equipe de Recepção#lhz_ar2a::lhz_aeroporto2	4_F_01,{
+	mes "[Equipe de Recepção]";
+	mes "Bem-vindo ao Aeroporto de Lighthalzen.";
+	mes "Se você acaba de chegar do seu voo, deixe-me guiá-lo até seu terminal principal.";
+	mes "Caso contrário, por favor embarque no Dirigível para seu destino.";
+	next;
+	if (select("Sair do terminal principal.:Cancelar.") == 1) {
+		mes "[Equipe de Recepção]";
+		mes "Uma vez no terminal principal, você terá que pagar a taxa novamente para embarcar no Dirigível.";
+		mes "Você só deve sair se a cidade de Lighthalzen for seu destino final.";
+		mes "Deseja prosseguir para o terminal principal?";
+		next;
+		if (select("Sim:Não") == 2) close;
+			warp "lhz_airport",142,40;
+			end;
+	}
+	mes "[Equipe de Recepção]";
+	mes "Certo, obrigado pelo seu apoio, e espero que você tenha um voo agradável~";
+	close;
+}
+
+lhz_airport,126,51,3	duplicate(lhz_aeroporto2)	Equipe de Recepção#lhz_ar2b	4_F_01
+lhz_airport,158,50,3	duplicate(lhz_aeroporto2)	Equipe de Recepção#lhz_ar2c	4_F_01

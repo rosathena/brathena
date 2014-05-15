@@ -1,0 +1,538 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: funcoes_globais.txt                    |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 2.16/1.2                            |
+//   |--------------------------------------------------------|
+//   | Descrição: Funções globais.                            |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Megasantos]                      |
+//   | 1.1 Criação do NPC (Funções brAthena) [Holy]           |
+//   | 1.2 Otimização [Shiraz]                                |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+-	script	NPCS#brA	-1,{
+ 
+	OnInit:
+
+	set(.@version, checkversion(0));
+		
+	if (!.@version) { // Pré-Renovação
+		movenpc("Locador de Mercenários#Espadachim",47,139);
+		movenpc("Artigos para Mercenários#Espadachim",56,139);
+		movenpc("Auxiliar Lua de Mel",171,185,3);
+		movenpc("Scamp#iz",186,57,5);
+		movenpc("Funcionária Kafra#iz",134,88,3);
+	}
+
+	if (.@version != -1) { // Pré-Renovação & Renovação
+		movenpc("Talpiz#BLS",214,79);
+	}
+
+	if (!.@version || .@version == -1) { // Pré-Renovação & Old-Times
+		movenpc("Dega#izlude",150,118,2);
+		movenpc("Kylick#izlude",150,143,2);
+		movenpc("Red#izlude",56,126);
+		movenpc("Cebalis#izlude",58,126);
+		movenpc("Soldado#izlude",124,178,4);
+		movenpc("Dona Risadinha#iz",129,118);
+		movenpc("Sr. Noel",168,168);
+	}
+
+	end();
+
+	OnDisguise:
+	undisguise();
+	end();
+}
+//////////////////////////////////////////////////////////////////////////////////
+// Function that clears job quest variables
+//////////////////////////////////////////////////////////////////////////////////
+
+function	script	F_ClearJobVar	{
+	// Misc ---------------------------------
+	set JBLVL,0;
+	set FIRSTAID,0;
+	set PLAYDEAD,0;
+	set got_bandage,0;
+	set got_novnametag,0;
+	// First Class Jobs ---------------------
+	set job_acolyte_q,0; set job_acolyte_q2,0;
+	set job_archer_q,0;
+	set job_magician_q,0;
+	set job_merchant_q,0; set job_merchant_q2,0; set job_merchant_q3,0;
+	set job_sword_q,0; set SWTEST, 0;
+	set job_thief_q,0;
+	// Super Novice
+	set SUPNOV_Q,0;
+	// 2-1 Jobs ------------------------------
+	set ASSIN_Q,0; set ASSIN_Q2,0; set ASSIN_Q3,0;
+	set BSMITH_Q,0; set BSMITH_Q2,0;
+	set HNTR_Q,0; set HNTR_Q2,0;
+	set KNIGHT_Q,0; set KNIGHT_Q2,0;
+	set PRIEST_Q,0; set PRIEST_Q2,0; set PRIEST_Q3,0;
+	set WIZ_Q,0; set WIZ_Q2,0;
+	// 2-2 Jobs ------------------------------
+	set ROGUE_Q,0; set ROGUE_Q2,0;
+	set ALCH_Q,0; set ALCH_Q2,0;
+	set CRUS_Q,0;
+	set MONK_Q,0; set JOB_MONK_C,0;
+	set SAGE_Q,0; set SAGE_Q2,0;
+	set DANC_Q,0;
+	set BARD_Q,0;
+	// Extended Classes
+	set TAEK_Q,0; set TK_Q,0;
+	set STGL_Q,0;
+	set SOUL_Q,0;
+	set GUNS_Q,0;
+	set NINJ_Q,0;
+	return;
+}
+
+function	script	F_ClearGarbage	{
+	// Clear outdated global VARS
+	//Clear TURTLE var if the Turtle Islans Quest is already done
+		if (TURTLE==20) set MISC_QUEST,MISC_QUEST | 65536;
+		if (MISC_QUEST & 65536) set TURTLE,0; //now clear the var if the quest is over
+	//Clear previously saved Quest Skills (now it isn't used)
+		set ADV_QSK,0;
+		set ADV_QSK2,0;
+	//Old Reset Skill Event used to use RES_SKILL var
+		set RES_SKILL,0;
+	//Here you put outdated variables from your outdated EVENTS
+	//e.g. Is XMAS done? Add the EVENT var clearing code here.
+	
+	//due to bugs in BS quest:
+	set wizard_m2,0;
+	
+	// Old Novice Ground Variables.
+	set NEW_MES_FLAG0,0;
+	set NEW_MES_FLAG1,0;
+	set NEW_MES_FLAG2,0;
+	set NEW_MES_FLAG3,0;
+	set NEW_MES_FLAG4,0;
+	set NEW_MES_FLAG5,0;
+	set NEW_LVUP0,0;
+	set NEW_LVUP1,0;
+	set NEW_JOBLVUP,0;
+	
+	// Old DTS variables that are no longer used.
+	set dtseligible,0;
+	set MISC_QUEST,MISC_QUEST & ~128;
+	
+	return;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// Used in REBIRTH scripts
+// Class = Internal Class ID
+// BaseJob = Base Job (0..23)
+// Upper : 0 - Default, 1 - Advanced, 2 - Baby
+//////////////////////////////////////////////////////////////////////////////////
+
+function	script	Job_Change	{
+	jobchange getarg(0),Upper;
+	logmes "CLASS CHANGE: " +strcharinfo(0)+ " become a "+jobname(Class);
+	return;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Functions used to spiff up dialoges [Lupus]
+//////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Rand"
+//////////////////////////////////////////////////////////////////////////////////
+//returns random argument
+// Example: check F_Bye or F_Hi functions
+// READ AND THINK: You can use it to pick a random number from a list:
+// set .@itemIDfromList, callfunc("F_Rand",1129,1222,1163,1357,1360,1522,1811,1410);
+
+function	script	F_Rand	{
+	return getarg(rand(getargcount()));
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Sex"
+//////////////////////////////////////////////////////////////////////////////////
+//returns 1st argument if female, 2nd argument otherwise
+// Example: mes callfunc("F_Sex","What a beautiful lady!","What a handsome man!");
+
+function	script	F_SexMes	{
+	return getarg(Sex);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Hi"
+//////////////////////////////////////////////////////////////////////////////////
+//returns random HELLO message
+
+function	script	F_Hi	{
+	return callfunc("F_Rand","Hi!","Hello!","Good day!","How are you?","Hello there.");
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Bye"
+//////////////////////////////////////////////////////////////////////////////////
+//returns random BYE message
+
+function	script	F_Bye	{
+	return callfunc("F_Rand","Bye. See you again.","Later.","Goodbye.","Good luck!","Have a nice day!","Byebye!!!");
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_ItemName"
+//////////////////////////////////////////////////////////////////////////////////
+// Returns expanded item name string
+//Argumentss
+// 0 - Item ID
+// 1 - Element N (0=none,1=Ice,2=Earth,3=Fire,4=Wind)
+// 2 - VVS meter 0...3
+// 3 - Refine
+// Example: mes "Show me your "+callfunc("F_ItemName",1201,1,2,5)+"...";
+//  is equal to: mes "Show me your ^000090 +5 VVS Fire Knife ^000000..."
+
+function	script	F_ItemName	{
+	if (getarg(3,0))
+		set .@t$,"+"+getarg(3)+" ";
+	switch (getarg(2,0)) {
+		case 0: break;
+		case 1: set .@t$,.@t$+"VS "; break;
+		case 2: set .@t$,.@t$+"VVS "; break;
+		case 3: set .@t$,.@t$+"VVVS "; break;
+		default: set .@t$,.@t$+getarg(2)+"xVS "; break;
+	}
+	switch (getarg(1,0)) {
+		case 0: break;
+		case 1: set .@t$,.@t$+"Ice "; break;
+		case 2: set .@t$,.@t$+"Earth "; break;
+		case 3: set .@t$,.@t$+"Fire "; break;
+		case 4: set .@t$,.@t$+"Wind "; break;
+		default: set .@t$,.@t$+"Strange "; break;
+	}
+	return "^000090"+.@t$+getitemname(getarg(0))+"^000000";
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_SaveQuestSkills": Store learnt quest skills 
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_SaveQuestSkills	{
+	set ADV_QSK,0; set ADV_QSK2,0;
+	//1st classes quest skills
+	for(set .@i, 0; .@i < 14; set .@i, .@i + 1){
+		if (getskilllv(144+.@i)) set ADV_QSK,ADV_QSK|pow(2,.@i);
+	}
+	//2nd classes quest skills
+	for(set .@i, 0; .@i < 19; set .@i, .@i + 1){
+		if (getskilllv(1001+.@i)) set ADV_QSK2,ADV_QSK2|pow(2,.@i);
+	}
+	return;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Load1Skills": Restore learnt 1st class quest skills
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_Load1Skills	{
+	//1st classes quest skills
+	for(set .@i, 0; .@i < 14; set .@i, .@i + 1){
+		if (ADV_QSK|pow(2,.@i) == ADV_QSK) skill 144+.@i,1,0;
+	}
+	set ADV_QSK,0; //Clear var
+	return;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_Load2Skills": Restore learnt 2nd class quest skills
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_Load2Skills	{
+	//2nd classes quest skills
+	for(set .@i, 0; .@i < 19; set .@i, .@i + 1){
+		if (ADV_QSK2|pow(2,.@i) == ADV_QSK2) skill 1001+.@i,1,0;
+	}
+	set ADV_QSK2,0; //Clear var
+	return;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_GetWeaponType": Determine weapon type by view
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_GetWeaponType	{
+	switch(getiteminfo(getarg(0),11)) {
+		case 1: return "Dagger"; break;
+		case 2: return "One-handed Sword"; break;
+		case 3: return "Two-handed Sword"; break;
+		case 4: return "One-handed Spear"; break;
+		case 5: return "Two-handed Spear"; break;
+		case 6: return "One-handed Axe"; break;
+		case 7: return "Two-handed Axe"; break;
+		case 8: return "Mace"; break;
+		//case 9: return "Unused"; break;
+		case 10: return "Staff"; break;
+		case 11: return "Bow"; break;
+		case 12: return "Knuckle"; break;
+		case 13: return "Instrument"; break;
+		case 14: return "Whip"; break;
+		case 15: return "Book"; break;
+		case 16: return "Katar"; break;
+		case 17: return "Revolver"; break;
+		case 18: return "Rifle"; break;
+		case 19: return "Gatling gun"; break;
+		case 20: return "Shotgun"; break;
+		case 21: return "Grenade Launcher"; break;
+		case 22: return "Shuriken"; break;
+		default: return "Unknown Weapon"; break;
+	}
+	end;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Function "F_GetArmorType": Determine equipment type by equip location
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_GetArmorType	{
+	switch(getiteminfo(getarg(0),5)) {
+		case 001: return "Lower Headgear"; break;
+		case 2: return callfunc("F_GetWeaponType",getarg(0)); break;
+		case 4: return "Garment"; break;
+		case 8: return "Accessory"; break;
+		case 16: return "Armor"; break;
+		case 32: return "Shield"; break;
+		case 64: return "Shoes"; break;
+		case 128: return "Accessory"; break;
+		case 136: return "Accessory"; break; //8+128
+		case 256: return "Upper Headgear"; break;
+		case 512: return "Middle Headgear"; break;
+		case 1024: return "Costume Upper Headgear"; break;
+		case 2048: return "Costume Midle Headgear"; break;
+		case 4096: return "Costume Lower Headgear"; break;
+		case 8192: return "Costume Garment"; break;
+		case 32768: return "Ammo"; break;
+		case 65536: return "Shadow Armor"; break;
+		case 131072: return "Shadow Weapon"; break;
+		case 262144: return "Shadow Shield"; break;
+		case 524288: return "Shadow Shoes"; break;
+		case 1048576: return "Shadow Accessory"; break;
+		case 2097152: return "Shadow Accessory"; break;
+		case 3145728: return "Shadow Accessory"; break; //1048576+2097152
+		default: return "Unknown Equip"; break;
+	}
+	end;
+}
+
+// Time calculation Function
+// *********************************************************************
+function	script	Time2Str	{
+	set .@Time_Left, getarg(0) - gettimetick(2);
+	
+	set .@Days, .@Time_Left / 86400;
+	set .@Time_Left, .@Time_Left - (.@Days * 86400);
+	set .@Hours, .@Time_Left / 3600;
+	set .@Time_Left, .@Time_Left - (.@Hours * 3600);
+	set .@Minutes, .@Time_Left / 60;
+	set .@Time_Left, .@Time_Left - (.@Minutes * 60);
+	
+	set .@Time$, "";
+	if ( .@Days > 1 )
+		set .@Time$, .@Time$ + .@Days + " days, ";
+	else if ( .@Days > 0 )
+		set .@Time$, .@Time$ + .@Days + " day, ";
+
+	if ( .@Hours > 1 )
+		set .@Time$, .@Time$ + .@Hours + " hours, ";
+	else if ( .@Hours > 0 )
+		set .@Time$, .@Time$ + .@Hours + " hour, ";
+
+	if ( .@Minutes > 1 )
+		set .@Time$, .@Time$ + .@Minutes + " minutes, ";
+	else if ( .@Minutes > 0 )
+		set .@Time$, .@Time$ + .@Minutes + " minute, ";
+
+	if ( .@Time_Left > 1 || .@Time_Left == 0 )
+		set .@Time$, .@Time$ + .@Time_Left + " seconds";
+	else if ( .@Time_Left == 1 )
+		set .@Time$, .@Time$ + .@Time_Left + " second";
+	
+	return .@Time$;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// Returns the plural of a noun - works in most cases, but not for everything!
+// -- callfunc "F_GetPlural","<noun>"{,<0:normal/1:uppercase>}
+// Examples:
+//    callfunc("F_GetPlural","dog")            // returns "dogs"
+//    callfunc("F_GetPlural","fox",1)          // returns "FOXES"
+//    callfunc("F_GetPlural","knife")          // returns "knives"
+//    callfunc("F_GetPlural","Piece of Cake")  // returns "Pieces of Cake"
+//
+// Returns the plural of a noun if the given number is not 1.
+// -- callfunc "F_InsertPlural",<number>,"<noun>"{,<0:normal/1:uppercase>{,"<format string>"}}
+// Format string uses sprintf(), and MUST contain %d (arg0) and %s (arg1), in that order.
+// Examples:
+//    callfunc("F_InsertPlural",1,"dog")    // returns "1 dog"
+//    callfunc("F_InsertPlural",3,"fox",1)  // returns "3 FOXES"
+//    // returns "^FF00005^000000 knives"
+//    callfunc("F_InsertPlural",5,"knife",0,"^FF0000%d^000000 %s")
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_GetPlural	{
+	set .@str$, getarg(0);
+
+	if (countstr(.@str$," ")) {  // multiple words
+		explode(.@tmp$,.@str$," ");
+		set .@size, getarraysize(.@tmp$);
+
+		// if format is "... of|in|on ...", pluralize preceding word; else pluralize last word
+		if (compare(.@str$," of ") || compare(.@str$," in ") || compare(.@str$," on ")) {
+			for (set .@i,1; .@i<.@size; set .@i,.@i+1) {
+				if (getstrlen(.@tmp$[.@i]) == 2 && compare("of|in|on",.@tmp$[.@i]))
+					break;
+				set .@index, .@index + 1;
+			}
+		} else
+			set .@index, .@size - 1;
+
+		set .@str$, .@tmp$[.@index];
+		set .@tmp$[.@index],"%s";
+		set .@format$, implode(.@tmp$," ");
+	} else
+		set .@format$, "%s";
+
+	set .@strlen, getstrlen(.@str$);
+	if (.@strlen < 3)  // prevent errors
+		return ((getarg(1,0)) ? strtoupper(sprintf(.@format$,.@str$)) : sprintf(.@format$,.@str$));
+
+	setarray .@suffix$[0], charat(.@str$,.@strlen - 1), substr(.@str$,.@strlen - 2,.@strlen - 1);
+	if (!compare("abcdefghijklmnopqrstuvwxyz",.@suffix$[0])) {  // last character is not a letter
+		set .@result$, .@str$;
+	}
+
+	// common exceptions --> singular form == plural form
+	else if (compare("fish|glasses|sunglasses|clothes|boots|shoes|greaves|sandals|wings|ears",.@str$)) {
+		set .@result$, .@str$;
+	}
+
+	// ends in -s, -x, -z, -ch, -sh --> add -es
+	else if (.@suffix$[0] == "s" || .@suffix$[0] == "x" || .@suffix$[0] == "z" ||
+	    .@suffix$[1] == "ch" || .@suffix$[1] == "sh") {
+		set .@result$, .@str$ + "es";
+	}
+
+	// ends in -f, -fe --> remove -f, -fe --> add -ves
+	else if ((.@suffix$[0] == "f" || .@suffix$[1] == "fe") && .@suffix$[1] != "ff") {
+		if (compare("belief|cliff|chief|dwarf|grief|gulf|proof|roof",.@str$))
+			set .@result$, .@str$ + "s";  // exceptions --> add -s
+		else
+			set .@result$, substr(.@str$,0,.@strlen - 2 - (.@suffix$[1] == "fe")) + "ves";
+	}
+	
+	// ends in consonant + -y --> remove -y --> add -ies
+	else if (.@suffix$[0] == "y" && !compare("aeiou",charat(.@suffix$[1],0))) {
+		set .@result$, delchar(.@str$,.@strlen - 1) + "ies";
+	}
+
+	// ends in -o --> exceptions --> add -es
+	else if (.@suffix$[0] == "o" &&
+	         compare("buffalo|domino|echo|grotto|halo|hero|mango|mosquito|potato|tomato|tornado|torpedo|veto|volcano",.@str$)) {
+		set .@result$, .@str$ + "es";
+	}
+
+	// default --> add -s
+	else {
+		set .@result$, .@str$ + "s";
+	}
+
+	return ((getarg(1,0)) ? strtoupper(sprintf(.@format$,.@result$)) : sprintf(.@format$,.@result$));
+}
+function	script	F_InsertPlural	{
+	return sprintf(getarg(3,"%d %s"), getarg(0), ((getarg(0) == 1) ? getarg(1) : callfunc("F_GetPlural",getarg(1),getarg(2,0))));
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Returns 'a' or 'an' based on a word - only follows basic rules, without exceptions!
+// -- callfunc "F_InsertArticle","<word>"{,<0:lowercase a/1:uppercase A>}
+// Examples:
+//    callfunc("F_InsertArticle","apple")  // returns "an apple"
+//    callfunc("F_InsertArticle","dog",1)  // returns "A dog"
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_InsertArticle	{
+	return ((getarg(1,0)) ? "A" : "a") + ((compare("aeiou", charat(getarg(0),0))) ? "n " : " ") + getarg(0);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Returns a number with commas between every three digits.
+// -- callfunc "F_InsertComma",<number>
+// Examples:
+//    callfunc("F_InsertComma",7777777)  // returns "7,777,777"
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_InsertComma	{
+	set .@str$, getarg(0);
+	for (set .@i,getstrlen(.@str$)-3; .@i>0; set .@i,.@i-3)
+		set .@str$, insertchar(.@str$,",",.@i);
+	return .@str$;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Returns a number with a '-st', '-nd', '-rd', or '-th' suffix.
+// -- callfunc "F_GetNumSuffix",<number>
+// Examples:
+//    callfunc("F_GetNumSuffix",1)   // returns "1st"
+//    callfunc("F_GetNumSuffix",11)  // returns "11th"
+//    callfunc("F_GetNumSuffix",32)  // returns "32nd"
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_GetNumSuffix	{
+	set .@n, getarg(0);
+	set .@mod, .@n % 10;
+	if (.@mod == 1 && .@n != 11) return .@n+"º";
+	else if (.@mod == 2 && .@n != 12) return .@n+"º";
+	else if (.@mod == 3 && .@n != 13) return .@n+"º";
+	else return .@n+"º";
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// *** Função "F_Navi": Controla o sistema de navegação para guias da Renovação.
+// Hexeds anteriores a 2011-10-10 não tem suporte aos links de navegação, então
+// desabilite o sistema de isso se aplicar ao seu client
+//////////////////////////////////////////////////////////////////////////////////
+function	script	F_Navi	{
+	// Remova o comentário para desativar o sistema de navegação.
+	//set .@disabled,1;
+
+	// Esta função tem 0 ~ 3 parâmetros.
+	switch(getargcount()) {
+	case 0:	// Checa se o sistema está desativado
+		return .@disabled;
+	case 1:	// Mostra a mensagem informativa, se habilitado.
+		if (!.@disabled) {
+			next;
+			mes getarg(0);
+			mes "Quando você clicar no ^B9062F[nome da localização]^000000, você receberá os mais avançados serviços de ^B9062FNavegação^000000!";
+		}
+		return;
+	default:	// Mostra o link de navegação, se habilitado; se não, define a cor do texto, se disponível.
+		if (!.@disabled)
+			return "<NAVI>[" + getarg(0) + "]<INFO>" + getarg(1) + ",0,000,0</INFO></NAVI>";
+		else if (getargcount() == 3)
+			return getarg(2)+getarg(0)+"^000000";
+		else
+			return getarg(0);
+	}
+}

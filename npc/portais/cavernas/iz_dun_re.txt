@@ -1,0 +1,42 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: iz_dun_re.txt                          |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.1/1.3/1.0                         |
+//   |--------------------------------------------------------|
+//   | Descrição: NPCs / Portais da Caverna de Izlude_05.     |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Megasantos]                      |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+iz_dun05,142,190,5	script	Guarda#iz_dun	4_M_CRU_SOLD,{
+	mes "[Guarda]";
+	mes "Então você deseja sair do quinto andar?";
+	next;
+	switch(select("Sim!:Não, eu quero continuar aqui.")) {
+	case 1:
+		mes "[Guarda]";
+		mes "Continue seguro, aventureiro.";
+		close2;
+		warp "iz_dun04",129,232;
+		end;
+	case 2:
+		mes "[Guarda]";
+		mes "Não quer ir?";
+		mes "Você é mais corajoso do que eu imaginava.";
+		close;
+	}
+}

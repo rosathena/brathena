@@ -1,0 +1,124 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: flavius_entrada.txt                    |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.0/1.0/1.2                         |
+//   |--------------------------------------------------------|
+//   | Descrição: NPC's de Entrada do Flavius.                |
+//   | - Oficiais de Flavius - Lado Guillaume                 |
+//   | - Oficiais de Flavius - Lado Croix                     |
+//   | - Cavaleiros                                           |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Shiraz]                          |
+//   | 1.1 Tradução PT-BR [Tyler]                             |
+//   | 1.2 Otimização [Hold & Holy]                           |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+// Oficiais de Flavius
+//============================================================
+bat_room,133,178,5	script	Oficial de Flavius#01a	4_M_KY_KNT,{
+  set .@npcbgf$, ((strnpcinfo(2) == "01a") || (strnpcinfo(2) == "02a") ? "Guillaume":"Croix");
+  set .@npcbgf2$, ((strnpcinfo(2) == "01b") || (strnpcinfo(2) == "02b") ? "Guillaume":"Croix");
+  set .@npcbgf3, ((strnpcinfo(2) == "01a") || (strnpcinfo(2) == "01b") ? 1:2);
+	if (checkweight(1201,1) == 0) {
+		mes "- Espere aí um minuto! -";
+		mes "- Atualmente você está -";
+		mes "- carregando itens demais. -";
+		mes "- Por favor tente novamente após -";
+		mes "- você descarregar um pouco do peso. -";
+		close;
+	}
+	mes "[Oficial do Exército "+.@npcbgf$+"]";
+	mes "Vamos mostrar todo o poder do Exército de "+.@npcbgf$+" para aqueles "+.@npcbgf2$+" fedorentos!";
+	next;
+	switch(select("Eu quero me juntar ao seu exército!:Terminar a conversa")) {
+	case 1:
+		if ((Class == Job_Novice) || (BaseClass == Job_SuperNovice) || BaseLevel < 80) {
+			mes "[Oficial do Exército "+.@npcbgf$+"]";
+			mes "Eu estou muito honrado que você queira se juntar para lutar contra o exército "+.@npcbgf2+" mas, eu sinto muito!: Eu não posso mandar um novato como você para morrer cruelmente no campo de batalha.";
+		} else {
+			set .@chk_urtime,checkquest(2070,PLAYTIME);
+			if ((.@chk_urtime == 0) || .@npcbgf3 && (.@chk_urtime == 1))  {
+				mes "[Oficial do Exército "+.@npcbgf$+"]";
+				mes "Me parece que você acabou de voltar do campo de batalha.";
+				mes "Então é muito cedo pra você retornar. Vá descansar um pouco e deixe os inimigos conosco!";
+			} else {
+				if (.@chk_urtime == 2)
+					erasequest 2070;
+				set .@mapcount2,getmapusers("bat_b0"+((.@npcbgf3 == 1) ? "1":"2"));
+				if (.@mapcount2 > 0) {
+					mes "[Oficial do Exército "+.@npcbgf$+"]";
+					mes "Eu recebi um comunidado informando que uma unidade do batalhão já foi despachada para o campo de batalha e está enfrentando os Croixs no momento.";
+					mes "Por que você não espera um instante? Eu aconselho você a afiar suas armas e preparar seus suprimentos até a hora da batalha.";
+			} else {
+					if ( (.@npcbgf3 == 1) && $@FlaviusBG1 > 0 || (.@npcbgf3 == 2) && $@FlaviusBG2 > 0) {
+						mes "[Oficial do Exército "+.@npcbgf$+"]";
+						mes "Uma unidade do batalhão já está preparada e esperando ser despachada ao campo de batalha.";
+						mes "Por que você não espera um instante? Eu aconselho você a afiar suas armas e preparar seus suprimentos até a hora da batalha.";
+					} else {
+						mes "[Oficial do Exército "+.@npcbgf$+"]";
+						mes "Certamente você já está preparado para a batalha!";
+						mes "Vá e mostre aos "+.@npcbgf2$+" o significado da palavra medo!";
+						mes "Hoje nosso grito de vitória deverá ser entoado por todo campo de batalha!";
+					close2;
+						warp "bat_room",((.@npcbgf3 == 1) ? 85 : 141),((.@npcbgf$ == "Guillaume") ? 223 : 207);
+						end;
+					}
+				}
+			}
+		}
+		break;
+	case 2:
+		mes "[Oficial do Exército "+.@npcbgf$+"]";
+		mes "Hoje nós sairemos vencedores!";
+		break;
+	}
+	close;
+}
+
+//============================================================
+bat_room,148,178,5	duplicate(Oficial de Flavius#01a)	Oficial de Flavius#02a	4_M_KY_KNT
+bat_room,133,121,1	duplicate(Oficial de Flavius#01a)	Oficial de Flavius#01b	4_M_CRU_KNT
+bat_room,148,121,1	duplicate(Oficial de Flavius#01a)	Oficial de Flavius#02b	4_M_CRU_KNT
+//============================================================
+
+bat_room,135,178,5	script	Cavaleiro Guillaume#3	4_M_KY_SOLD,{
+	mes "["+strnpcinfo(1)+"]";
+	mes "O objetivo principal da Arena Flavius é fazer 2 pontos antes que o seu inimigo através da destruição de seus cristais.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Os cristais para ambos os exércitos estão protegidos por barricadas especiais que não podem ser destruídas por ataques diretos.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Mas elas podem ser removidas através da destruição dos Guardiões que guardam cada base inimiga.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Os cristais são imunes a todo o tipo de habilidade, suas habilidades físicas são a única opção para destruir o cristal inimigo.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Por favor, lembre-se: quando você entra em uma batalha você receberá um sinal que indica o período de duração pelo qual você não poderá participar de um mesmo tipo de batalha.";
+	mes "Você poderá checar esta duração pressionando os botões Alt+U.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Você está pronto pra batalha? Então se apresente ao recrutador próximo à mim!";
+	close;
+}
+
+//============================================================
+bat_room,151,178,5	duplicate(Cavaleiro Guillaume#3)	Cavaleiro Guillaume#4	4_M_KY_SOLD
+bat_room,135,121,1	duplicate(Cavaleiro Guillaume#3)	Cavaleiro Croix#3	4_M_CRU_SOLD
+bat_room,151,121,1	duplicate(Cavaleiro Guillaume#3)	Cavaleiro Croix#4	4_M_CRU_SOLD
+//============================================================

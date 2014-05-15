@@ -1,0 +1,180 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: refinador_abencoado.txt                |
+//   |--------------------------------------------------------|
+//   | Criado por: rA/brA Dev. Team                           |
+//   |--------------------------------------------------------|
+//   | Versões rA/brA: 1.0/1.1                                |
+//   |--------------------------------------------------------|
+//   | Descrição: Refinador abençoado.                        |
+//   | Refina equipamento sem quebrar. Refina de +6~12.       |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Megasantos]                      |
+//   | 1.1 Tradução PT-BR [lututuiBR]                         |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+-	script	::BlacksmithDister	-1,{
+	disable_items;
+	mes "[Ferreiro Dister]";
+	mes "Nesta sociedade altamente competitiva, nós devemos ser diferentes para sobreviver!";
+	mes "Eu refino equipamentos em nível +6 ~ +12.";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Eu precisarei de ^ff9999Omni-Oridecon^000000 para armas, ou de ^ff9999Mega-Elunium^000000 para armaduras.";
+	mes "Refinamentos fracassados ^FF0000não quebrarão ou reduzirão o nível de refino^000000.";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Que tal? Você quer refinar?";
+	next;
+	setarray .@position$[1],"Cabeça Topo","Corpo","Mão Esquerda","Mão direita","Capa","Sapatos","Acessório 1","Acessório 2","Cabeça Meio","Cabeça Baixo";
+	set .@menu$,"";
+	for(set .@i,1; .@i<=10; set .@i,.@i+1)
+		set .@menu$, .@menu$+((getequipisequiped(.@i))?getequipname(.@i):.@position$[.@i]+"-[Não equipado]")+":";
+	set .@part, select(.@menu$);
+	if (!getequipisequiped(.@part)) {
+		mes "[Ferreiro Dister]";
+		switch(.@part) {
+		case 1:
+			mes "Sou um ferreiro, não um cabeleireiro.";
+			break;
+		case 2:
+			mes "Com meu martelo, Farei você uma estrela do céu.";
+			break;
+		case 3:
+		case 4:
+			mes "Fazer mãos artificiais não é minha especialidade.";
+			break;
+		case 5:
+			mes "Traga o item para que eu possa refiná-lo!";
+			break;
+		case 6:
+			mes "De onde está vindo esse cheiro estranho?";
+			break;
+		case 7:
+		case 8:
+			mes "Onde está o acessório?";
+			break;
+		case 9:
+			mes "O que quer que eu refine?";
+			break;
+		case 10:
+			mes "Huh? O que quer que eu faça?";
+			break;
+		}
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[Ferreiro Dister]";
+		mes "Este item não pode ser refinado.";
+		close;
+	}
+	set .@equip_refine, getequiprefinerycnt(.@part);
+	if (.@equip_refine < 6 || .@equip_refine > 12) {
+		mes "[Ferreiro Dister]";
+		mes "Este equipamento está refinado no nível "+.@equip_refine+". Eu só dou conta de itens com níveis de refino de +6 a +12!";
+		close;
+	}
+	set .@equip_lv, getequipweaponlv(.@part);
+	switch(.@equip_lv) {
+	default:
+	case 0:
+		set .@price,20000;
+		set .@material,6439; //Unbreakable_Def
+		set .@type$,"Armadura";
+		break;
+	case 1:
+		set .@price,1000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 2:
+		set .@price,2000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 3:
+		set .@price,20000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	case 4:
+		set .@price,40000;
+		set .@material,6438; //Unbreakable_Weap
+		set .@type$,"Arma";
+		break;
+	}
+	set .@ore$,"^ff9999Blessed "+.@type$+" Ore^000000";
+	mes "[Ferreiro Dister]";
+	mes "Este "+.@type$+" está refinado em "+.@equip_refine+". Para refiná-lo, eu preciso de "+.@ore$+" e "+callfunc("F_InsertComma",.@price)+" zeny de taxa do refinamento.";
+	mes "Quer continuar?";
+	next;
+	if (select("Sim:Não") == 2) {
+		mes "[Ferreiro Dister]";
+		mes "Estou ocupado, não me incomode!";
+		close;
+	}
+	if (getequippercentrefinery(.@part) < 100) {
+		mes "[Ferreiro Dister]";
+		mes "Este "+.@type$+" foi refinado muitas vezes. Embora ele não vá desaparecer no caso de falha, o "+.@ore$+" vai!";
+		next;
+		mes "[Ferreiro Dister]";
+		mes "É claro, a taxa de refinamento não será devolvida! Quer continuar?";
+		next;
+		if (select("Sim:Não") == 2) {
+			mes "[Ferreiro Dister]";
+			mes "Bom. Eu também ficaria triste e falhasse.";
+			close;
+		}
+	}
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Ferreiro Dister]";
+		mes "Material insuficiente.";
+		mes "Para refinar a "+((.@equip_lv)?"arma":"armadura")+", eu preciso de "+.@ore$+" e "+callfunc("F_InsertComma",.@price)+" zeny de taxa de refinamento.";
+		close;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+	mes "[Ferreiro Dister]";
+	mes "Tac! Tac! Tac!";
+	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+		specialeffect EF_BLESSING;
+		successrefitem .@part;
+		next;
+		mes "[Ferreiro Dister]";
+		mes "Hahahahahaha!!!";
+		next;
+		mes "[Ferreiro Dister]";
+		mes "O refino foi um grande sucesso~ Hahaha!";
+		close;
+	}
+	specialeffect EF_CURSEATTACK;
+	specialeffect2 EF_SUI_EXPLOSION;
+	next;
+	emotion (!rand(5))?e_ag:e_omg;
+	mes "[Ferreiro Dister]";
+	mes "Oh Meu Deus!!!!";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Oh! Embora tenha sido abençoado pelo "+.@ore$+" para preservar o equipamento...";
+	next;
+	mes "[Ferreiro Dister]";
+	mes "Meu humor piora quando eu falho!!";
+	close;
+}
+prt_in,52,56,3	duplicate(BlacksmithDister)	Ferreiro Dister#prt	4_M_DWARF
+payon,148,172,3	duplicate(BlacksmithDister)	Ferreiro Dister#pay	4_M_DWARF
+alberta_in,20,56,3	duplicate(BlacksmithDister)	Ferreiro Dister#alb	4_M_DWARF
+yuno_in01,175,18,3	duplicate(BlacksmithDister)	Ferreiro Dister#yuno	4_M_DWARF
+ein_in01,26,82,3	duplicate(BlacksmithDister)	Ferreiro Dister#ein	4_M_DWARF
+lhz_in02,280,15,3	duplicate(BlacksmithDister)	Ferreiro Dister#lhz	4_M_DWARF

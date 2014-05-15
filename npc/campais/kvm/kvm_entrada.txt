@@ -1,0 +1,128 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: kvm_entrada.txt                        |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.0/1.0/1.2                         |
+//   |--------------------------------------------------------|
+//   | Descrição: NPCs de entrada do KvM.                     |
+//   | Mercenário Oficial do KvM - Lado Guillaume             |
+//   | Cavaleiro Guillaume - KvM                              |
+//   | Mercenário Oficial do KvM - Lado Croix                 |
+//   | Cavaleiro Croix - KvM                                  |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Shiraz]                          |
+//   | 1.1 Tradução PT-BR [Tyler]                             |
+//   | 1.2 Otimização [Holy & Hold]                           |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+// Oficial do KvM - Lado Guillaume
+//============================================================
+bat_room,164,178,5	script	Mercenário Oficial KVM#1	4_M_KY_KNT,{
+	set .@permit,checkquest(6025,PLAYTIME);
+	if ((.@permit == 0) || (.@permit == 1)) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Me parece que recentemente você participou de uma batalha no KVM. Você deve esperar 5 minutos antes de se inscrever novamente.";
+		close;
+	} else if (.@permit == 2)
+		erasequest 6025;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Mostre a eles o real poder de "+((strnpcinfo(0) == "Mercenário Oficial KVM#1") ? "Guillaume":"Croix")+"!";
+	next;
+	if (select("Eu vou lutar com vocês.:Fim da conversa.") == 1) {
+		mes "["+strnpcinfo(1)+"]";
+		mes "Mostre-os o quão forte nós somos.";
+		mes "Hoje, todo o mundo vai ouvir o grito de triunfo do "+((strnpcinfo(0) == "Mercenário Oficial KVM#1") ? "General Guillaume":"Príncipe Croix")+"!";
+		close2;
+		set .@c, ((strnpcinfo(2) == "1") ? 223 : 207);
+		if (BaseLevel > 79)
+			warp "bat_room",169,.@c;
+		else if (BaseLevel < 60)
+			warp "bat_room",197,.@c;
+		else
+			warp "bat_room",225,.@c;
+		end;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Nós venceremos!";
+	close;
+}
+
+// Cavaleiro Guillaume - KvM
+//============================================================
+bat_room,167,178,5	script	Cavaleiro Guillaume#kvm	4_M_KY_SOLD,{
+	mes "["+strnpcinfo(1)+"]";
+	mes "Olá.";
+	mes "O que você deseja saber?";
+	next;
+	switch(select("Inscrever-se no KvM.:O que é o KvM?:Como faço para participar no KvM?:Eu gostaria de saber sobre meus Pontos Krieger.")) {
+	case 1:
+		mes "["+strnpcinfo(1)+"]";
+		mes "As inscrições não estão disponíveis ainda.";
+		mes "Para se inscrever, você precisa falar com um Mercenário Oficial do KvM.";
+		close;
+	case 2:
+		mes "["+strnpcinfo(1)+"]";
+		mes "KvM é uma abreviação para Krieger von Midgard.";
+		mes "Aventureiro, você está ciente de que o caminho para o novo mundo já se abriu?";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Nós da Administração Guillaume, temos planos seríssimos para avançar para o novo mundo.";
+		mes "E o KvM é um desses planos.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Isso significa que nós, um dos muitos países do continente de Midgard,";
+		mes "tomamos a decisão de contratar muitos aventureiros para avançarmos imediatamente para o novo mundo.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Por este motivo estamos selecionando os melhores aventureiros, nós estamos explorando o KvM.";
+		mes "Nós esperamos as respostas de muitos aventureiros.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "E nós recompensaremos todos eles por suas participações nesta empreitada!";
+		mes "E para retirar sua recompensa, por favor entre em contato com um Negociante do KvM.";
+		close;
+	case 3:
+		mes "["+strnpcinfo(1)+"]";
+		mes "Basicamente, o KvM consiste em uma batalha de 5 contra 5.";
+		mes "Primeiramente você deve se inscrever com um recepcionista do KvM, em um grupo ou sozinho.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "As inscrições de grupo são feitas quando você pretende entrar no KvM com seus membros de grupo e a inscrição individual é feita quando você pretende entrar no KvM sozinho.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Por favor inscreva-se com os Oficiais do KvM, ele entrará em contato com você mais tarde quando você estiver em Prontera.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Então você entra para a preparação e recebe instruções para o campo de batalha.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Entretando, informamos que você deve estar ao menos no escritório KvM, senão ele poderá não entrar em contato.";
+		close;
+	case 4:
+		mes "["+strnpcinfo(1)+"]";
+		mes "Seus Pontos Krieger são:";
+		mes ""+kvm_point+".";
+		close;
+	}
+}
+
+// Oficial do KvM - Lado Croix
+//============================================================
+bat_room,164,121,1	duplicate(Mercenário Oficial KVM#1)	Mercenário Oficial KVM#2	4_M_CRU_KNT
+
+// Cavaleiro Croix - KvM
+//============================================================
+bat_room,167,121,1	duplicate(Cavaleiro Guillaume#kvm)	Cavaleiro Croix#kvm	4_M_CRU_SOLD

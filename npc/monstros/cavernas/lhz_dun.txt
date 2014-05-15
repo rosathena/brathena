@@ -1,0 +1,426 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: lhz_dun.txt                            |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: ??/1.8/1.2                          |
+//   |--------------------------------------------------------|
+//   | Descrição:  Monstros das cavernas de Lighthalzen.      |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Shiraz]                          |
+//   | 1.1 Tradução PT-BR [Holy & Megasantos]                 |
+//   | 1.2 Tradução conforme bRO [Megasantos]                 |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+//========================================================================================
+// [Pré-Renovação] lhz_dun01 - Laboratório de Somatologia (Primeiro Andar)
+//========================================================================================
+lhz_dun01,0,0,0,0	monster#pre	Metaling	METALING,50,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Anopheles	ANOPHELES,70,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Exterminador	REMOVAL,100,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Egnigem Cenia	YGNIZEM,1,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Wickebine Tres	WHIKEBAIN,1,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Armeyer Dinze	ARMAIA,1,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Errende Ebecee	EREND,1,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Kavach Icarus	KAVAC,1,0,0,0
+lhz_dun01,0,0,0,0	monster#pre	Laurell Weinder	RAWREL,1,0,0,0
+lhz_dun01,150,50,16,18	monster#pre	Egnigem Cenia	YGNIZEM,1,900000,800000,1
+lhz_dun01,150,50,16,18	monster#pre	Wickebine Tres	WHIKEBAIN,1,900000,800000,1
+lhz_dun01,150,50,16,18	monster#pre	Armeyer Dinze	ARMAIA,1,900000,800000,1
+lhz_dun01,150,50,16,18	monster#pre	Errende Ebecee	EREND,5,900000,800000,1
+lhz_dun01,150,50,16,18	monster#pre	Kavach Icarus	KAVAC,5,600000,300000,1
+lhz_dun01,150,50,16,18	monster#pre	Laurell Weinder	RAWREL,5,600000,300000,1
+lhz_dun01,250,150,18,30	monster#pre	Egnigem Cenia	YGNIZEM,4,900000,800000,1
+lhz_dun01,250,150,18,30	monster#pre	Wickebine Tres	WHIKEBAIN,4,600000,300000,1
+lhz_dun01,250,150,18,30	monster#pre	Armeyer Dinze	ARMAIA,4,900000,800000,1
+lhz_dun01,250,150,18,30	monster#pre	Errende Ebecee	EREND,2,900000,800000,1
+lhz_dun01,250,150,18,30	monster#pre	Kavach Icarus	KAVAC,2,900000,800000,1
+lhz_dun01,250,150,18,30	monster#pre	Laurell Weinder	RAWREL,2,600000,300000,1
+lhz_dun01,50,150,11,35	monster#pre	Egnigem Cenia	YGNIZEM,1,600000,300000,1
+lhz_dun01,50,150,11,35	monster#pre	Wickebine Tres	WHIKEBAIN,4,900000,800000,1
+lhz_dun01,50,150,11,35	monster#pre	Armeyer Dinze	ARMAIA,1,900000,800000,1
+lhz_dun01,50,150,11,35	monster#pre	Errende Ebecee	EREND,4,900000,800000,1
+lhz_dun01,50,150,11,35	monster#pre	Kavach Icarus	KAVAC,4,900000,800000,1
+lhz_dun01,50,150,11,35	monster#pre	Laurell Weinder	RAWREL,2,600000,300000,1
+lhz_dun01,192,61,18,30	monster#pre	Egnigem Cenia	YGNIZEM,1,900000,800000,1
+lhz_dun01,192,61,18,30	monster#pre	Wickebine Tres	WHIKEBAIN,1,900000,800000,1
+lhz_dun01,192,61,18,30	monster#pre	Armeyer Dinze	ARMAIA,1,900000,800000,1
+lhz_dun01,192,61,18,30	monster#pre	Errende Ebecee	EREND,1,900000,800000,1
+lhz_dun01,192,61,18,30	monster#pre	Kavach Icarus	KAVAC,1,900000,800000,1
+lhz_dun01,192,61,18,30	monster#pre	Laurell Weinder	RAWREL,1,900000,800000,1
+lhz_dun01,0,0,0,0	monster#pre	Gemini-S58	GEMINI,1,7200000,5400000,0,{}
+
+//==================================================
+// [Renovação] lhz_dun01 - Laboratório de Somatologia (Primeiro Andar)
+//==================================================
+lhz_dun01,0,0,0,0	monster#re	Exterminador	REMOVAL,100,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Anopheles	ANOPHELES,70,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Metaling	METALING,50,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Kavach Icarus	KAVAC,13,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Errende Ebecee	EREND,13,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Laurell Weinder	RAWREL,11,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Wickebine Tres	WHIKEBAIN,11,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Armeyer Dinze	ARMAIA,8,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Egnigem Cenia	YGNIZEM,8,5000,0,0
+lhz_dun01,0,0,0,0	monster#re	Gemini-S58	GEMINI,1,5000,0,0,{}
+
+//========================================================================================
+// [Pré-Renovação] lhz_dun02 - Laboratório de Somatologia (Segundo Andar)
+//========================================================================================
+lhz_dun02,0,0,0,0	monster#pre	Egnigem Cenia	YGNIZEM,26,0,0,0
+lhz_dun02,0,0,0,0	monster#pre	Wickebine Tres	WHIKEBAIN,26,0,0,0
+lhz_dun02,0,0,0,0	monster#pre	Armeyer Dinze	ARMAIA,26,0,0,0
+lhz_dun02,0,0,0,0	monster#pre	Errende Ebecee	EREND,26,0,0,0
+lhz_dun02,0,0,0,0	monster#pre	Kavach Icarus	KAVAC,26,0,0,0
+lhz_dun02,0,0,0,0	monster#pre	Laurell Weinder	RAWREL,26,0,0,0
+lhz_dun02,150,150,56,54	monster#pre	Egnigem Cenia	YGNIZEM,4,120000,60000,1
+lhz_dun02,150,150,56,54	monster#pre	Wickebine Tres	WHIKEBAIN,4,120000,60000,1
+lhz_dun02,150,150,56,54	monster#pre	Armeyer Dinze	ARMAIA,4,120000,60000,1
+lhz_dun02,150,150,56,54	monster#pre	Errende Ebecee	EREND,4,120000,60000,1
+lhz_dun02,150,150,56,54	monster#pre	Kavach Icarus	KAVAC,4,120000,60000,1
+lhz_dun02,150,150,56,54	monster#pre	Laurell Weinder	RAWREL,4,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Egnigem Cenia	YGNIZEM,10,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Wickebine Tres	WHIKEBAIN,10,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Armeyer Dinze	ARMAIA,10,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Errende Ebecee	EREND,10,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Kavach Icarus	KAVAC,10,120000,60000,1
+lhz_dun02,150,150,105,90	monster#pre	Laurell Weinder	RAWREL,10,120000,60000,1
+lhz_dun02,0,0,0,0	monster#pre	Egnigem Cenia	YGNIZEM,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Wickebine Tres	WHIKEBAIN,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Armeyer Dinze	ARMAIA,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Errende Ebecee	EREND,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Kavach Icarus	KAVAC,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Laurell Weinder	RAWREL,10,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Exterminador	REMOVAL,20,300000,150000,1
+lhz_dun02,0,0,0,0	monster#pre	Eremes Guile	EREMES,1,180000,120000,0
+lhz_dun02,0,0,0,0	monster#pre	Gemini-S58	GEMINI,10,5400000,180000,0,{}
+lhz_dun02,0,0,0,0	boss_monster	Egnigem Cenia	B_YGNIZEM,1,7200000,600000,1
+
+//==================================================
+// [Renovação] lhz_dun02 - Laboratório de Somatologia (Segundo Andar)
+//==================================================
+lhz_dun02,0,0,0,0	monster#re	Laurell Weinder	RAWREL,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Wickebine Tres	WHIKEBAIN,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Kavach Icarus	KAVAC,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Errende Ebecee	EREND,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Egnigem Cenia	YGNIZEM,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Armeyer Dinze	ARMAIA,50,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Exterminador	REMOVAL,20,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Gemini-S58	GEMINI,10,5000,0,0
+lhz_dun02,0,0,0,0	monster#re	Eremes Guile	EREMES,1,5000,0,0,{}
+
+//========================================================================================
+// [Pré-Renovação] lhz_dun03 - Laboratório de Somatologia (Terceiro Andar)
+//========================================================================================
+lhz_dun03,140,235,116,30	monster#pre	Seyren	SEYREN,4,180000,120000,0
+lhz_dun03,140,235,116,30	monster#pre	Eremes	EREMES,4,180000,120000,0
+lhz_dun03,140,235,116,30	monster#pre	Howard	HARWORD,4,180000,120000,0
+lhz_dun03,140,235,116,30	monster#pre	Margaretha	MAGALETA,4,180000,120000,0
+lhz_dun03,140,235,116,30	monster#pre	Cecil	SHECIL,4,180000,120000,0
+lhz_dun03,140,235,116,30	monster#pre	Kathryne	KATRINN,4,180000,120000,0
+lhz_dun03,40,214,16,16	monster#pre	Seyren	SEYREN,1,120000,60000,0
+lhz_dun03,40,214,16,16	monster#pre	Eremes	EREMES,1,120000,60000,0
+lhz_dun03,40,214,16,16	monster#pre	Howard	HARWORD,1,120000,60000,0
+lhz_dun03,40,214,16,16	monster#pre	Margaretha	MAGALETA,1,120000,60000,0
+lhz_dun03,40,214,16,16	monster#pre	Cecil	SHECIL,1,120000,60000,0
+lhz_dun03,40,214,16,16	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Seyren	SEYREN,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Eremes	EREMES,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Howard	HARWORD,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Margaretha	MAGALETA,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Cecil	SHECIL,1,120000,60000,0
+lhz_dun03,240,213,16,17	monster#pre	Kathryne 	KATRINN,1,120000,60000,0
+lhz_dun03,140,65,108,38	monster#pre	Seyren	SEYREN,7,120000,160000,0
+lhz_dun03,140,65,108,38	monster#pre	Eremes	EREMES,7,120000,160000,0
+lhz_dun03,140,65,108,38	monster#pre	Howard	HARWORD,7,120000,160000,0
+lhz_dun03,140,65,108,38	monster#pre	Margaretha	MAGALETA,7,120000,160000,0
+lhz_dun03,140,65,108,38	monster#pre	Cecil	SHECIL,7,120000,60000,0
+lhz_dun03,140,65,108,38	monster#pre	Kathryne	KATRINN,7,120000,60000,0
+lhz_dun03,140,31,8,15	monster#pre	Seyren	SEYREN,1,600000,540000,0
+lhz_dun03,140,31,8,15	monster#pre	Eremes	EREMES,1,540000,480000,0
+lhz_dun03,140,31,8,15	monster#pre	Howard	HARWORD,1,600000,540000,0
+lhz_dun03,140,31,8,15	monster#pre	Margaretha	MAGALETA,1,540000,480000,0
+lhz_dun03,140,31,8,15	monster#pre	Cecil	SHECIL,1,600000,540000,0
+lhz_dun03,140,31,8,15	monster#pre	Kathryne	KATRINN,1,540000,480000,0
+lhz_dun03,40,66,16,16	monster#pre	Seyren	SEYREN,1,120000,60000,0
+lhz_dun03,40,66,16,16	monster#pre	Eremes	EREMES,1,120000,60000,0
+lhz_dun03,40,66,16,16	monster#pre	Howard	HARWORD,1,120000,60000,0
+lhz_dun03,40,66,16,16	monster#pre	Margaretha	MAGALETA,1,120000,60000,0
+lhz_dun03,40,66,16,16	monster#pre	Cecil	SHECIL,1,120000,60000,0
+lhz_dun03,40,66,16,16	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Seyren	SEYREN,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Eremes	EREMES,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Howard	HARWORD,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Margaretha	MAGALETA,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Cecil	SHECIL,1,120000,60000,0
+lhz_dun03,240,66,16,16	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,54,131,35,39	monster#pre	Seyren	SEYREN,5,180000,120000,0
+lhz_dun03,54,131,35,39	monster#pre	Eremes	EREMES,5,180000,120000,0
+lhz_dun03,54,131,35,39	monster#pre	Howard	HARWORD,5,180000,120000,0
+lhz_dun03,54,131,35,39	monster#pre	Margaretha	MAGALETA,5,180000,120000,0
+lhz_dun03,54,131,35,39	monster#pre	Cecil	SHECIL,5,120000,60000,0
+lhz_dun03,54,131,35,39	monster#pre	Kathryne	KATRINN,5,120000,60000,0
+lhz_dun03,228,137,35,39	monster#pre	Seyren	SEYREN,5,180000,120000,0
+lhz_dun03,228,137,35,39	monster#pre	Eremes	EREMES,5,180000,120000,0
+lhz_dun03,228,137,35,39	monster#pre	Howard	HARWORD,5,180000,120000,0
+lhz_dun03,228,137,35,39	monster#pre	Margaretha	MAGALETA,5,180000,120000,0
+lhz_dun03,228,137,35,39	monster#pre	Cecil	SHECIL,5,120000,60000,0
+lhz_dun03,228,137,35,39	monster#pre	Kathryne	KATRINN,5,120000,60000,0
+lhz_dun03,138,138,36,34	monster#pre	Seyren	SEYREN,3,120000,60000,0
+lhz_dun03,138,138,36,34	monster#pre	Eremes	EREMES,3,120000,60000,0
+lhz_dun03,138,138,36,34	monster#pre	Howard	HARWORD,3,120000,60000,0
+lhz_dun03,138,138,36,34	monster#pre	Margaretha	MAGALETA,3,180000,120000,0
+lhz_dun03,138,138,36,34	monster#pre	Cecil	SHECIL,4,0,0,0
+lhz_dun03,138,138,36,34	monster#pre	Kathryne	KATRINN,4,0,0,0
+lhz_dun03,140,192,66,21	monster#pre	Seyren	SEYREN,7,120000,60000,0
+lhz_dun03,140,192,66,21	monster#pre	Eremes	EREMES,7,180000,120000,0
+lhz_dun03,140,192,66,21	monster#pre	Howard	HARWORD,7,120000,60000,0
+lhz_dun03,140,192,66,21	monster#pre	Margaretha	MAGALETA,7,180000,120000,0
+lhz_dun03,140,192,66,21	monster#pre	Cecil	SHECIL,7,120000,60000,0
+lhz_dun03,140,192,66,21	monster#pre	Kathryne	KATRINN,7,120000,60000,0
+lhz_dun03,89,164,4,8	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,89,164,4,8	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,107,167,4,5	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,107,167,4,5	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,171,167,4,5	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,171,167,4,5	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,189,164,4,8	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,189,164,4,8	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,89,113,4,9	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,89,113,4,9	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,107,109,4,5	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,107,109,4,5	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,171,109,4,5	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,171,109,4,5	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,189,113,4,9	monster#pre	Kathryne	KATRINN,1,120000,60000,0
+lhz_dun03,189,113,4,9	monster#pre	Cecil	SHECIL,3,120000,60000,0
+lhz_dun03,96,164,13,8	monster#pre	Seyren	SEYREN,2,300000,120000,0
+lhz_dun03,96,164,13,8	monster#pre	Eremes	EREMES,2,300000,120000,0
+lhz_dun03,96,164,13,8	monster#pre	Margaretha	MAGALETA,2,300000,120000,0
+lhz_dun03,96,164,13,8	monster#pre	Cecil Damon	SHECIL,5,0,0,0
+lhz_dun03,96,164,13,8	monster#pre	Kathryne	KATRINN,3,0,0,0
+lhz_dun03,180,164,13,8	monster#pre	Seyren	SEYREN,2,300000,120000,0
+lhz_dun03,180,164,13,8	monster#pre	Howard	HARWORD,2,300000,120000,0
+lhz_dun03,180,164,13,8	monster#pre	Margaretha	MAGALETA,2,300000,120000,0
+lhz_dun03,180,164,13,8	monster#pre	Cecil	SHECIL,5,0,0,0
+lhz_dun03,180,164,13,8	monster#pre	Kathryne	KATRINN,3,0,0,0
+lhz_dun03,98,113,13,9	monster#pre	Seyren	SEYREN,2,300000,120000,0
+lhz_dun03,98,113,13,9	monster#pre	Eremes	EREMES,2,300000,120000,0
+lhz_dun03,98,113,13,9	monster#pre	Howard	HARWORD,2,300000,120000,0
+lhz_dun03,98,113,13,9	monster#pre	Cecil	SHECIL,5,0,0,0
+lhz_dun03,98,113,13,9	monster#pre	Kathryne	KATRINN,3,0,0,0
+lhz_dun03,180,113,13,9	monster#pre	Eremes	EREMES,2,300000,120000,0
+lhz_dun03,180,113,13,9	monster#pre	Howard	HARWORD,2,300000,120000,0
+lhz_dun03,180,113,13,9	monster#pre	Margaretha	MAGALETA,2,300000,120000,0
+lhz_dun03,180,113,13,9	monster#pre	Cecil	SHECIL,5,0,0,0
+lhz_dun03,180,113,13,9	monster#pre	Kathryne	KATRINN,3,0,0,0,{}
+lhz_dun03,114,138,12,16	monster	Lorde Seyren	G_SEYREN,1,2700000,2400000,1
+lhz_dun03,163,138,12,16	monster	Mestre-Ferreiro Howard	G_HARWORD,1,3000000,2700000,1
+lhz_dun03,139,158,20,11	monster	Algoz Eremes	G_EREMES,1,2580000,2340000,1
+lhz_dun03,139,117,20,11	monster	Atiradora de Elite Cecil	G_SHECIL,1,2700000,2500000,1
+lhz_dun03,138,138,36,34	monster	Suma-Sacerdotisa Margaretha	G_MAGALETA,1,3300000,3000000,1
+lhz_dun03,138,138,36,34	monster	Arquimaga Kathryne	G_KATRINN,1,2580000,2460000,1
+
+//==================================================
+// [Renovação] lhz_dun03 - Laboratório de Somatologia (Terceiro Andar)
+//==================================================
+lhz_dun03,0,0,0,0	monster#re	Cecil Damon	SHECIL,81,5000,0,0
+lhz_dun03,0,0,0,0	monster#re	Kathryne Keyron	KATRINN,57,5000,0,0
+lhz_dun03,0,0,0,0	monster#re	Margaretha Sorin	MAGALETA,42,5000,0,0
+lhz_dun03,0,0,0,0	monster#re	Howard Alt-Eisen	HARWORD,42,5000,0,0
+lhz_dun03,0,0,0,0	monster#re	Eremes Guile	EREMES,42,5000,0,0
+lhz_dun03,0,0,0,0	monster#re	Seyren Windsor	SEYREN,42,5000,0,0
+
+
+//========================================================================================
+// [Renovação] lhz_dun04 - Laboratório de Somatologia (Quarto Andar)
+//========================================================================================
+lhz_dun04,0,0,0,0	monster#re	Randel Lawrence	RANDEL,42,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Flamel Emul	FLAMEL,42,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Celia Alde	CELIA,81,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Chen Liu	CHEN,42,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Gertie Wie	GERTIE,57,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Alphoccio Basil	ALPHOCCIO,42,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Trentini	TRENTINI,42,5000,0,0
+lhz_dun04,0,0,0,0	monster#re	Paladino Randel	G_RANDEL,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Criador Flamel	G_FLAMEL,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Professora Celia	G_CELIA,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Mestre Chen	G_CHEN,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Desordeira Gertie	G_GERTIE,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Menestrel Alphoccio	G_ALPHOCCIO,1,3300000,3000000,1
+lhz_dun04,0,0,0,0	monster#re	Cigana Trentini	G_TRENTINI,1,3300000,3000000,1,{}
+
+lhz_dun03,2,2,0	script#pre	invocar_chefe_lt	-1,{
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer6000000:
+	if (rand(1,6) == 1) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer6300000:
+	if (rand(1,6) == 2) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer6600000:
+	if (rand(1,6) == 3) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer6900000:
+	if (rand(1,6) == 4) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer7200000:
+	if (rand(1,6) == 5) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer7500000:
+	if (rand(1,6) == 6) {
+		donpcevent "invocar_chefe_lt::Oninvoc";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer7800000:
+	donpcevent "invocar_chefe_lt::Oninvoc";
+	stopnpctimer;
+	end;
+
+Oninvoc:
+	// Invocar o MvP em cordenadas aleatórias.
+	switch(rand(1,6)) {
+	case 1: set .@x,140;	set .@y,232;	break;
+	case 2: set .@x,75;	set .@y,138;	break;
+	case 3: set .@x,140;	set .@y,87;		break;
+	case 4: set .@x,205;	set .@y,140;	break;
+	case 5: set .@x,123;	set .@y,137;	break;
+	case 6: set .@x,175;	set .@y,137;	break;
+	}
+	set .@mob,rand(1646,1651);
+	monster "lhz_dun03",.@x,.@y,strmobinfo(1,.@mob),.@mob,1,"invocar_chefe_lt::OnMyMVPDead";
+
+	// Invocar monstros em cordenadas aleatórias.
+	switch(rand(1,6)) {
+	case 1: set .@x2,183;	set .@y2,97;	break;
+	case 2: set .@x2,97;	set .@y2,96;	break;
+	case 3: set .@x2,47;	set .@y2,139;	break;
+	case 4: set .@x2,231;	set .@y2,140;	break;
+	case 5: set .@x2,139;	set .@y2,211;	break;
+	case 6: set .@x2,139;	set .@y2,259;	break;
+	}
+	set .@mob2,rand(1640,1645);
+	monster "lhz_dun03",.@x2,.@y2,strmobinfo(1,.@mob2),.@mob2,1,"invocar_chefe_lt::OnMVP";
+	end;
+
+OnMyMVPDead:
+	killmonster "lhz_dun03","invocar_chefe_lt::OnMvp";
+	initnpctimer;
+	end;
+
+OnMVP:
+	end;
+}
+
+lhz_dun03,0,0,0	script#re	mvp_lhz_dun03	-1,{
+OnTimer6000000: // delay1 = 6000000 ms (100 min)
+	stopnpctimer;
+	sleep rand(0,30)*60000; // 0 to 30 minutes
+OnInit:
+	// Seleciona coordenadas para invocar o MVP aleatório em
+	switch(rand(1,6)) {
+		case 1:  set .@x,140;  set .@y,232;  break;
+		case 2:  set .@x,75;   set .@y,138;  break;
+		case 3:  set .@x,140;  set .@y,87;   break;
+		case 4:  set .@x,205;  set .@y,140;  break;
+		case 5:  set .@x,123;  set .@y,137;  break;
+		case 6:  set .@x,175;  set .@y,137;  break;
+	}
+	set .@mob,rand(1646,1651);
+	monster "lhz_dun03",.@x,.@y,strmobinfo(1,.@mob),.@mob,1,strnpcinfo(3)+"::OnMyMVPDead";
+
+	// Seleciona as coordenadas para Sumonar um MvP aleatório lvl 99 em
+	switch(rand(1,6)) {
+		case 1:  set .@x2,183;  set .@y2,97;   break;
+		case 2:  set .@x2,97;   set .@y2,96;   break;
+		case 3:  set .@x2,47;   set .@y2,139;  break;
+		case 4:  set .@x2,231;  set .@y2,140;  break;
+		case 5:  set .@x2,139;  set .@y2,211;  break;
+		case 6:  set .@x2,139;  set .@y2,259;  break;
+	}
+	set .@mob2,rand(1640,1645);
+	monster "lhz_dun03",.@x2,.@y2,strmobinfo(1,.@mob2),.@mob2,1,strnpcinfo(3)+"::OnMy99Dead";
+	end;
+
+OnMyMVPDead:
+	killmonster "lhz_dun03",strnpcinfo(3)+"::OnMy99Dead";
+	initnpctimer;
+OnMy99Dead:
+	end;
+}
+
+lhz_dun04,0,0,0	script#re	mvp_lhz_dun04	-1,{
+OnTimer6000000: // delay1 = 6000000 ms (100 min)
+	stopnpctimer;
+	sleep rand(0,30)*60000; // 0 to 30 minutes
+OnInit:
+	// Seleciona coordenadas para invocar o MVP aleatório em
+	switch(rand(1,7)) {
+		case 1:  set .@x,77;   set .@y,251;  break;
+		case 2:  set .@x,147;  set .@y,224;  break;
+		case 3:  set .@x,219;  set .@y,219;  break;
+		case 4:  set .@x,244;  set .@y,120;  break;
+		case 5:  set .@x,149;  set .@y,41;   break;
+		case 6:  set .@x,53;   set .@y,109;  break;
+		case 7:  set .@x,149;  set .@y,151;  break;
+	}
+	set .@mob,rand(2235,2241);
+	monster "lhz_dun04",.@x,.@y,strmobinfo(1,.@mob),.@mob,1,strnpcinfo(3)+"::OnMyMVPDead";
+
+	// Seleciona as coordenadas para Sumonar um MvP aleatório lvl 160 em
+	switch(rand(1,7)) {
+		case 1:  set .@x2,77;   set .@y2,251;  break;
+		case 2:  set .@x2,147;  set .@y2,224;  break;
+		case 3:  set .@x2,219;  set .@y2,219;  break;
+		case 4:  set .@x2,244;  set .@y2,120;  break;
+		case 5:  set .@x2,149;  set .@y2,41;   break;
+		case 6:  set .@x2,53;   set .@y2,109;  break;
+		case 7:  set .@x2,149;  set .@y2,151;  break;
+	}
+	set .@mob2,rand(2228,2234);
+	monster "lhz_dun04",.@x2,.@y2,strmobinfo(1,.@mob2),.@mob2,1,strnpcinfo(3)+"::OnMy99Dead";
+	end;
+
+OnMyMVPDead:
+	killmonster "lhz_dun04",strnpcinfo(3)+"::OnMy99Dead";
+	initnpctimer;
+OnMy99Dead:
+	end;
+}

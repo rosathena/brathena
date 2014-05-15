@@ -1,0 +1,70 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: manuk.txt                              |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.1a/1.1a/1.1                       |
+//   |--------------------------------------------------------|
+//   | Descrição:  Monstros dos Campos de Manuk.              |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Shiraz]                          |
+//   | 1.1 Tradução PT-BR [Holy & Megasantos]                 |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+//============================================================
+// [Pré-Renovação] man_fild01 - Montanhas de Manuk
+//============================================================
+man_fild01,0,0,0,0	monster#pre	Nepenthes	NEPENTHES,105,0,0,0
+man_fild01,0,0,0,0	monster#pre	Leão da Montanha	HILLSRION,10,0,0,0
+man_fild01,0,0,0,0	monster#pre	Larva de Centopéia	CENTIPEDE_LARVA,30,0,0,0
+man_fild01,0,0,0,0	monster#pre	Centopéia	CENTIPEDE,2,0,0,0,{}
+
+//==================================================
+// [Renovação] man_fild01 - Montanhas de Manuk
+//==================================================
+man_fild01,0,0,0,0	monster#re	Nepenthes	NEPENTHES,105,5000,0,0
+man_fild01,0,0,0,0	monster#re	Larva de Centopéia	CENTIPEDE_LARVA,30,5000,0,0
+man_fild01,0,0,0,0	monster#re	Leão da Montanha	HILLSRION,10,5000,0,0
+man_fild01,0,0,0,0	monster#re	Centopéia	CENTIPEDE,2,5000,0,0,{}
+
+//============================================================
+// [Pré-Renovação] man_fild02 - Montanhas de Manuk
+//============================================================
+man_fild02,0,0,0,0	monster#pre	Golem de Bradium	BRADIUM_GOLEM,50,0,0,0
+man_fild02,0,0,0,0	monster#pre	Centopéia	CENTIPEDE,35,0,0,0
+man_fild02,0,0,0,0	monster#pre	Tatacho	TATACHO,25,0,0,0,{}
+
+//==================================================
+// [Renovação] man_fild02 - Montanhas de Manuk
+//==================================================
+man_fild02,0,0,0,0	monster#re	Golem de Bradium	BRADIUM_GOLEM,50,5000,0,0
+man_fild02,0,0,0,0	monster#re	Centopéia	CENTIPEDE,35,5000,0,0
+man_fild02,0,0,0,0	monster#re	Tatacho	TATACHO,25,5000,0,0,{}
+
+//============================================================
+// [Pré-Renovação] man_fild03 - Montanhas de Manuk
+//============================================================
+man_fild03,0,0,0,0	monster#pre	Leão da Montanha	HILLSRION,25,0,0,0
+man_fild03,0,0,0,0	monster#pre	Tatacho	TATACHO,25,0,0,0
+man_fild03,0,0,0,0	monster#pre	Centopéia	CENTIPEDE,25,0,0,0
+man_fild03,0,0,0,0	monster#pre	Mamute Rochoso	HARDROCK_MOMMOTH,1,14400000,0,0,{}
+
+//==================================================
+// [Renovação] man_fild03 - Montanhas de Manuk
+//==================================================
+man_fild03,0,0,0,0	monster#re	Leão da Montanha	HILLSRION,25,5000,0,0
+man_fild03,0,0,0,0	monster#re	Tatacho	TATACHO,25,5000,0,0
+man_fild03,0,0,0,0	monster#re	Centopéia	CENTIPEDE,25,5000,0,0
+man_fild03,0,0,0,0	monster#re	Mamute Rochoso	HARDROCK_MOMMOTH,1,14400000,0,0,{}

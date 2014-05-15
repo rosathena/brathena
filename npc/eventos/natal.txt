@@ -1,0 +1,3135 @@
+//    ____________________________________________________________ 
+//   /                                                            \
+//   |       _           _   _   _                                |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _           |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |          |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |          |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|          |
+//   |                                                            |
+//   |                    brAthena Script                         |
+//   |------------------------------------------------------------|
+//   | Nome do Script: natal.txt                                  |
+//   |------------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                            |
+//   |------------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.2/1.0/1.3                             |
+//   |------------------------------------------------------------|
+//   | Descrição: Eventos de Natal, Natal 2005 e 2008.            |
+//   | - Natal -                                                  |
+//   | Evento: Colete as meias e troque por um presente.          |
+//   | - Esse NPC DESATIVA o Papai Noel ativo atualmente em Lutie.|
+//   | - 2005 -                                                   |
+//   | Evento 1: Criação de Chapéu de Natal por Louise Kim.       |
+//   | Evento 2: Aproveite o Natal com um evento de monstros.     |
+//   | Evento 3: Oholy necessita que você procure por Deviruchis. |
+//   | - 2008 -                                                   |
+//   | Evento 1: Caixa de Música e Bolo.                          | 
+//   | Evento 2: Jogue Cartas com o Papai Noel.                   |
+//   | Evento 3: Roupas de Papai Noel.                            |
+//   |------------------------------------------------------------|
+//   | Changelog:                                                 |
+//   | 1.0 Criado Cabeçalho [Megasantos]                          |
+//   | 1.1 União de NPCs [Holy]                                   |
+//   | 1.2 Tradução PT-BR [Holy]                                  |
+//   | 1.3 Revisão [Clare & Saraii]                               |
+//   |------------------------------------------------------------|
+//   | - Anotações                                                |
+//   \____________________________________________________________/
+
+xmas_in,100,96,4	script	Papai Noel::Santa2	4_M_SANTA,{
+	mes "[Papai Noel]";
+	if (xmas_npc==0) set xmas_npc, 1;
+	if (#event_xmas > 0 && #event_xmas < 30 ) goto L_Start;
+	mes "Feliz Natal!";
+	if (!Class || #event_xmas >= 30) close;
+	mes "Eu tenho um presente para você! HoHoHo!";
+	getitem rand(664,667),1; //
+	set #event_xmas,#event_xmas+1;
+	close;
+
+L_Start:
+	mes "Estou tendo um pequeno problema...";
+	mes "Você se importa em ouvir?";
+	next;
+	menu "Ouvir o Papai Noel.",M_0, "Dar a prova ao Papai Noel.",M_1, "Cancelar.",M_End;
+
+	M_0:
+		mes "[Papai Noel]";
+		mes "Meu problema é...";
+		mes "Parece haver um homem lá fora, que está me imitando e causando terror.";
+		next;
+		mes "[Papai Noel]";
+		mes "Como o Grinch da lenda, ele está tomando os brinquedos das crianças e guardando-os para si mesmo.";
+		next;
+		mes "[Papai Noel]";
+		mes "Estou muito ocupado aqui embrulhando e organizando meus presentes para o próximo ano, então por isso eu não posso sair e encontrá-lo.";
+		mes "Gostaria que você saisse e destruisse esse homem para mim.";
+		next;
+		mes "[Papai Noel]";
+		mes "Ele está com meus sacos mágicos, por isso ele entrará para dentro do saco sempre que você o atacar e escapará para um outro lugar.";
+		next;
+		mes "[Papai Noel]";
+		mes "Porém,";
+		mes "Com pressa, ele poderá derrubar algumas coisas.";
+		mes "Se ele derrubar uma de suas meias que usa para roubar as crianças, aproveite e pegue-a.";
+		next;
+		mes "[Papai Noel]";
+		mes "Se você coletar 3 dessas meias, irei te premiar";
+		mes "com um protótipo de caixa misteriosa";
+		mes "que tenho guardado próximo ao laboratório. Ela gera presentes aleatórios e me economiza bastante trabalho.";
+		close;
+	M_1:
+		mes "[Papai Noel]";
+		if (countitem(7034) < 3) goto L_NotEnuf;
+		delitem 7034,3;
+		mes "Parece que você está fazendo um ótimo trabalho";
+		mes "derrotando esses Papais Noeis falsos. Continue assim!";
+		next;
+		getitem 644,1; // Caixa de Presente
+		set #event_xmas,#event_xmas+1;
+		mes "[Papai Noel]";
+		mes "Aqui está seu presente.";
+		mes "Se você conseguir mais 3, irei te dar outra Caixa.";
+		mes "Espero que continue coletando mais Meias.";
+		close;
+	
+		L_NotEnuf:
+			mes "Você não possui meias suficientes como prova.";
+			mes "Derrote mais desses Papais Noeis";
+			mes "e consiga mais Meias para obter mais prêmios.";
+			close;
+	M_End:
+		mes "[Papai Noel]";
+		mes "Entendo. Bem, pelo menos";
+		mes "nós nos encontraremos novamente na manhã de Natal.";
+		close;
+
+OnInit:
+	disablenpc "Papai Noel";
+	end;
+}
+
+// Goblin Natalino
+//============================================================
+prt_fild11,0,0,0,0	monster	Christmas Goblin	GOBLINE_XMAS,5,0,0,0
+gef_fild11,0,0,0,0	monster	Christmas Goblin	GOBLINE_XMAS,5,0,0,0
+yuno_fild09,0,0,0,0	monster	Christmas Goblin	GOBLINE_XMAS,5,0,0,0
+
+// Poring Noel
+//============================================================
+ein_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ein_fild10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild00,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild12,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild13,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gef_fild14,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+glast_01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+lhz_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+lhz_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+lhz_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+mjolnir_12,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild12,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild13,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild14,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild15,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild16,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild17,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+moc_fild18,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+pay_fild11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild00,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild10,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+prt_fild11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+xmas_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+cmd_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild06,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild08,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild09,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild11,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+yuno_fild12,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+ama_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+gon_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+um_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+um_fild02,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+um_fild03,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+um_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+nif_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+nif_fild02,0,0,0,0 	monster	Poring Noel	PORING_,15,0,0,0
+lou_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+hu_fild01,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+hu_fild04,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+hu_fild05,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+hu_fild07,0,0,0,0	monster	Poring Noel	PORING_,15,0,0,0
+
+// Antonios
+//============================================================
+ein_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ein_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild00,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild12,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild13,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild14,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+glast_01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+lhz_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+lhz_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+lhz_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+mjolnir_12,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild12,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild13,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild14,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild15,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild16,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild17,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+moc_fild18,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild00,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+xmas_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+cmd_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+yuno_fild12,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+ama_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gon_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+um_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+um_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+um_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+um_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+nif_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+nif_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+lou_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+hu_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+hu_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+hu_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+hu_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+
+// Jakks Natalinos
+//============================================================
+gef_dun01,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+//gefenia02,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+
+// Orcs Natalinos
+//============================================================
+gef_fild02,0,0,0,0	monster	Orc Natalino	ORC_XMAS,5,0,0,0
+gef_fild03,0,0,0,0	monster	Orc Natalino	ORC_XMAS,5,0,0,0
+gef_fild10,0,0,0,0	monster	Orc Natalino	ORC_XMAS,5,0,0,0
+gef_fild14,0,0,0,0	monster	Orc Natalino	ORC_XMAS,5,0,0,0
+alde_dun02,0,0,0,0	monster	Orc Natalino	ORC_XMAS,5,0,0,0
+
+// Louise Gorro de Natal (Evento 1)
+//============================================================
+xmas_in,89,92,5	script	Louise Kim#estilista	4_F_06,{
+	mes "[Estilista Louise Kim]";
+	mes "Cone em forma de chapéu vermelho de Natal é muito comum.";
+	mes "É antiquado.";
+	mes "Década de 1980'!";
+	mes "Haha~";
+	next;
+	mes "[Estilista Louise Kim]";
+	mes "Se você deixá-lo comigo,";
+	mes "o deixarei no modelo atual.";
+	mes "Você sabe o que quero dizer~!";
+	next;
+	mes "[Estilista Louise Kim]";
+	mes "Você conhece o chapéu do Antonio, certo?";
+	mes "Adivinha quem fez?";
+	mes "Como você sabe, um Antonio é difícil de se encontrar,";
+	mes "só o encontrei por que utilizei um poder no chapéu. ";
+	mes "";
+	next;
+	mes "[Estilista Louise Kim]";
+	mes "Se você não gosta do seu chapéu,";
+	mes "entregue-o para mim.";
+	mes "E eu mudarei seu modelo para um novo";
+	mes "estilo, Chapéu-Louise.";
+	mes "";
+	emotion e_lv;
+	next;
+	if (countitem(2236) > 0) {
+		if (select("Aqui.:Está bem.") == 1) {
+			mes "[Estilista Louise Kim]";
+			mes "Ótima escolha!!";
+			mes "Se eu fazer assim ...";
+			mes "e isso e...";
+			mes "finalmente irá se transformar em um chapéu fantástico.";
+			mes "Mas antes disso, preciso de alguns materiais para a criação.";
+			mes "Então, o que acha?";
+			next;
+			if (select("Quais são os materiais?:Então, o que? Eu não quero saber.") == 1) {
+				mes "[Estilista Louise Kim]";
+				mes "Bem, nada especial.";
+				mes "Basicamente, você precisa de um Gorro de Natal é claro.";
+				mes "E com um toque dos meus dedos mágicos,";
+				mes "ele irá se transformar em algo muito especial.";
+				mes "Apenas um pouco mais bonito e";
+				mes "um pouco mais prático. Haha...";
+				next;
+				mes "[Estilista Louise Kim]";
+				mes "Enfim, para resumir, os materiais necessários são....";
+				mes "^0000FFGorro de Natal^000000 e";
+				mes " ^0000FF 1 Espinho de Cacto ^000000 para costura, ";
+				mes "^0000FF 10 Água Benta ^000000 para benção, ";
+				mes "^0000FF 1 Rosário ^000000 para sorte.";
+				mes "É o suficiente para fazer o Chapéu-Louise.";
+				next;
+				if (countitem(952) > 0 && countitem(523) > 9 && countitem(2608) > 0) {
+					select("Aqui está.....");
+					mes "[Estilista Louise Kim]";
+					mes "Uau~~!! Foi rápido!!";
+					mes "Eu gostei do seu estilo~.";
+					mes "Ok!! Se tudo estiver pronto, não há necessidade de hesitar.";
+					mes "Eu vou te mostrar o poder de Designer de Louise Kim .";
+					emotion e_no1;
+					next;
+					mes "-Ela põe o chapéu em um balde-";
+					mes "-cheio com água benta.-";
+					mes "-Ela rapidamente leva-o para fora e começa a remendar o chapéu-";
+					mes "-cantarolando uma melodia.-";
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "~Com a número um do designer, Louise Kim,~";
+					mes "~você será o espírito mais abençoado.~";
+					emotion e_ho;
+					misceffect EF_BLESSING;
+					next;
+					mes "-Imediatamente, ela coloca o Rosário com-";
+					mes "-um desconhecido líquido que o dissolve.-";
+					mes "-E com um pincel,-";
+					mes "-ordenadamente reveste o líquido sobre -";
+					mes "-um fio do chapéu.-";
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "~Com a número um do designer, Louise Kim,~";
+					mes "~você será o espírito mais sortudo.~";
+					emotion e_ho;
+					misceffect EF_GLORIA;
+					next;
+					mes "-Ela começa a costurar o chapéu com -";
+					mes "-o Espinho de Cacto e um fio.-";
+					mes " ";
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "~Isso é chamado o milagre de Louise.~";
+					mes "~A designer mais talentosa,~";
+					mes "~L_O_U_I_S_E K_I_M~";
+					emotion e_lv;
+					misceffect EF_BENEDICTIO;
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "Aqui!! Tudo pronto~~";
+					mes "Você gostou?";
+					mes "Não é maravilhoso?";
+					mes "Leve-o! É um presente.";
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "Eu deveria ter cobrado um alto preço por isso";
+					mes "mas como você sabe que é Natal!";
+					mes "É um presente para você!";
+					mes "Não vou cobrar nada.";
+					mes "Basta dizer a muitas pessoas como sou boa.";
+					emotion e_heh;
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "Onde quer que vá,";
+					mes "faça o que fizer,";
+					mes "nunca tire o chapéu.";
+					mes "Você não terá a chance de comprá-lo";
+					mes "não importa o quanto você pague.";
+					next;
+					mes "[Estilista Louise Kim]";
+					mes "Certo ~ Vá em frente~";
+					mes "Vá gabar-se!";
+					mes "~Quem é mais feliz do que~";
+					mes "~alguém que esteve com a Louise.~";
+					emotion e_ho;
+					delitem 2236,1; // Gorro de Natal
+					delitem 952,1;  // Espinho de Cacto
+					delitem 523,10; // Água Benta
+					delitem 2608,1; // Rosário
+					getitem 5136,1; // Gorro de Natal do Antônio
+					close;
+				}
+				else {
+					mes "[Estilista Louise Kim]";
+					mes "Volte apenas quando tiver os materiais,";
+					mes "caso contrário eu não vou mudar nada.";
+					emotion e_lv;
+					close;
+				}
+			}
+			mes "[Estilista Louise Kim]";
+			mes "Você vai se arrepender!";
+			mes "Pense novamente!";
+			emotion e_heh;
+			close;
+		}
+		mes "[Estilista Louise Kim]";
+		mes "Ok, faça o que quiser.";
+		mes "Não sou eu,";
+		mes "quem vai perder para própria sorte.";
+		emotion e_heh;
+		close;
+	} else {
+		mes "[Estilista Louise Kim]";
+		mes "Talvez você só tenha a chance de conseguir um Gorro de Natal algum tempo depois,";
+		mes "pense nisso com cuidado.";
+		mes "Você poderá obter o melhor chapéu já projetado,";
+		mes "e eu poderei mostrar meu talento.";
+		mes "";
+		emotion e_heh;
+		close;
+	}
+}
+
+// Evento de Feliz Natal (Evento 2)
+prontera,155,285,3	script	Enjoy#enjoy	4_M_MONK,{
+	if (!christ_solo05){
+		mes "[Enjoy]";
+		mes "Ah~~~";
+		mes "Já é inverno novamente~~!";
+		mes "Esse tempo frio faz";
+		mes "meu corpo congelar~";
+		mes "E também faz o meu coração congelar.";
+		mes "Quem disse que o Natal é só para os amantes?~";
+		mes "Ah~~Eu estou tão solitário~!!!";
+		next;
+		mes "[Enjoy]";
+		mes "Irmã impiedosa!!";
+		mes "Como ela pode me deixar sozinho em um dia de natal~";
+		mes "'Passe os seus dias de Natal com a sua família'";
+		mes "Hum...Eu preciso descansar um pouco.";
+		mes "Estou tão nervoso esses dias~";
+		next;
+		mes "[Enjoy]";
+		mes "Vamos fazer um natal alegre para ";
+		mes "solteiros solitários.";
+		mes "Quem está comigo?!!";
+		mes "!!!!!!!!!!!";
+		mes "!!!!!!!!!!!!!";
+		next;
+		switch(select("Uau!:Hum...Eu não estou interessado.:Eu estou ~")){
+		case 1:
+			mes "[Enjoy]";
+			mes "Certo~~!!!";
+			mes "Vamos dançar e rolar!!";
+			mes "Aqui está o meu plano!!";
+			mes "Vamos punir aqueles casais";
+			mes "que estão tão animados no Natal.";
+			mes "Eu só não quero vê-los felizes.";
+			next;
+			mes "[Enjoy]";
+			mes "Para colocar em ação,";
+			mes "precisamos reunir muitas falanges.";
+			mes "Ok!! Traga falanges no caminho de cada cidade e volte aqui. ";
+			mes "Certo? Vamos lá!!";
+			next;
+			mes "[Enjoy]";
+			mes "Cada um deve ter o número do telefone de uma pessoa.";
+			mes "Devemos manter isso em segredo, antes de agirmos.";
+			mes "Portanto, devemos ter muito cuidado.";
+			mes "Bem...";
+			mes "Eu sei o número de telefone da ^0000FFHappymerry^000000.";
+			next;
+			mes "[Enjoy]";
+			mes "Em primeiro lugar, procure a ^0000FFHappymerry^000000";
+			mes "e diga-lhe sobre o nosso plano.";
+			mes "E no caminho de volta, traga quantas falanges você puder trazer.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Certo, senhor!!!";
+			next;
+			mes "[Enjoy]";
+			mes "Ah, e não se esqueça de trazer";
+			mes "5 galhos secos de árvores mortas!!!";
+			mes "Você deve trazer os itens para atacarmos a cidade.~";
+			mes "Hahahaha~~";
+			emotion e_gg;
+			next;
+			mes "[Enjoy]";
+			mes "Brincar?!!!!";
+			mes "Vamos castigar!!!";
+			mes "Nós não estamos sendo ciumentos,";
+			mes "É apenas um direito levando uma vida de solteiro!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Vamos castigar!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+			set christ_solo05,1;
+			close;
+		case 2:
+			mes "[Enjoy]";
+			mes "Se você não está comigo, fuja~!!";
+			mes "Saia da minha vista!!!!";
+			mes "";
+			close;
+		case 3:
+			mes "[Enjoy]";
+			mes "......";
+			specialeffect EF_BLESSING;
+			next;
+			mes "[Enjoy]";
+			mes ".............";
+			specialeffect EF_INCAGIDEX;
+			next;
+			mes "[Enjoy]";
+			mes "........................";
+			specialeffect EF_STEELBODY;
+			next;
+			mes "[Enjoy]";
+			mes "........................";
+			mes "Se perca, seu diabo!!!!!!";
+			specialeffect EF_BEGINASURA;
+			specialeffect2 EF_HIT2;
+			set Hp,Hp/2;
+			set Hp,Hp/2;
+			close2;
+			warp "prontera",155,230;
+			end;
+		}
+	} else if ((christ_solo05 > 0) && (christ_solo05 < 5)){
+		mes "[Enjoy]";
+		mes "Cada um deve ter o número do telefone de uma pessoa.";
+		mes "Devemos manter isso em segredo, antes de agirmos.";
+		mes "Portanto, devemos ter muito cuidado.";
+		mes "Bem...";
+		mes "Eu sei o número de telefone da ^0000FFHappymerry^000000.";
+		next;
+		mes "[Enjoy]";
+		mes "Em primeiro lugar, procure a ^0000FFHappymerry^000000";
+		mes "e diga-lhe sobre o nosso plano.";
+		mes "E no caminho de volta, traga quantas falanges você puder trazer.";
+		next;
+		mes "[Enjoy]";
+		mes "Ah, e não se esqueça de trazer";
+		mes "5 galhos secos de árvores mortas!!!";
+		mes "Vamos castigar casais!!!";
+		close;
+	} else if (christ_solo05 == 5) {
+		if (countitem(604) > 4){
+			mes "[Enjoy]";
+			mes "Você fez o que eu te disse para fazer?!!!";
+			mes "Você trouxe os galhos secos de árvores mortas? Deixe-me ver~~!!";
+			next;
+			mes "[Enjoy]";
+			mes "Ótimo!!";
+			mes "Está tudo pronto!!!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Espere!!";
+			mes "Onde estão as outras pessoas??";
+			next;
+			mes "[Enjoy]";
+			mes "O que você está falando?!";
+			mes "Eles já estão aqui.......";
+			next;
+			mes "[Enjoy]";
+			mes "Você não vê?!";
+			mes "Por Favor~!!!! Você está bem?!!!";
+			donpcevent "Happymerry#happymerry02::OnCommandOn";
+			donpcevent "Christ#christ02::OnCommandOn";
+			donpcevent "Mas#mas02::OnCommandOn";
+			donpcevent "Event#event02::OnCommandOn";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Ah.. sim!!!";
+			next;
+			mes "[Enjoy]";
+			mes "Bem-vindo!! Bem-vindos meus falanges!!!";
+			mes "Ser só não é um pecado.";
+			mes "Por que temos de vê-los";
+			mes "desse jeito!";
+			mes "Eu odeio casais!!";
+			mes "Simples e pobres!!";
+			next;
+			mes "[Enjoy]";
+			mes "Por aqueles que têm um amigo que acabou de conhecer seu/sua companheiro(a),";
+			mes "ou que teve de virar a seu/sua volta para não ver casais se beijando!!";
+			mes "O que você está esperando!!";
+			mes "Por que temos que ser a vítima!!";
+			mes "";
+			next;
+			mes "[Enjoy]";
+			mes "É época de Natal novamente!!";
+			mes "";
+			next;
+			mes "[Enjoy]";
+			mes "Nós somos os soldados";
+			mes "que tem espancado monstros com nossas mãos.";
+			mes "Você não se lembra dos dias?! Nós pulamos do Dirigível!!";
+			mes "Estamos bem treinados solteiros!! Haha~!";
+			next;
+			mes "[Enjoy]";
+			mes "Nós não precisamos de alguém para limpar as nossas lágrimas.";
+			mes "Não há necessidade para invejar!!";
+			mes "Esse Natal será para os solteiros!! ";
+			mes "Yahuull~";
+			mes "";
+			next;
+			mes "[Todos]";
+			mes "Natal para os solteiros!!!";
+			mes "Sem inveja!! Sem tristeza!! Sem raiva!!!";
+			mes "Natal para os solteiros!!!";
+			next;
+			mes "- Desfrute usando galhos secos de árvores mortas.";
+			mes "- Quebre-os apertando.-";
+			next;
+			mes "[Enjoy]";
+			mes "Vamos punir os casais,";
+			mes "para que eles queiram levar uma vida de solteiro!!";
+			mes " ";
+			mes "[Todos]";
+			mes "Vamos puní-los!!!!!";
+			emotion e_go;
+			emotion e_go,1;
+			donpcevent "Happymerry#happymerry02::OnCommandEmotion";
+			donpcevent "Christ#christ02::OnCommandEmotion";
+			donpcevent "Mas#mas02::OnCommandEmotion";
+			donpcevent "Event#event02::OnCommandEmotion";
+			misceffect EF_HITLINE2; //_HITLINE2
+			delitem 604,5; //Branch_of_Dead_Tree
+			set christ_solo05,6;
+			donpcevent "Happymerry#happymerry02::OnCommandOff";
+			donpcevent "Christ#christ02::OnCommandOff";
+			donpcevent "Mas#mas02::OnCommandOff";
+			donpcevent "Event#event02::OnCommandOff";
+			close2;
+			mapannounce "prontera", "O soldado solitário "+ strcharinfo(0) +" sai espalhando tristeza por toda a cidade.",bc_map,0x66FFCC;
+			monster "prontera",155,300,""+ strcharinfo(0) +"'s anguish",1062,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",156,300,""+ strcharinfo(0) +"'s jealousy",1062,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",157,300,""+ strcharinfo(0) +"'s despair",1062,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",158,300,""+ strcharinfo(0) +"'s frustration",1062,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",154,300,""+ strcharinfo(0) +"'s bombing",1062,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",158,299,""+ strcharinfo(0) +"'s grudge",1246,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",157,299,""+ strcharinfo(0) +"'s curse",1246,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",156,299,""+ strcharinfo(0) +"'s anger",1246,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",155,299,""+ strcharinfo(0) +"'s grief",1246,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",154,299,""+ strcharinfo(0) +"'s hatred",1246,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",158,298,""+ strcharinfo(0) +"'s a bitter taste of solo",1245,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",157,298,""+ strcharinfo(0) +"'s couple punisher",1245,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",156,298,""+ strcharinfo(0) +"'s loneliness",1245,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",155,298,""+ strcharinfo(0) +"'s sobbing",1245,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",154,298,""+ strcharinfo(0) +"'s darkness",1245,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",158,297,""+ strcharinfo(0) +"'s depression",1244,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",157,297,""+ strcharinfo(0) +"'s estrangement",1244,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",156,297,""+ strcharinfo(0) +"'s nightmare",1244,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",155,297,""+ strcharinfo(0) +"'s wail",1244,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",154,297,""+ strcharinfo(0) +"'s whisper",1244,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",158,296,""+ strcharinfo(0) +"'s regret",1588,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",157,296,""+ strcharinfo(0) +"'s shadow",1588,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",156,296,""+ strcharinfo(0) +"'s couplebreaker",1588,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",155,296,""+ strcharinfo(0) +"'s sadness",1588,1,"Enjoy#enjoy::OnMyMobDead";
+			monster "prontera",154,296,""+ strcharinfo(0) +"'s symbol of brokenheart",1588,1,"Enjoy#enjoy::OnMyMobDead";
+			donpcevent "Enjoy#enjoy::OnCommandGo";
+			end;
+		} else {
+			mes "[Enjoy]";
+			mes "Não há muito tempo!!!";
+			mes "Não há tempo para hesitar!!";
+			mes "Se não os casais vão desfrutar de seu dia de Natal";
+			mes "felizes.";
+			mes "Você vai deixar que isso aconteça!!!!!";
+			mes "Vamos vamos!!";
+			mes "Vá buscar ^0000FF 5 Galhos Secos^000000 de árvores mortas!!!";
+			close;
+		}
+	} else {
+		mes "[Enjoy]";
+		mes "Hum.... ";
+		mes "Não adianta só culpar a si mesmo!";
+		mes "Nós, companheiros solitárias podemos construir nosso próprio futuro esperançoso.";
+		mes "Vamos lá!!!";
+		next;
+		mes "[Enjoy]";
+		mes "Para o dia em que todos ficam felizes~!!";
+		mes "Vamos para ele!!!";
+		mes "Animem-se todos!!!";
+		mes "Vamos bagunçar até que fiquemos felizes~!";
+		mes "";
+		set christ_solo05,0;
+		close;
+	}
+
+OnMyMobDead:
+	end;
+
+OnCommandGo:
+	disablenpc "Enjoy#enjoy";
+	initnpctimer;
+	end;
+
+OnCommandStop:
+	enablenpc "Enjoy#enjoy";
+	killmonster "prontera","Enjoy#enjoy::OnMyMobDead";
+	stopnpctimer;
+	end;
+
+OnTimer3000:
+	mapannounce "prontera","Você deve refinar até que esteja satisfeito!!!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer5000:
+	mapannounce "prontera","Seria um desperdicio organizar esta festa no calabouço!!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer7000:
+	mapannounce "prontera","Há um NPC flertando me!!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer9000:
+	mapannounce "prontera","Eu estava sempre sozinho desde o dia em que nasci!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer11000:
+	mapannounce "prontera","Nós plantamos ervas mesmo em um dia de Natal!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer13000:
+	mapannounce "prontera","...Nós somos os insuperáveis soldados solteiros!!!",bc_map,0x66FFCC;
+	end;
+
+OnTimer180000:
+	mapannounce "prontera","Desejo que cada soldado solteiro tenha um Feliz Natal!!",bc_map,0x66FFCC;
+	donpcevent "Enjoy#enjoy::OnCommandStop";
+	end;
+}
+
+prontera,150,286,5	script	Happymerry#happymerry02	4_M_LGTMAN,{
+	end;
+
+OnInit:
+	disablenpc "Happymerry#happymerry02";
+	stopnpctimer;
+	end;
+
+OnCommandOn:
+	initnpctimer;
+	enablenpc "Happymerry#happymerry02";
+OnCommandEmotion:
+	emotion e_go;
+	end;
+
+OnCommandOff:
+	disablenpc "Happymerry#happymerry02";
+	stopnpctimer;
+	end;
+
+OnTimer60000:
+	donpcevent "Happymerry#happymerry02::OnCommandOff";
+	donpcevent "Christ#christ02::OnCommandOff";
+	donpcevent "Mas#mas02::OnCommandOff";
+	donpcevent "Event#event02::OnCommandOff";
+	stopnpctimer;
+	end;
+}
+
+prontera,161,286,4	script	Christ#christ02	4_M_PECOKNIGHT,{
+	end;
+OnInit:
+	disablenpc "Christ#christ02";
+	end;
+
+OnCommandOn:
+	enablenpc "Christ#christ02";
+OnCommandEmotion:
+	emotion e_go;
+	end;
+
+OnCommandOff:
+	disablenpc "Christ#christ02";
+	end;
+}
+
+prontera,161,281,1	script	Mas#mas02	4_M_ALCHE_A,{
+	end;
+OnInit:
+	disablenpc "Mas#mas02";
+	end;
+
+OnCommandOn:
+	enablenpc "Mas#mas02";
+OnCommandEmotion:
+	emotion e_go;
+	end;
+
+OnCommandOff:
+	disablenpc "Mas#mas02";
+	end;
+}
+
+prontera,150,281,7	script	Event#event02	4_M_SITDOWN,{
+	end;
+OnInit:
+	disablenpc "Event#event02";
+	end;
+
+OnCommandOn:
+	enablenpc "Event#event02";
+OnCommandEmotion:
+	emotion e_go;
+	end;
+
+OnCommandOff:
+	disablenpc "Event#event02";
+	end;
+}
+
+prontera,188,177,4	script	Happymerry#happymerry	4_M_LGTMAN,{
+	if (christ_solo05==1) {
+		mes "[Happymerry]";
+		mes "Holgren~~!!";
+		mes "Eu nunca imaginei que iria ver você me traindo!!!";
+		mes "Eu odeio o Natal~!";
+		emotion e_sob;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Você...é...?";
+		next;
+		mes "[Happymerry]";
+		mes "Do que você está rindo? huh~!";
+		mes "Pelo menos, nunca precisei de ajuda";
+		mes "para conseguir meus equipamentos refinados!";
+		mes "Eu sempre fui corajosa!!";
+		mes "Benção? Glória~~?!";
+		mes "Casais~~dã~!!!!!!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Você parece estar no caminho certo!!!";
+		mes "Enjoy está esperando por você.";
+		mes "Vamos lá!!!";
+		next;
+		mes "[Happymerry]";
+		mes "...!";
+		mes "O dia chegou?";
+		mes "Ele me ajudou no último Natal,";
+		mes "quando eu falhei no refino dos meus equipamentos.";
+		mes "Ah, santo Enjoy~";
+		mes "";
+		next;
+		mes "[Happymerry]";
+		mes "Tudo bem! Eu estive esperando faz um ano!!";
+		mes "Eu estou pronta para estragar o dia do Natal~!!";
+		mes "Então, leve-me até o Enjoy, ok?";
+		mes "Onde ele está?!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ele está esperando por você!";
+		mes "Vá na frente~";
+		mes "Eu alcanço você depois de contactar os outros.";
+		mes "";
+		next;
+		mes "[Happymerry]";
+		mes "Certo!";
+		mes "Era para eu chamar ^0000FFChrist^000000!";
+		mes "Chame-o para mim!";
+		mes "Eu vou indo na frente levando as minhas malas.";
+		mes "Até breve!";
+		set christ_solo05,2;
+		close;
+	} else if (christ_solo05 > 1) {
+		mes "[Happymerry]";
+		mes "Hum...Há mais coisas para fazer que eu pensava.";
+		mes "Bem, já faz um ano.....";
+		mes "De qualquer maneira, Não se esqueça de chamar ^0000FFChrist^000000!";
+		mes "Até breve!";
+		close;
+	} else {
+		mes "[Happymerry]";
+		mes "Holgren~~!!";
+		mes "Eu nunca imaginei que iria ver você me traindo!!!";
+		mes "Eu odeio o Natal~!";
+		emotion e_sob;
+		next;
+		mes "[Happymerry]";
+		mes "Do que você está rindo? huh~!";
+		mes "Pelo menos, nunca precisei de ajuda";
+		mes "para conseguir meus equipamentos refinados!";
+		mes "Eu sempre fui corajosa!!";
+		mes "Benção? Glória~~?!";
+		mes "Casais~~dã~!!!!!!";
+		close;
+	}
+}
+
+prontera,62,339,3	script	Christ#christ	4_M_PECOKNIGHT,{
+	if (christ_solo05 == 2) {
+		mes "[Christ]";
+		mes "~Agora finalmente!!!";
+		mes "Eu começarei a montar o Peco-Peco~!";
+		mes "Por que eu iria precisa disso para organizar uma festa com o sacerdote?!";
+		mes "Eu não preciso de tudo isso.";
+		mes "A única coisa que eu preciso é desse Peco-Peco gorducho~!";
+		mes "";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Hum...";
+		next;
+		mes "[Christ]";
+		mes "Quem é você!";
+		mes "Nunca pense em montar no meu Peco~!";
+		mes "Ah~meu amado Peco~~Você não ficou com medo? Está tudo bem querido.";
+		mes "Enjoy sempre esteve sozinho desde o dia que ele nasceu~";
+		mes "Mas eu?!! Não!!";
+		mes "Eu carrego sempre comigo o meu amado Peco-Peco!!";
+		next;
+		mes "[Christ]";
+		mes "Eu vou para a festa de Natal com o meu peco.";
+		mes "Nós dividiremos bolo de Natal juntos e.....";
+		mes "Eu não vou ser solitário!";
+		mes "Não, não vou!!!";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Estou aqui em nome do Enjoy...";
+		next;
+		mes "[Christ]";
+		mes "Huh? O que você disse?";
+		mes "Enjoy? Você o conhece? Então, você deve ter sido mandando pela Happymerry!?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Sim, Happymerry me mandou...";
+		next;
+		mes "[Christ]";
+		mes "Finalmente, o dia chegou!!";
+		mes "Você ficou sabendo? Peco~";
+		mes "...Temos um plano incrível!";
+		mes "Este Natal vai ser fantástico!!";
+		mes "Não há necessidade de invejar casais!!";
+		next;
+		mes "[Christ]";
+		mes "Certo!!";
+		mes "Vou correndo até Enjoy com o meu peco~!";
+		mes "Até logo~~!";
+		set christ_solo05,3;
+		close;
+	} else if (christ_solo05 > 2) {
+		mes "[Christ]";
+		mes "Tudo bem, vejo você lá!!";
+		mes "Estou indo encontrar Enjoy!";
+		mes "E não se esqueça de falar com ^0000FFMas^000000";
+		mes "sobre isso!!!";
+		mes "Até logo~~!";
+		close;
+	} else {
+		mes "[Christ]";
+		mes "~Agora finalmente!!!";
+		mes "Eu começarei a montar o Peco-Peco~!";
+		mes "Por que eu iria precisa disso para organizar uma festa com o sacerdote?!";
+		mes "Eu não preciso de tudo isso.";
+		mes "A única coisa que eu preciso é desse Peco-Peco gorducho~!";
+		mes "";
+		next;
+		mes "[Christ]";
+		mes "Quem é você!";
+		mes "Nunca pense em montar no meu Peco~!";
+		mes "Ah~meu amado Peco~~Você não ficou com medo? Está tudo bem querido.";
+		mes "Enjoy sempre esteve sozinho desde o dia que ele nasceu~";
+		mes "Mas eu?!! Não!!";
+		mes "Eu carrego sempre comigo o meu amado Peco-Peco!!";
+		next;
+		mes "[Christ]";
+		mes "Eu vou para a festa de Natal com o meu peco.";
+		mes "Nós dividiremos bolo de Natal juntos e.....";
+		mes "Eu não vou ser solitário!";
+		mes "Não, não vou!!!";
+		close;
+	}
+}
+
+prontera,163,66,7	script	Mas#mas	4_M_ALCHE_A,{
+	if (christ_solo05 == 3) {
+		mes "[Mas]";
+		mes "Ahhh!!!!!Mas que demora!";
+		mes "Alguém sabe quanto tempo essas ervas demoram para crescer?!!";
+		mes "Eu vou plantar ervas e fazer poções e vendê-las para os solteiros!!";
+		mes "Hahahaha!!";
+		next;
+		mes "[Mas]";
+		mes "Ah~~";
+		mes "Como é que eu me sinto tão vazio~.";
+		mes "mesmo eu tendo tantas coisas no armazém. ";
+		mes "Não~~!!!!!!";
+		mes "Não há tempo a perder~~";
+		mes "Vamos plantar ervas.......";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ei ~ você está bem? Você é Mas?";
+		next;
+		mes "[Mas]";
+		mes "Quem... quem é você?!!!";
+		mes "Bem, já faz muito dês de a ultima vez que falei com um estranho.";
+		mes "Hum...";
+		mes "Eu sinto algo quente dentro do meu coração....... ";
+		mes "Não importa! No que estou pensando?!!";
+		mes "Vá embora ~Eu tenho que plantar ervas~";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Mas!!";
+		mes "É você certo?!";
+		mes "Christ me enviou.";
+		next;
+		mes "[Mas]";
+		mes "O que!!!Pronto!!";
+		mes "Sim, certo!";
+		mes "Eu não preciso passar tanto tempo assim plantando ervas!!";
+		mes "Isso é uma ordem do Enjoy!?!";
+		mes "Eu vou ir para lá imediatamente~!!!!!";
+		next;
+		mes "[Mas]";
+		mes "...Vamos comigo?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Não~~";
+		mes "Eu tenho algo a fazer.";
+		mes "Eu tenho que contar aos outros sobre isso.";
+		next;
+		mes "[Mas]";
+		mes "Ah tudo bem!!!";
+		mes "Procure por ^0000FFEvent^000000.";
+		mes "Bem, adeus~.";
+		mes "Eu vou te encontrar lá!!...";
+		mes "Ervas~?! Casais?! Tanto faz~~";
+		set christ_solo05,4;
+		close;
+	} else if (christ_solo05 > 3) {
+		mes "[Mas]";
+		mes "Se me da licença, eu vou em frente para encontrar Enjoy.";
+		mes "E não se esqueça de falar disso para ^0000FFEvent^000000.";
+		mes "Ervas~Casais~~Tanto faz~~";
+		mes "Este Natal vai ser fantástico!!";
+		mes "Hahahaha~";
+		close;
+	} else {
+		mes "[Mas]";
+		mes "Ahhh!!!!!Mas que demora!";
+		mes "Alguém sabe quanto tempo essas ervas demoram para crescer?!!";
+		mes "Eu vou plantar ervas e fazer poções e vendê-las para os solteiros!!";
+		mes "Hahahaha!!";
+		next;
+		mes "Ah~~";
+		mes "Como é que eu me sinto tão vazio~.";
+		mes "mesmo eu tendo tantas coisas no armazém. ";
+		mes "Não~~!!!!!!";
+		mes "Não há tempo a perder~~";
+		mes "Vamos plantar ervas.......";
+		close;
+	}
+}
+
+prontera,35,209,5	script	Event#event	4_M_SITDOWN,{
+	if (christ_solo05 == 4) {
+		mes "[Event]";
+		mes "........................";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...Você... é...?";
+		next;
+		mes "[Event]";
+		mes "...Eu também te amo~!!!";
+		emotion e_omg,1;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "(Ah, meu..)";
+		next;
+		mes "[Event]";
+		mes "Está bem, Tinybee. Eu não estou sozinho em tudo.";
+		mes "Eu tenho a Srta.Bathory e a Srta.Orclady comigo.";
+		mes "Hahahaha~~~";
+		mes "";
+		next;
+		mes "-Ele riu falando com sua mão direita.-";
+		mes "";
+		//Emotion "Event#event" ET_KIK
+		emotion e_kis;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Mas enviou-me aqui.";
+		mes "Você sabe sobre o plano, certo?";
+		mes "...Você está ouvindo?";
+		next;
+		mes "[Event]";
+		mes "...Ouviu?? Tinybee?";
+		mes "O dia chegou!!";
+		mes "Hahaha~~~~.";
+		next;
+		mes "[Event]";
+		mes "Espere por mim Kafra perdida~~~";
+		mes "Não seja tão solitária~.";
+		mes "Eu vou fazer o seu Natal inesquecívelmente fantástico.";
+		mes "Vamos Tinybee.";
+		mes "";
+		next;
+		mes "-Ele continuou falando com a mão direita-";
+		mes "-e embalado suas coisas e fez uma reverência para a Kafra.-";
+		mes "";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Finalmente!!! Tudo está pronto!!";
+		mes "Agora vou empacotar os meus ^0000FFGalhos Secos^000000";
+		mes "para punir os casais!!!";
+		mes "Hahahaha...";
+		set christ_solo05,5;
+		close;
+	} else if (christ_solo05 > 4) {
+		mes "[Event]";
+		mes "Espere por mim Kafra perdida~~~";
+		mes "Não seja tão solitária~.";
+		mes "Eu vou fazer o seu Natal inesquecívelmente fantástico.";
+		mes "Vamos Tinybee.";
+		next;
+		mes "-Ele continuou falando com a mão direita-";
+		mes "-e embalado suas coisas e fez uma reverência para a Kafra.-";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Finalmente!!! Tudo está pronto!!";
+		mes "Agora vou empacotar os meus ^0000FFGalhos secos^000000";
+		mes "para punir os casais!!!";
+		mes "Hahahaha...";
+		close;
+	} else {
+		mes "[Event]";
+		mes "........................";
+		next;
+		mes "[Event]";
+		mes "...Eu também te amo~!!!";
+		emotion e_omg,1;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "(Ah, meu...)";
+		next;
+		mes "[Event]";
+		mes "Está bem, Tinybee. Eu não estou sozinho em tudo.";
+		mes "Eu tenho a Srta.Bathory e a Srta.Orclady comigo.";
+		mes "Hahahaha~~~";
+		mes "";
+		next;
+		mes "-Ele riu falando com sua mão direita.-";
+		mes "";
+		emotion e_kis;
+		close;
+	}
+}
+
+// Oholy (Event 3)
+prontera,156,242,0	script	Oholy#pron::OholyDup	1_F_PRIEST,{
+	if (!christ_carol05) {
+		mes "[Oholy]";
+		mes "Alegria para o mundo!";
+		mes "O Senhor veio.";
+		specialeffect EF_GLORIA;
+		next;
+		if (Sex) {
+			mes "[Oholy]";
+			mes "Feliz Natal!";
+			mes "Querido irmão, o que vem em";
+			mes "sua mente quando você pensa em Natal?";
+			next;
+		} else {
+			mes "[Oholy]";
+			mes "Feliz Natal!";
+			mes "Querida irmã, o que vem em";
+			mes "sua mente quando você pensa em Natal?";
+			next;
+		}
+		switch(select("Papai Noel:Presentes de Natal:Canções de Natal:Chápeu de Natal:Eu não gosto de casais")) {
+		case 1:
+			mes "[Oholy]";
+			mes "Papai Noel!";
+			mes "Você ainda tem a infantilidade";
+			mes "e a inocência, criança!!!";
+			mes "Hohoho.";
+			next;
+			mes "[Oholy]";
+			mes "Há um boato de que Papai Noel";
+			mes "vive na cidade onde o Natal ";
+			mes "nunca termina. Isto é apenas";
+			mes "entre você e eu, ok?";
+			next;
+			mes "[Oholy]";
+			mes "Essas são as últimas notícias por Oholy";
+			mes "Não são incríveis?";
+			emotion e_heh;
+			close;
+		case 2:
+			mes "[Oholy]";
+			mes "Presentes! Isso é bom!";
+			mes "Como é emocionante!!!";
+			mes "Você acorda e encontrar";
+			mes "presentes de Natal ao lado de seu travesseiro!";
+			next;
+			mes "[Oholy]";
+			mes "Você já ouviu falar do";
+			mes "Malvado Papai Noel que faz uma surpresa";
+			mes "atacando em cada Natal, ele";
+			mes "rouba os presentes das";
+			mes "boas crianças!";
+			next;
+			mes "[Oholy]";
+			mes "Dizem que, na cidade do Natal";
+			mes "oferecem uma recompensa para quem";
+			mes "capturar o Malvado Papai Noel, Antonio.";
+			next;
+			mes "[Oholy]";
+			mes "Essas são as últimas notícias por Oholy";
+			mes "Não são incríveis?";
+			emotion e_heh;
+			close;
+		case 3:
+			mes "[Oholy]";
+			mes "Está certo!";
+			mes "A canção é essencial no";
+			mes "Natal! Quando eu era";
+			mes "jovem, minha mente costumava";
+			mes "vibrar com as canções durante o";
+			mes "Natal.";
+			next;
+			mes "[Oholy]";
+			mes "Mas, nestes dias, não há muitas";
+			mes "pessoas que cantam músicas natalinas.";
+			mes "Por isso, é difícil sentir que";
+			mes "o Natal está chegando.";
+			mes " ";
+			next;
+			mes "[Oholy]";
+			mes "Por isso, decidi desejar";
+			mes "Feliz Natal a todos";
+			mes "cantando músicas natalinas e";
+			mes "dando presentes para as crianças de porta";
+			mes "em porta, mas infelizmente, um";
+			mes "demônio roubou meu livro de canções natalinas!!!";
+			next;
+			mes "[Oholy]";
+			mes "Eu tenho muitas casas para visitar.";
+			mes "Eu me sinto tão triste por decepcionar";
+			mes "as crianças que não ouvem os cânticos.";
+			next;
+			menu "...posso ajudá-lo?",-;
+			mes "[Oholy]";
+			mes "Meu Deus! Você é de verdade?";
+			mes "Oh? Nossa... Você pode ouvir?";
+			mes "Cada crianças apreciar a sua bondade.";
+			emotion e_heh;
+			mes "Não tenha medo. Eu não vou";
+			mes "lhe pedir para fazer uma nova Canção de Natal.";
+			next;
+			mes "[Oholy]";
+			mes "Se você tem essa vontade,";
+			mes "não temos tempo a perder.";
+			mes "Vamos seguir em frente para dar esperança as crianças!";
+			next;
+			mes "[Oholy]";
+			mes "Bem, por favor, me traga de volta";
+			mes "o livro de canções natalinas, "+ strcharinfo(0) +".";
+			mes "Esse diabinho ainda está";
+			mes "na cidade, pois isso aconteceu há poucos minutos.";
+			next;
+			mes "[Oholy]";
+			mes "Por favor, tenha cuidado porque";
+			mes "você está lidando com um demônio.";
+			mes "Bem então, espero que você tenha uma boa sorte!!!";
+			mes " ";
+			emotion e_no1;
+			set christ_carol05,1;
+			close;
+		case 4:
+			mes "[Oholy]";
+			mes "A Chapéu de Natal!!";
+			mes "Você sabia que o real";
+			mes "Chápeu de Natal é totalmente diferente";
+			mes "dos que os monstros";
+			mes "estão usando?! Eu ouvi um boato";
+			mes "que um designer anônimo";
+			mes "em Lutie, fez todos aqueles Chapéis de Natal.";
+			next;
+			mes "[Oholy]";
+			mes "Além disso, há um outro rumor";
+			mes "sobre um falso Papai Noel, Antonio.";
+			mes "Ele foi perseguido por muitos ";
+			mes "aventureiros, mas nunca foi";
+			mes "apanhado por causa de sua roupa de Papai Noel.";
+			next;
+			mes "[Oholy]";
+			mes "Talvez seu chapéu e roupas tenham";
+			mes "poderes especiais...";
+			mes "Talvez o designer anônimo";
+			mes "ainda viva em Lutie. Por que";
+			mes "você não vai visitá-lo e pedir para";
+			mes "fazer-lhe um novo chapéu de Natal?";
+			next;
+			mes "[Oholy]";
+			mes "Essas são as últimas notícias por Oholy";
+			mes "Não são incríveis?";
+			emotion e_heh;
+			close;
+		case 5:
+			mes "[Oholy]";
+			mes "Oh, meu caro. Eu estava pensando no";
+			mes "mesmo... Oops, ha..haha.";
+			mes "Oh bem, isso não é só comigo. Muitas";
+			mes "pessoas pensam da mesma forma no Natal.";
+			next;
+			mes "[Oholy]";
+			mes "Eu ouvi um boato estranho que";
+			mes "essas pessoas estão tramando";
+			mes "algo neste Natal.";
+			mes "...Espero que corra tudo bem(*murmur*)";
+			next;
+			mes "[Oholy]";
+			mes "Essas são as últimas notícias por Oholy";
+			mes "Não são incríveis?";
+			emotion e_heh;
+			close;
+		}
+	} else if (christ_carol05 == 1) {
+		mes "[Oholy]";
+		mes "Ele não deve ser capaz de escapar";
+		mes "da cidade. Por favor, encontre o";
+		mes "diabo e me traga de volta o meu";
+		mes "livro de canções natalinas.";
+		mes "Este diabo perverso que está arruinado o Natal deve ser punido!!!";
+		close;
+	} else if (christ_carol05 == 2) {
+		if (!checkweight(1201,1)) {
+			mes "^3355FFEspere um segundo!";
+			mes "Atualmente você está carregando";
+			mes "muitos itens com você.";
+			mes "Por favor volte após";
+			mes "utilizar o Serviço das Kafras";
+			mes "para guardar alguns de seus itens.^000000";
+			close;
+		}
+		set .@now_weight,MaxWeight-Weight;
+		if (.@now_weight < 2000) {
+			mes "^3355FFEspere um segundo!";
+			mes "Atualmente você está carregando";
+			mes "muitos itens com você.";
+			mes "Por favor volte após";
+			mes "utilizar o Serviço das Kafras";
+			mes "para guardar alguns de seus itens.^000000";
+			close;
+		}
+		if (countitem(1097) > 0) {
+			mes "[Oholy]";
+			mes "Ah, graças a Deus!";
+			mes "Você me trouxe o livro!";
+			mes "Será que o diabo não vai incomodá-lo?";
+			mes "Estou feliz por você ter retorno com segurança.";
+			next;
+			mes "[Oholy]";
+			mes "Em troca, eu vou cantar";
+			mes "uma das canção do livro de canções.";
+			next;
+			mes "[Oholy]";
+			mes "Hum! Huum!!";
+			mes "~Durma bem, pequenas crianças,~";
+			mes "~onde quer que estejam~";
+			mes "~Amanhã é Natal~";
+			mes "~sob todas as estrelas.~";
+			specialeffect EF_GLORIA;
+			next;
+			mes "-Sua mente é dominada por seu canto-";
+			mes "-Você começou a cantarolar em seguida,-";
+			mes "-começou a cantar a próxima fase-";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "~Logo os flocos de neve vão cair~";
+			mes "~e amanhã você vai ver~";
+			mes "~todos os seus desejos, cada um deles,~";
+			mes "~serem realizados sob a árvore.~";
+			specialeffect2 EF_GLORIA;
+			next;
+			mes "[Oholy]";
+			mes "Oh, meu caro. Você tem uma maravilhosa";
+			mes "voz! Certo!!!";
+			mes "Eu ia dar a estes";
+			mes "para as crianças, mas, uma vez que você encontrou";
+			mes "meu livro de canções e cantou uma canção comigo!";
+			next;
+			mes "-Ele trouxe um grande saco-";
+			mes "-e abriu na sua frente-";
+			next;
+			mes "[Oholy]";
+			mes "OK! Não olhar para dentro.";
+			mes "Basta colocar suas mãos,";
+			mes "pegue o que você quiser.";
+			next;
+			switch(rand(1,15)) {
+			case 1:
+				mes "[Oholy]";
+				mes "Uma Sacola de Biscoitos!";
+				mes "Eu a preparei sozinho.";
+				mes "Existem muitos doces nela.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;//Página Deteriorada
+				set christ_carol05,3;
+				getitem 12130,7;//Sacola de Biscoitos
+				close;
+			case 2:
+				mes "[Oholy]";
+				mes "Doces!";
+				mes "Estes foram feitas por";
+				mes "Chefe Noun.";
+				mes "É um doce delicioso.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;//Página Deteriorada
+				set christ_carol05,3;
+				getitem 529,20;//Bala
+				close;
+			case 3:
+				mes "[Oholy]";
+				mes "Bengalas Doces!";
+				mes "Estas foram feitas por";
+				mes "Chefe Noun.";
+				mes "Muito doce e delicioso.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;//Página Deteriorada
+				set christ_carol05,3;
+				getitem 530,15;//Bengala Doce
+				close;
+			case 4:
+				mes "[Oholy]";
+				mes "Um Pedaço de Bolo!";
+				mes "Estes foram cozidas por";
+				mes "Chefe Noun.";
+				mes "Muito suave e delicioso.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;//Página Deteriorada
+				set christ_carol05,3;
+				getitem 539,5;//Pedaço de Bolo
+				close;
+			case 5:
+				mes "[Oholy]";
+				mes "Biscoitos!";
+				mes "Estes foram cozidas pelo";
+				mes "Chefe Noun.";
+				mes "Muito crocante e delicioso.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1; // Página Deteriorada
+				set christ_carol05,3;
+				getitem 538,10; // Pedaço de Bolo
+				close;
+			case 6:
+				mes "[Oholy]";
+				mes "Um Boneco de Esporo!";
+				mes "Ele foi criado pelo";
+				mes "Bispo Tomas.";
+				mes "Muito fofo.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 743,1; // Boneco de Esporo
+				close;
+			case 7:
+				mes "[Oholy]";
+				mes "Um Boneco de Bafomé!";
+				mes "..........?!..........";
+				mes "Como o conseguiu..?!";
+				mes "Oops, ah bem.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 750,1; // Boneco de Bafomé
+				close;
+			case 8:
+				mes "[Oholy]";
+				mes "Um Boneco de Osíris!";
+				mes "..........?!..........";
+				mes "Como o conseguiu..?!";
+				mes "Oops, ah bem.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 751,1; // Boneco de Osires
+				close;
+			case 9:
+				mes "[Oholy]";
+				mes "Um Boneco de Rocker!";
+				mes "Este foi dado por";
+				mes "um cavaleiro.";
+				mes "Muito gentil da parte dele.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 752,1; // Boneco de Rocker
+				close;
+
+			case 10:
+				mes "[Oholy]";
+				mes "Um Boneco de Yoyo!";
+				mes "Este foi dado por uma";
+				mes "mercenária, Marzia.";
+				mes "Muito gentil da parte dela.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 753,1; // Boneco de Yoyo
+				close;
+			case 11:
+				mes "[Oholy]";
+				mes "Um Boneco de Fumacento!";
+				mes "Este foi dado por um";
+				mes "caçador, Raiden Kurs.";
+				mes "Muito gentil da parte dele.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 754,1; // Boneco de Fumacento
+				close;
+			case 12:
+				mes "[Oholy]";
+				mes "Um Boneco de Gato Preto!";
+				mes "A Irmã Margaretha encontrou esse item";
+				mes "derrotando um monstro, Loli Ruri.";
+				mes "Muito gentil da parte dela.";
+				mes "Espero que ela esteja bem.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 7206,1;// Boneco de Gato Preto
+				close;
+			case 13:
+				mes "[Oholy]";
+				mes "Uma Boneca Enforcada!";
+				mes "Eu que fiz esta boneca.";
+				mes "Não é adorável?!";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 7212,1;// Boneca Enforcada
+				close;
+			case 14:
+				mes "[Oholy]";
+				mes "Um Boneco de Munak!";
+				mes "Ele veio de algum país";
+				mes "depois do oceano.";
+				mes "O artesão que fez este boneco";
+				mes "tinha grande paixão.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 7277,1;// Boneco de Munak
+				close;
+			case 15:
+				mes "[Oholy]";
+				mes "Um Gorro de Natal!";
+				mes "É o único produzido";
+				mes "durante a Temporada de Natal.";
+				mes "Não é um chapéu comum.";
+				mes "Feliz Natal!";
+				emotion e_heh;
+				delitem 1097,1;// Página Deteriorada
+				set christ_carol05,3;
+				getitem 2236,1;// Gorro de Natal
+				close;
+			}
+		} else {
+			mes "[Oholy]";
+			mes "Bem-vindo de volta!! Você parece bem.";
+			mes "2 braços e 2 pernas, parece ótimo.";
+			mes "Mas, onde está meu livro de canções?!";
+			close;
+		}
+	} else {
+		mes "[Oholy]";
+		mes "Muito obrigado.";
+		mes "Pessoas e demônios ficam";
+		mes "tão contentes com o dia de Natal,";
+		mes "por isso ninguém";
+		mes "se preocupa. Então você deseja";
+		mes "ajudar? Por favor~";
+		next;
+		mes "[Oholy]";
+		mes "Vamos pensar no próximo";
+		mes "e fazer uma boa ação durante o Natal!";
+		set christ_carol05,0;
+		close;
+	}
+}
+
+// Funções Deviruchi
+function	script	F_carol_devi	{
+	if (christ_carol05 == 1) {
+		mes "[Deviruchi]";
+		mes "Ei, humano!!";
+		mes "Não quer me vender a sua";
+		mes "alma e fazer um contrato benéfico comigo?";
+		emotion e_kis;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ei, você! Deviruchi!!!";
+		mes "Seu travesso!!! Te Peguei!";
+		next;
+		mes "-Você rapidamente arrebatou-";
+		mes "-a nuca de Deviruchi-";
+		next;
+		switch(rand(1,4)) {
+		case 1:
+			mes "[Deviruchi]";
+			mes "O que você está fazendo!?";
+			mes "Humano?";
+			mes "Deixe-me ir...agora!";
+			emotion e_omg;
+			emotion e_omg,1;
+			next;
+			mes "-Deviruchi rapidamente fugiu-";
+			mes "-^4d4dffOnde Deviruchi estava,-";
+			mes "-há um papel que está desgastado.^000000-";
+			mes "-Vamos ler o jornal.-";
+			enablenpc getarg(1);
+			disablenpc getarg(0);
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Rudolph... Se... Foggy...";
+			mes "Sledge... Reindeer...";
+			mes "Hum, Eu acho que consegui o que preciso.";
+			mes "Vamos voltar ao Sr.Oholy.";
+			set christ_carol05,2;
+			getitem 1097,1; //Página Deteriorada
+			close;
+		case 2:
+			mes "[Deviruchi]";
+			mes "O que você está fazendo!?";
+			mes "Humano?";
+			mes "Deixe-me ir...agora!";
+			emotion e_omg;
+			emotion e_omg,1;
+			next;
+			mes "-Deviruchi rapidamente fugiu-";
+			mes "-e murmurou algo.-";
+			enablenpc getarg(1);
+			disablenpc getarg(0);
+			next;
+			mes "-Agora você será amaldiçoado!!!-";
+			sc_start SC_Curse,5000,0;
+			emotion e_omg,1;
+			close;
+		case 3:
+			mes "[Deviruchi]";
+		  mes "O que você está fazendo!?";
+			mes "Humano?";
+			mes "Deixe-me ir...agora!";
+			emotion e_omg;
+			emotion e_omg,1;
+			next;
+			mes "-Deviruchi rapidamente fugiu-";
+			mes "-e murmurou algo.-";
+			enablenpc getarg(1);
+			disablenpc getarg(0);
+			next;
+			mes "-Você ficará cego!!!-";
+			sc_start SC_Blind,5000,0;
+			emotion e_omg,1;
+			close;
+		case 4:
+			mes "[Deviruchi]";
+		  mes "O que você está fazendo!?";
+			mes "Humano?";
+			mes "Deixe-me ir...agora!";
+			emotion e_omg;
+			emotion e_omg,1;
+			next;
+			mes "-Deviruchi rapidamente fugiu-";
+			mes "-e murmurou algo.-";
+			enablenpc getarg(1);
+			disablenpc getarg(0);
+			next;
+			mes "-Você será envenenado!!!-";
+			sc_start SC_Poison,5000,0;
+			emotion e_omg,1;
+			close;
+		}
+	}
+	else {
+		mes "[Deviruchi]";
+		mes "Ei, humano!!";
+		mes "Não quer me vender a sua";
+		mes "alma e fazer um contrato benéfico comigo?";
+		emotion e_omg;
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ei, você! Deviruchi!!!";
+		mes "Seu travesso!!! Te Peguei!";
+		next;
+		mes "-Você rapidamente arrebatou-";
+		mes "-a nuca de Deviruchi-";
+		next;
+		mes "[Deviruchi]";
+		mes "O que você está fazendo!?";
+		mes "Humano?";
+		mes "Deixe-me ir...agora!";
+		emotion e_omg;
+		emotion e_omg,1;
+		next;
+		mes "-Deviruchi rapidamente fugiu-";
+		mes "-e murmurou algo.-";
+		mes "-Seu corpo está flutuando de repente.-";
+		close2;
+		warp getarg(2),getarg(3),getarg(4);
+		end;
+	}
+}
+
+function	script	F_carol_devi2	{
+	mes "[Deviruchi]";
+	mes "Ei, humano!!";
+	mes "Não quer me vender a sua";
+	mes "alma e fazer um contrato benéfico comigo?";
+	emotion e_omg;
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "Ei, você! Deviruchi!!!";
+	mes "Seu travesso!!! Te Peguei!";
+	next;
+	mes "-Você rapidamente arrebatou-";
+	mes "-a nuca de Deviruchi-";
+	next;
+	mes "[Deviruchi]";
+	mes "O que você está fazendo!?";
+	mes "Humano?";
+	mes "Deixe-me ir...agora!";
+	emotion e_omg;
+	emotion e_omg,1;
+	next;
+	mes "-Deviruchi fugiu rapidamente-";
+	mes "-e murmurou algo.-";
+	mes "-Seu corpo está flutuando de repente.-";
+	close2;
+	warp getarg(0),getarg(1),getarg(2);
+	end;
+}
+
+prontera,94,297,3	script	Deviruchi#pron_01	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","prontera",155,230);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#pron_01","Deviruchi#pron_02","prontera",155,230);
+	end;
+}
+
+prontera,205,242,3	script	Deviruchi#pron_02	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","prontera",155,230);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#pron_02","Deviruchi#pron_03","prontera",155,230);
+	end;
+}
+
+prontera,126,118,3	script	Deviruchi#pron_03	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","prontera",155,230);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#pron_03","Deviruchi#pron_01","prontera",155,230);
+	end;
+}
+
+// Payon
+payon,165,153,3	duplicate(OholyDup)	Oholy#payon	1_F_PRIEST
+payon,142,203,3	script	Deviruchi#payon_01	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","payon",166,60);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#payon_01","Deviruchi#payon_02","payon",166,60);
+	end;
+}
+
+payon,248,239,3	script	Deviruchi#payon_02	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","payon",166,60);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#payon_02","Deviruchi#payon_03","payon",166,60);
+	end;
+}
+
+payon,140,56,3	script	Deviruchi#payon_03	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","payon",166,60);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#payon_03","Deviruchi#payon_01","payon",166,60);
+	end;
+}
+
+morocc,161,85,0	duplicate(OholyDup)	Oholy#morocc	1_F_PRIEST
+morocc,52,134,3	script	Deviruchi#morocc_01	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","morocc",160,51);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#morocc_01","Deviruchi#morocc_02","morocc",160,51);
+	end;
+}
+
+morocc,210,264,3	script	Deviruchi#morocc_02	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","morocc",160,51);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#morocc_02","Deviruchi#morocc_03","morocc",160,51);
+	end;
+}
+
+morocc,223,74,3	script	Deviruchi#morocc_03	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","morocc",160,51);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#morocc_03","Deviruchi#morocc_01","morocc",160,51);
+	end;
+}
+
+// Geffen
+geffen,120,188,0	duplicate(OholyDup)	Oholy#geffen	1_F_PRIEST
+geffen,173,163,3	script	Deviruchi#geffen_01	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","geffen",120,34);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#geffen_01","Deviruchi#geffen_02","geffen",120,34);
+	end;
+}
+
+geffen,49,95,3	script	Deviruchi#geffen_02	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","geffen",120,34);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#geffen_02","Deviruchi#geffen_03","geffen",120,34);
+	end;
+}
+
+geffen,111,101,3	script	Deviruchi#geffen_03	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","geffen",120,34);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#geffen_03","Deviruchi#geffen_01","geffen",120,34);
+	end;
+}
+
+// Alberta
+alberta,54,237,0	duplicate(OholyDup)	Oholy#alberta	1_F_PRIEST
+alberta,97,86,3	script	Deviruchi#alberta_01	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","alberta",28,235);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#alberta_01","Deviruchi#alberta_02","alberta",28,235);
+	end;
+}
+
+alberta,180,48,3	script	Deviruchi#alberta_02	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","alberta",28,235);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#alberta_02","Deviruchi#alberta_03","alberta",28,235);
+	end;
+}
+
+alberta,54,132,3	script	Deviruchi#alberta_03	4_DEVIRUCHI,3,3,{
+	callfunc("F_carol_devi2","alberta",28,235);
+	end;
+
+OnTouch:
+	callfunc("F_carol_devi","Deviruchi#alberta_03","Deviruchi#alberta_01","alberta",28,235);
+	end;
+}
+
+// ------------------------- Eventos de Natal 2008 -------------------------
+
+// =========== Carolling - Caixa de Música =============
+// =====================================================
+prontera,226,306,4	script	Carolling#iROxmas08	1_F_PRIEST,{
+	if (iROxmas08carol < 1 || iROxmas08carol == 3) {
+		if (iROxmas08carol == 3) {
+			mes "[Carolling]";
+			mes "Sinos Tocam! Sinos Tocam! Sinos";
+			mes "em todo lugar!";
+			mes "O divertido é andar em";
+			mes "um trenó puxado por renas, ei~!";
+			next;
+			mes "[Carolling]";
+			mes "Feliz Natal!";
+			mes "Ei! Você! O que vem à mente quando";
+			mes "você pensa no Natal?";
+			next;
+		} else {
+			mes "[Carolling]";
+			mes "Sinos Tocam! Sinos Tocam! Sinos em todo lugar!";
+			next;
+			specialeffect 75;
+			mes "[Carolling]";
+			mes "O divertido é andar em um trenó puxado por renas!";
+			next;
+			mes "[Carolling]";
+			mes "Feliz Natal!";
+			if (Sex) {
+				mes "Ei, garoto! O que vem à mente quando";
+			} else {
+				mes "Ei, garota! O que vem à mente quando";
+			}
+			mes "você pensa no Natal?";
+			next;
+		}
+		switch(select("Papai Noel:Presentes:Canções:Costumes de Natal:Falso Papai Antonio")) {
+
+			case 1:
+				mes "[Carolling]";
+				mes "Papai Noel!?";
+				mes "Você é muito inocente!!";
+				mes "Ah!";
+				next;
+				mes "[Carolling]";
+				mes "Aqui está um segredo!";
+				mes "Há um boato de que o Papai Noel";
+				mes "vive em uma aldeia";
+				mes "durante todo o ano.";
+				next;
+				mes "[Carolling]";
+				mes "Mas agora!!!..";
+				mes "Nesta época de Natal!!..";
+				mes "As pessoas podem encontrá-lo em qualquer um";
+				mes "dos cinco vilarejos natalinos";
+				mes "de toda Rune-Midgard!";
+				next;
+				mes "[Carolling]";
+				mes "Se você vencer Noel, você pode obter";
+				mes "um presente. Você irá procurá-lo para isso?";
+				next;
+				emotion e_heh;
+				mes "[Carolling]";
+				mes "Notícia quente da Carolling! Aha!";
+				mes "Isso não é uma grande notícia?";
+				close;
+
+			case 2:
+				mes "[Carolling]";
+				mes "Presentes?! Muito bem!";
+				mes "Não é emocionante abrir os presentes";
+				mes "sobre sua cabeça!?";
+				next;
+				mes "[Carolling]";
+				mes "De qualquer forma, você sabia...";
+				mes "Que um Papai Noel falso roubou";
+				mes "alguns presentes do Papai original!?";
+				next;
+				mes "[Carolling]";
+				mes "Além disso, ele colocou feitiços ruins";
+				mes "sobre os presentes de modo a que eles se tornam";
+				mes "monstros!";
+				next;
+				emotion e_heh;
+				mes "[Carolling]";
+				mes "Notícia quente da Carolling! Aha!";
+				mes "Não é surpreendente?";
+				close;
+
+			case 3:
+				if (iROxmas08carol == 3) {
+					mes "[Carolling]";
+					mes "Ah, uma caixa de música é útil.";
+					next;
+					mes "[Carolling]";
+					mes "Embora nem todos podemos tocá-la no";
+					mes "vilarejo como nós planejamos, é";
+					mes "legal que você possa carregá-la.";
+					next;
+					mes "[Carolling]";
+					mes "Queremos aproveitar todas as canções";
+					mes "juntos... Espero conseguir Pedaços de";
+					mes "Cristal!";
+					next;
+					mes "[Carolling]";
+					mes "Se você conseguir ^0000FFFragmento de Cristal";
+					mes "Cantante^000000, pode trazer para mim por favor?";
+					next;
+					select("Por que não? Claro, eu posso dar-lhe alguns.");
+					if (countitem(6092) < 6) {
+						mes "[Carolling]";
+						mes "Sim, por favor.";
+						next;
+						mes "[Carolling]";
+						mes "Se você conseguir ^0000FFFragmento de Cristal";
+						mes "Cantante^000000, pode trazer para mim por favor?";
+						close;
+					} else {
+						mes "[Carolling]";
+						mes "Uau, você os tem!";
+						next;
+						mes "[Carolling]";
+						mes "Posso assar um bolo,";
+						mes "e eu posso esculpir o seu nome no";
+						mes "bolo, se você quiser!";
+						next;
+						if (select("Não, obrigado.:Por favor, nomeio para mim.") == 2) {
+							mes "[Carolling]";
+							mes "Obrigado por sua ajuda!";
+							next;
+							mes "[Carolling]";
+							mes "Muitas pessoas vivem no mundo";
+							mes "gigante!";
+							mes "Assim, muitas pessoas esperam escutar";
+							mes "carolling, mas eu sempre falta";
+							mes "Crystal pieces.";
+							next;
+							mes "[Carolling]";
+							mes "Se você obter ^0000FFFragmento de Cristal Cantante^000000, traga-o para mim, tudo bem?";
+							next;
+							emotion e_heh;
+							delitem 6092,6;
+							getnameditem 12354,"+strcharinfo(0)+";
+							mes "[Carolling]";
+							mes "Vamos nos preocupar com os outros em torno de você";
+							mes "nesta época de Natal!";
+							close;
+						} else {
+							mes "[Carolling]";
+							mes "Ah!";
+							mes "Timidez!";
+							next;
+							mes "[Carolling]";
+							mes "De qualquer forma, muito obrigado por sua ajuda.";
+							next;
+							mes "[Carolling]";
+							mes "Muitas pessoas vivem no mundo";
+							mes "gigante!";
+							mes "Assim, muitas pessoas esperam escutar";
+							mes "Carolling, mas eu sempre faltam";
+							mes "Cristais.";
+							next;
+							mes "[Carolling]";
+							mes "Se você obter ^0000FFFragmento de Cristal Cantante^000000, traga-o para mim, tudo bem?";
+							next;
+							emotion e_heh;
+							delitem 6092,6;
+							getitem 12354,1;
+							mes "[Carolling]";
+							mes "Vamos nos preocupar com os outros em torno de você";
+							mes "nesta época de Natal!";
+							close;
+						}
+					}
+				}
+					mes "[Carolling]";
+					mes "Você sabe sobre o Natal!?";
+					mes "Falando sobre o Natal,";
+					mes "estive esperando por isso,";
+					mes "o Natal vem aí!";
+					next;
+					mes "[Carolling]";
+					mes "Mas não havia felicidade aqui,";
+					mes "não como antes, por isso não podiamos";
+					mes "sentir o espírito do Natal.";
+					next;
+					mes "[Carolling]";
+					mes "Então, eu instalei um Cristal Cantante";
+					mes "em Prontera...";
+					next;
+					mes "[Carolling]";
+					mes "mas o idiota do Antonio quebrou o";
+					mes "cristal!";
+					next;
+					mes "[Carolling]";
+					mes "As caixas de presente foram mudando";
+					mes "de lugar desde que Antonio usou";
+					mes "alguma magia sobre eles, então os monstros";
+					mes "comeram os pedaços de cristal!";
+					next;
+					mes "[Carolling]";
+					mes "Estou muito triste, pois o";
+					mes "Cristal de Canto tem sido a esperança";
+					mes "de muitas crianças ao redor das aldeias.";
+					next;
+					if (select("Não há outra maneira?:Você pode ouvir as canções em Lutie.") == 2) {
+						mes "[Carolling]";
+						mes "E só ficar lá, todo";
+						mes "Natal, por toda a sua vida?";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "O quê? O que quer dizer?";
+						next;
+						mes "[Carolling]";
+						mes "Ah, deixa pra lá.";
+						mes "Ah...";
+						close;
+					}
+					mes "[Carolling]";
+					mes "Talvez, é muito difícil fazer uma";
+					mes "jukebox para as aldeias, mas uma";
+					mes "caixa de música pode ser possível.";
+					next;
+					mes "[Carolling]";
+					mes "Precisamos de ^0000FFFragmento de Cristal Cantante^000000";
+					mes "que os monstros devorarem.";
+					next;
+					mes "[Carolling]";
+					mes "Por favor me traga ^0000FF6 Fragmentos de Cristal";
+					mes "Cantante^000000, e eu irei premiá-lo";
+					mes "com presentes!";
+					next;
+					mes "[Carolling]";
+					mes "Muito bem, huh!!";
+					next;
+					select("........................");
+					mes "[Carolling]";
+					mes "...Por que você está me olhando";
+					mes "assim?";
+					next;
+					mes "[Carolling]";
+					mes "Você está pensando que estamos sempre";
+					mes "ficando encrencados, não é?";
+					next;
+					mes "[Carolling]";
+					mes "Eu sei que não é bom";
+					mes "controlar as coisas, mas nossas recompensas";
+					mes "serão boas, certo?";
+					next;
+					select("........................");
+					mes "[Carolling]";
+					mes "Ei, quero tratá-lo bem...";
+					next;
+					select("........................");
+					mes "[Carolling]";
+					mes "Você é tão cruel para mim!";
+					mes "Mal! Mal!";
+					next;
+					mes "[Carolling]";
+					mes "Por favor, tenha esperança nas";
+					mes "crianças!!!?";
+					mes "Por favor me traga 6 Fragmentos de Cristal Cantante";
+					mes "de ^0000FFPresente Violento^000000!";
+					next;
+					emotion e_ok;
+					mes "[Carolling]";
+					mes "Eles são definitivamente como";
+					mes "o próprio nome.";
+					mes "Vá em frente, por favor!";
+					set iROxmas08carol,1;
+					close;
+
+			case 4:
+				mes "[Carolling]";
+				mes "Costumes de Natal!!?";
+				mes "Sabe, os trajes de natal que";
+				mes "os monstros estão usando agora não são";
+				mes "genuínos!";
+				next;
+				mes "[Carolling]";
+				mes "Há rumores de que aqui em Lutie há";
+				mes "um designer que faz essas fantasias.";
+				next;
+				mes "[Carolling]";
+				mes "Todos os anos, os aventureiros acusam";
+				mes "Antonio de Papai Noel falso,";
+				mes "mas não há como provar";
+				mes "devido ao seu chapéu e roupas!";
+				next;
+				mes "[Carolling]";
+				mes "Existem algumas habilidades especiais";
+				mes "dentro deles?";
+				mes "Há ainda o designer na";
+				mes "Vila do Natal... Como ele ousa,";
+				mes "pedindo-lhe para fazer essa fantasia?";
+				next;
+				emotion e_heh;
+				mes "[Carolling]";
+				mes "Notícia quente da Carolling mesmo! Ha!";
+				mes "É quente, em?";
+				close;
+
+			case 5:
+				mes "[Carolling]";
+				mes "A-N-T-O-N-I-O!?";
+				mes "Quando eu o vi, ele estava bastante";
+				mes "diferente de antes.";
+				next;
+				mes "[Carolling]";
+				mes "Ele parece estar bem resolvido";
+				mes "desde que ele fugiu das";
+				mes "pessoas que o procuraram.";
+				next;
+				mes "[Carolling]";
+				mes "E ele não está mais sozinho... é";
+				mes "o que eu ouvi...";
+				next;
+				emotion e_heh;
+				mes "[Carolling]";
+				mes "Notícia quente da Carolling mesmo! Ha!";
+				mes "É quente, em?";
+				close;
+		}
+	}
+
+	if (iROxmas08carol == 1) {
+		if (countitem(6092) < 6) {
+			mes "[Carolling]";
+			mes "Talvez, é muito difícil fazer uma";
+			mes "jukebox para as aldeias, mas uma";
+			mes "caixa de música pode ser possível.";
+			next;
+			mes "[Carolling]";
+			mes "Precisamos de ^0000FFFragmento de Cristal Cantante^000000";
+			mes "que os monstros devorarem.";
+			next;
+			mes "[Carolling]";
+			mes "Por favor me traga ^0000FF6 Fragmentos de Cristal Cantante^000000, e eu irei premiá-lo com presentes!";
+			next;
+			mes "[Carolling]";
+			mes "Por todas as crianças do";
+			mes "mundo!!!";
+			mes "Me traga ^0000FFFragmento de Cristal";
+			mes "Cantante^000000 do ^0000FFPresente Violento^000000!";
+			next;
+			emotion e_ok;
+			mes "[Carolling]";
+			mes "Seja cuidadoso!";
+			mes "Eles estão definitivamente como";
+			mes "o próprio nome.";
+			mes "Tome cuidado!!!";
+			close;
+		} else {
+			specialeffect 75;
+			mes "[Carolling]";
+			mes "Não chore, não chore!";
+			mes "Papai Noel não vai te dar nenhum";
+			mes "presente se você estiver chorando.";
+			next;
+			mes "[Carolling]";
+			select("Tenho-os!");
+			mes "[Carolling]";
+			mes "Uau, você conseguiu!";
+			mes "Eles são tão cruéis, não são?";
+			mes "Estou feliz em vê-lo novamente.";
+			next;
+			mes "[Carolling]";
+			mes "Vamos contar juntos!";
+			mes "... ...";
+			mes "Seis!!";
+			next;
+			mes "[Carolling]";
+			mes "Tudo bem! Podemos começar a fazer a nossa";
+			mes "caixa de música com os fragmentos do cristal.";
+			next;
+			mes "[Carolling]";
+			mes "Gostaríamos de amplificar os sons dos";
+			mes "fragmentos de cristal para soar através";
+			mes "da caixa de música.";
+			next;
+			mes "[Carolling]";
+			mes "Você sabe, uma caixa de música que soa";
+			mes "como uma jukebox!";
+			next;
+			mes "[Carolling]";
+			mes "É útil. Você pode carregá-lo,";
+			mes "bem como ouvir canções doces";
+			mes "em qualquer lugar. Não parece que";
+			mes "legal!?";
+			next;
+			mes "[Carolling]";
+			mes "Então, precisamos de mais alguns";
+			mes "materiais.";
+			mes "^0000FF10 Troncos, 1 Martelo de";
+			mes "Ferreiro, 1 Jubileu, 10 Muco";
+			mes "Pegajoso, 1 Diamante de 3 Quilates^000000!";
+			next;
+			delitem 6092,6;
+			emotion e_ok;
+			set iROxmas08carol,2;
+			mes "[Carolling]";
+			mes "Isso é tudo o que precisamos.";
+			mes "Que? Não é fácil?";
+			close;
+		}
+	}
+
+	if (iROxmas08carol == 2) {
+		if (countitem(1019) < 10 || countitem(1005) < 1 || countitem(7312) < 1 || countitem(938) < 10 || countitem(732) < 1) {
+			mes "[Carolling]";
+			mes "Nós podemos fazer uma caixa de música";
+			mes "com Fragmentos de Cristal Cantante.";
+			mes "É prático, você pode ouvir canções";
+			mes "em qualquer lugar. Legal né?";
+			next;
+			mes "[Carolling]";
+			mes "Então, precisamos de mais alguns materiais.";
+			mes "^0000FF10 Troncos, 1 Martelo de";
+			mes "Ferreiro, 1 Jubileu, 10 Muco";
+			mes "Pegajoso, 1 Diamante de 3 Quilates^000000!";
+			next;
+			emotion e_ok;
+			mes "[Carolling]";
+			mes "Isso é tudo o que precisamos.";
+			mes "Que? Não é fácil?";
+			close;
+		} else {
+			specialeffect 75;
+			mes "[Carolling]";
+			mes "Jingle bells, jingle bells,";
+			mes "jingle all the way!";
+			mes "É divertido de pilotar um";
+			mes "trenó... renas... no trenó!!!";
+			next;
+			mes "[Carolling]";
+			mes "Uau!";
+			mes "Você voltou!";
+			mes "Trouxe todos os";
+			mes "materiais?";
+			next;
+			mes "[Carolling]";
+			mes "Bom!";
+			mes "Não há necessidade de hesitar! Vamos";
+			mes "começar a fazer a nossa caixa de música.";
+			next;
+			mes "[Carolling]";
+			specialeffect 101;
+			mes "Martelo de Ferreiro sobre bloco";
+			mes "de madeira... e nós moldamos a estrutura.";
+			next;
+			mes "[Carolling]";
+			//(Efeito - stones from ground?)
+			mes "Por favor use o Fragmento de Cristal";
+			mes "Cantante para a coluna, o Diamante como";
+			mes "um suporte, e o Muco Pegajoso como";
+			mes "cola.";
+			next;
+			mes "[Carolling]";
+			specialeffect 1;
+			mes "E agora...";
+			mes "nós decoramos com o Jubileu...";
+			next;
+			mes "[Carolling]";
+			specialeffect 88;
+			mes "A última etapa...!";
+			mes "Dando vida a ele!";
+			next;
+			mes "[Carolling]";
+			mes "Está pronto!!!";
+			next;
+			mes "[Carolling]";
+			mes "É tão legal! Não é uma gracinha!!?!";
+			next;
+			mes "[Carolling]";
+			mes "Você fez o que eu pedi, então eu vou";
+			mes "dar-lhe presentes, como prometido.";
+			next;
+			mes "[Carolling]";
+			mes "Um, é esta caixa de música.";
+			mes "Por favor, toque esta caixa de música em todo";
+			mes "o vilarejo!";
+			next;
+			mes "[Carolling]";
+			mes "Outro presente é um bolo de Natal";
+			mes "especialmente com a forma do seu nome!";
+			mes "Eu fiz este bolo em forma de seu";
+			mes "nome!";
+			next;
+			mes "[Carolling]";
+			mes "Não se preocupe, o gosto é bom.";
+			next;
+			emotion e_ok;
+			getitem 2784,1;
+			getnameditem 12354,"+strcharinfo(0)+";
+			delitem 1019,10;
+			delitem 1005,1;
+			delitem 7312,1;
+			delitem 938,10;
+			delitem 732,1;
+			set iROxmas08carol,3;
+			mes "[Carolling]";
+			mes "Muito obrigado.";
+			mes "Feliz Natal!";
+			mes "Tenha uma boa temporada de férias!";
+			close;
+		}
+	}
+}
+
+// ============= Papai Noel - Card Game ================
+// =====================================================
+-	script	Papai Noel#iROxmas08::08santa	4_M_SANTA,{
+	mes "[Papai Noel]";
+	mes "Uau! Fora-lhe impertinentes ou agradável esse";
+	mes "ano?";
+	mes "Tudo bem, o que vem à sua mente";
+	mes "quando você pensa sobre o Natal?";
+	next;
+	switch(select("Canções:Papai Noel:Presentes:Costumes de Natal:Nada muito real...")) {
+
+	case 1:
+		mes "[Papai Noel]";
+		mes "Canções! Isso é ótimo!";
+		mes "A Carolling sempre faz doce para";
+		mes "um Natal mais feliz!!!";
+		next;
+		mes "[Papai Noel]";
+		mes "Sim, de fato a alegria de Carolling se espalha";
+		mes "em todo o mundo?";
+		close;
+
+	case 2:
+		mes "[Papai Noel]";
+		if (Sex) {
+			mes "Ho ho ho! Que bom garoto!";
+		} else {
+			mes "Ho ho ho! Que boa garota!";
+		}
+		next;
+		mes "[Papai Noel]";
+		mes "Mas você deve ser cuidadoso com um Papai";
+		mes "Noel que está rondando por ai.";
+		mes "Você já ouviu falar do Antonio, que";
+		mes "invade aldeias a cada Natal?";
+		next;
+		mes "[Papai Noel]";
+		mes "Ele roubou os meus dons, assim como";
+		mes "aventureiros atacaram meus Brinquedos e o";
+		mes "Campo de Lutie.";
+		next;
+		mes "[Papai Noel]";
+		mes "O Papai Noel está com a reputação";
+		mes "manchada!";
+		mes "O Mundo Noel é";
+		mes "considerando uma porcaria devido a";
+		mes "essa situação.";
+		close;
+
+	case 3:
+		mes "[Papai Noel]";
+		mes "Uma caixa de presente! Isso soa bem!";
+		mes "É tão emocionante abrir caixas de presente";
+		mes "quando você acorda no Natal";
+		mes "de manhã!!!";
+		next;
+		mes "[Papai Noel]";
+		mes "Mas temos poucos presentes agora,";
+		mes "tudo por causa que o Antonio roubou meu";
+		mes "saco do presente.";
+		next;
+		mes "[Papai Noel]";
+		mes "Muitos aventureiros tentaram pegar";
+		mes "ele para mim, mas ele não é fácil pegá-lo.";
+		next;
+		mes "[Papai Noel]";
+		mes "Enfim, deixe esses aventureiros tentarem";
+		mes "pegá-lo, eu tenho um pequeno jogo para";
+		mes "você.";
+		next;
+		mes "[Papai Noel]";
+		mes "Vou dar-lhe um pequeno presente se";
+		mes "me vencer!";
+		next;
+		mes "[Papai Noel]";
+		mes "Você quer jogar um jogo";
+		mes "comigo?";
+		next;
+		if (select("Não, obrigado.:Sim, eu quero.") == 1) {
+			mes "[Papai Noel]";
+			mes "Aww, não tenha medo. Se você tem";
+			mes "sido um pouco impertinente esse ano,";
+			mes "não irei encher suas meias com";
+			mes "carvão.";
+			next;
+			mes "[Papai Noel]";
+			mes "Vou ficar aqui durante todo o";
+			mes "Natal, visite-me";
+			mes "quando mudar de idéia.";
+			close;
+		}
+		if (gettimetick(2) < SantaCardTime) {
+			mes "[Papai Noel]";
+			mes "Hum... Você já jogou o jogo";
+			mes "recentemente não foi?";
+			next;
+			mes "[Papai Noel]";
+			mes "Você pode experimentar o jogo uma vez por hora.";
+			mes "Por favor, visite-me depois de uma hora!";
+			close;
+		}
+		set .@SantaCardTurn,0;
+		set .@SantaCardWins,0;
+		mes "[Papai Noel]";
+		mes "Uau! Você é tão legal!";
+		next;
+		mes "[Papai Noel]";
+		mes "Deixe-me explicar como jogar este";
+		mes "jogo.";
+		next;
+		mes "[Papai Noel]";
+		mes "É muito simples. Eu vou escolher uma carta";
+		mes "de três cartas: Carta Poring,";
+		mes "Carta Ghostring, e Carta Angeling.";
+		mes "Adivinhe qual carta vou escolher e";
+		mes "você ganhará!";
+		next;
+		mes "[Papai Noel]";
+		mes "Se você acertar 3 vezes dentre 5";
+		mes "chances, eu te darei um presente.";
+		mes "Vamos começar!";
+		next;
+		while(.@SantaCardTurn != 5) {
+			emotion e_loud;
+			mes "[Papai Noel]";
+			mes "Primeiro deixe-me embaralhar estas";
+			mes "cartas... Ok!!!";
+			next;
+			specialeffect 0;
+			mes "[Papai Noel]";
+			mes "Um!";
+			next;
+			specialeffect 1;
+			mes "[Papai Noel]";
+			mes "Dois!";
+			next;
+			specialeffect 2;
+			mes "[Papai Noel]";
+			mes "Três!";
+			next;
+			specialeffect 18;
+			mes "[Papai Noel]";
+			mes "Eu estou pegando apenas uma!";
+			next;
+			cutin "sorry",4;
+			mes "[Papai Noel]";
+			mes "Eu estou pegando apenas uma!";
+			mes "Por favor, diga-me qual carta eu peguei.";
+			next;
+			switch(select("Poring:Angeling:Ghostring")) {
+				case 1:
+					mes "["+strcharinfo(0)+"]";
+					mes "Hum...Eu escolho Poring!";
+					set .@SantaCardP,1;
+					next;
+					break;
+
+				case 2:
+					mes "["+strcharinfo(0)+"]";
+					mes "Hum...Eu escolho Angeling!";
+					set .@SantaCardP,2;
+					next;
+					break;
+
+				case 3:
+					mes "["+strcharinfo(0)+"]";
+					mes "Hum...Eu escolho Ghostring!";
+					set .@SantaCardP,3;
+					next;
+			}
+			mes "[Papai Noel]";
+			mes "Vejamos!!";
+			mes "Um! Dois! Três!";
+			set .@SantaCardNpc, rand(1,3);
+			next;
+			if (.@SantaCardNpc == 1) {
+				cutin "Æ÷¸µÄ«µå",4;
+			}
+			else if (.@SantaCardNpc == 2) {
+				cutin "¿£Á©¸µÄ«µå",4;
+			}
+			else if (.@SantaCardNpc == 3) {
+				cutin "°í½ºÆ®¸µÄ«µå",4;
+			}
+			set .@SantaCardTurn,.@SantaCardTurn+1;
+			if (.@SantaCardP == .@SantaCardNpc) {
+				set .@SantaCardWins,.@SantaCardWins+1;
+				emotion e_gasp;
+				emotion e_ic,1;
+				cutin "",255;
+				mes "[Papai Noel]";
+				mes "Você tem sorte.";
+				mes "Você consegue adivinhar a carta certa";
+				mes "na próxima?";
+				next;
+			} else {
+				emotion e_gasp;
+				emotion e_omg,1;
+				cutin "",255;
+				mes "[Papai Noel]";
+				mes "Ahh, talvez da próxima vez...";
+				next;
+			}
+		}
+		if (.@SantaCardWins < 3) {
+			mes "["+strcharinfo(0)+"]";
+			mes "Essa foi apenas sorte. Deixe-me tentar";
+			mes "de novo!!";
+			next;
+			mes "[Papai Noel]";
+			mes "Volte sempre que você quiser.";
+			close;
+		} else {
+			mes "[Papai Noel]";
+			mes "Você é tão bom!";
+			next;
+			mes "[Papai Noel]";
+			mes "Agora, este presente é para você. Coloque sua";
+			mes "mão na sacola e escolha apenas";
+			mes "um presente.";
+			set .@SantaCardPrize, rand(1,12);
+			next;
+			if (.@SantaCardPrize == 1) {
+				getitem 12354,2;
+			}
+			else if (.@SantaCardPrize == 2) {
+				getitem 595,3;
+			}
+			else if (.@SantaCardPrize == 3) {
+				getitem 593,3;
+			}
+			else if (.@SantaCardPrize == 4) {
+				getitem 12236,3;
+			}
+			else if (.@SantaCardPrize == 5) {
+				getitem 538,10;
+			}
+			else if (.@SantaCardPrize == 6) {
+				getitem 14546,10;
+			}
+			else if (.@SantaCardPrize == 7) {
+				getitem 5136,1;
+			}
+			else if (.@SantaCardPrize == 8) {
+				getitem 603,1;
+			}
+			else if (.@SantaCardPrize == 9) {
+				getitem 12130,1;
+			}
+			else if (.@SantaCardPrize == 10) {
+				getitem 14550,10;
+			}
+			else if (.@SantaCardPrize == 11) {
+				getitem 12132,3;
+			}
+			else if (.@SantaCardPrize == 12) {
+				getitem 594,3;
+			}
+			set SantaCardTime,gettimetick(2)+3600;
+			mes "[Papai Noel]";
+			mes "Bom trabalho! Obrigado por jogar o";
+			mes "jogo de cartas comigo! Feliz";
+			mes "Natal!";
+			close;
+		}
+
+	case 4:
+		mes "[Papai Noel]";
+		mes "Quer dizer que os jovens";
+		mes "gostam dos meus trajes de";
+		mes "Papai Noel!?!";
+		mes "Ele é leve, elegante, e";
+		mes "te mantém quente!";
+		close;
+
+	case 5:
+		mes "[Papai Noel]";
+		mes "........................";
+		next;
+		mes "[Papai Noel]";
+		mes "........................";
+		if (Sex) {
+			mes "Oh! Pobre garoto...";
+		} else {
+			mes "Oh! Pobre garota...";
+		}
+		next;
+		mes "[Papai Noel]";
+		mes "........................";
+		if (Sex) {
+			mes "Oh! Pobre garoto...";
+		} else {
+			mes "Oh! Pobre garota...";
+		}
+		mes "...";
+		next;
+		mes "[Papai Noel]";
+		mes "Você deve abrir seu coração para o";
+		mes "espírito Natalino!";
+		mes "Uma vez que você fizer isso, sei que você será capaz";
+		mes "de pensar em algo.";
+		close;
+	}
+}
+
+payon,171,109,4	duplicate(08santa)	Papai Noel#0801	4_M_SANTA
+prontera,156,285,4	duplicate(08santa)	Papai Noel#0802	4_M_SANTA
+alberta,117,66,4	duplicate(08santa)	Papai Noel#0803	4_M_SANTA
+geffen,119,70,4	duplicate(08santa)	Papai Noel#0804	4_M_SANTA
+morocc,158,104,4	duplicate(08santa)	Papai Noel#0805	4_M_SANTA
+
+
+// ========= Louise Kim - Roupa de Papai Noel ==========
+// =====================================================
+xmas_in,89,92,4	script	Louise Kim#iROxmas08	4_F_06,{
+	mes "[Louise Kim]";
+	mes "Eu sempre pensei sobre como é chato";
+	mes "o Papai Noel estar usando um traje";
+	mes "muito feio!";
+	next;
+	mes "[Louise Kim]";
+	mes "Eu poderia fazer um novo mais glamouroso para";
+	mes "ele!";
+	next;
+	mes "[Louise Kim]";
+	mes "Uma vez, fiz uma fantasia para o";
+	mes "Antonio!";
+	mes "Ele é tão difícil de";
+	mes "ser capturado porque";
+	mes "minhas roupas o abençoaram";
+	mes "com boa sorte!";
+	next;
+	emotion e_lv;
+	mes "[Louise Kim]";
+	mes "Ei perdedor! Você pode compartilhar o meu senso";
+	mes "da moda e usar da minha opinião se você";
+	mes "executar uma missão para mim.";
+	next;
+	mes "[Louise Kim]";
+	mes "Você está interessado?";
+	next;
+	if (select("Não.:Sim, por favor.") == 1) {
+		mes "[Louise Kim]";
+		mes "Ah!";
+		mes "Você é bobo! Você perdeu a sua grande";
+		mes "chance!";
+		next;
+		emotion e_heh;
+		mes "[Louise Kim]";
+		mes "Venha até mim mais tarde se";
+		mes "quiser começar a missão.";
+		mes "Eu, Louise Kim, sou generoso";
+		mes "o suficiente para aceitar da próxima.";
+		close;
+	}
+	mes "[Louise Kim]";
+	mes "Você é tão legal.";
+	next;
+	mes "[Louise Kim]";
+	mes "Não se preocupe com essa missão.";
+	mes "Não é tão difícil.";
+	mes "Eu só estou precisando de alguns";
+	mes "materiais. Coisas que estão";
+	mes "além da minha capacidade...";
+	next;
+	mes "[Louise Kim]";
+	mes "De qualquer forma, você pode me trazer algumas coisas?";
+	next;
+	if (select("Por que não? O que você precisa?:Desculpe, não há tempo.") == 2) {
+		emotion e_heh;
+		mes "[Louise Kim]";
+		mes "O quê?";
+		mes "Você definitivamente vai se arrepender.";
+		mes "Não haverá mais chances depois.";
+		close;
+	}
+	mes "[Louise Kim]";
+	mes "Tudo bem, você é legal!!";
+	mes "Você precisa me trazer: ^0000FFCamisa de Algodão,";
+	mes "3 Poções Vermelhas, Água Benta, 4 Papel de";
+	mes "Presente, Laço para Presente^000000..";
+	next;
+	mes "[Louise Kim]";
+	mes "Se você me trazer tudo isso, eu";
+	mes "posso fazer para você uma fantasia glamurosa de";
+	mes "Natal.";
+	next;
+	if (countitem(2301) < 1 || countitem(501) < 3 || countitem(523) < 1 || countitem(7175) < 4 || countitem(7174) < 1) {
+			mes "[Louise Kim]";
+			mes "Se você me trouxer todas as";
+			mes "coisas, gostaria de fazer-lhe uma maravilhosa";
+			mes "fantasia, tudo gratuito...";
+			next;
+			emotion e_lv;
+			mes "[Louise Kim]";
+			mes "Por favor, volte aqui novamente se você";
+			mes "estiver interessado.";
+			close;
+	} else {
+		select("Aqui está.");
+		emotion e_ok;
+		mes "[Louise Kim]";
+		mes "Nossa! Bom!";
+		mes "Não vamos atrasar.";
+		mes "Vou te mostrar toda a minha";
+		mes "habilidade.";
+		next;
+		mes "-Ela derrama tudo em uma panela-";
+		mes "-até a camisa vai junto!-";
+		mes "-Ela a traz para fora com habilidade-";
+		mes "-e canta muitas bênçãos.-";
+		next;
+		specialeffect 42;
+		emotion e_ho;
+		mes "[Louise Kim]";
+		mes "Pela artista, Louise Kim!";
+		mes "Todo o mundo será abençoado";
+		mes "hoje à noite!";
+		next;
+		mes "-Despeja a poção vermelha em outro pote-";
+		mes "-em seguida, mistura tudo.-";
+		mes "-Coloca a camisa de algodão e";
+		mes "-a tinge com o coração agradecido.-";
+		mes "-Fio por fio-";
+		mes "-Corda por corda-";
+		mes "-Conte suas bênçãos e cante!-";
+		next;
+		specialeffect 75;
+		emotion e_ho;
+		mes "[Louise Kim]";
+		mes "Pela artista, Louise Kim!";
+		mes "Todo o mundo será abençoado";
+		mes "hoje à noite!";
+		next;
+		mes "-Ela tricota a roupa-";
+		mes "-com uma agulha em forma de gancho-";
+		mes "-tudo com grande habilidade.-";
+		mes "Derrama suas bençãos,-";
+		mes "alegria e boa vontade!-";
+		next;
+		specialeffect 91;
+		emotion e_lv;
+		mes "[Louise Kim]";
+		mes "É milagroso!";
+		mes "Eu sou um gênio do mundo.";
+		mes "Artista, Louise Kim!!!";
+		next;
+		mes "[Louise Kim]";
+		mes "Tudo bem! Não é lindo?";
+		mes "Você pode chamá-lo como quiser.";
+		mes "Minha moda é radiante.";
+		mes "Eu não tenho inveja do Designer";
+		mes "Pierre.";
+		next;
+		emotion e_heh;
+		mes "[Louise Kim]";
+		mes "Eu deveria ser bem pago,";
+		mes "no entanto eu só vou deixar";
+		mes "ser de graça, por que é natal!";
+		next;
+		delitem 2301,1;
+		delitem 501,3;
+		delitem 523,1;
+		delitem 7175,4;
+		delitem 7174,1;
+		getitem 12132,1;
+		mes "[Louise Kim]";
+		mes "Vá se gabar por estar vestindo essas maravilhosas";
+		mes "roupas. Não haveria";
+		mes "nada sem mim, Louise Kim.";
+		close;
+	}
+}
+
+// MOBS de Natal
+prt_fild00,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild00,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild00,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild00,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild01,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild01,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild01,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild02,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild02,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild02,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild03,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild03,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild03,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild04,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild04,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild04,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild05,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild05,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild05,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild06,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild06,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild06,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild07,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild07,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild07,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild08,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild08,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild08,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild09,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild09,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild09,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild10,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild10,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild10,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+prt_fild11,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+prt_fild11,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+prt_fild11,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+prt_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild01,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild01,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild01,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild02,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild02,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild02,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild03,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild03,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild03,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild04,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild04,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild04,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild05,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild05,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild05,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild06,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild06,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild06,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild07,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild07,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild07,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild08,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild08,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild08,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild09,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild09,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild09,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild10,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild10,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild10,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+pay_fild11,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+pay_fild11,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+pay_fild11,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+pay_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild00,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild00,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild00,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild00,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild01,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild01,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild01,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild02,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild02,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild02,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild02,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild03,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild03,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild03,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild03,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild04,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild04,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild04,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild04,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild05,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild05,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild05,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild05,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild06,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild06,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild06,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild06,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild07,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild07,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild07,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild07,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild08,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild08,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild08,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild08,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild09,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild09,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild09,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild09,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild10,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild10,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild10,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild10,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild11,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild11,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild11,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild11,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild12,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild12,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild12,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild12,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild13,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild13,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild13,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild13,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+gef_fild14,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+gef_fild14,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+gef_fild14,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+gef_fild14,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0
+xmas_fild01,0,0,0,0	monster	Jakk Natalino	JAKK_XMAS,5,0,0,0
+xmas_fild01,0,0,0,0	monster	Goblin Natalino	GOBLINE_XMAS,5,0,0,0
+xmas_fild01,0,0,0,0	monster	Cookie Natalino	COOKIE_XMAS,5,0,0,0
+xmas_fild01,0,0,0,0	monster	Antonio	ANTONIO,1,0,0,0

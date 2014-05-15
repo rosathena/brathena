@@ -1,0 +1,370 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: Quest Habilidade de Platina: Sacerdote |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.3b/1.5/1.1                        |
+//   |--------------------------------------------------------|
+//   | Descrição: Quest da habilidade Martírio                |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Cabeçalho Criado [Holy]                            |
+//   | 1.1 Tradução PT-BR [Holy]                              |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+prt_church,111,112,1	script	Irmã Lina	1_F_PRIEST,{
+	if (BaseJob == Job_Priest) {
+		if (SACERDOTE_HB == 100) {
+			if (getskilllv("PR_REDEMPTIO") == 0) {
+				mes "[Irmã Lina]";
+				mes "Hum? Nós já nos conhecemos antes,";
+				mes "não foi? Todos";
+				mes "os sacerdotes começam a parecerem";
+				mes "os mesmos depois de um tempo.";
+				mes "Ah, você foi um dos";
+				mes "a quem ensinei o Martírio?";
+				next;
+				mes "[Irmã Lina]";
+				mes "Você esqueceu, certo?";
+				mes "Bem, isso não é nenhum problema para mim,";
+				mes "posso ensiná-lo novamente. Essa habilidade permite que você reviva os membros";
+				mes "de seu grupo que estejam mortos através do sacrifício";
+				mes "de sua própria vida.";
+				next;
+				mes "[Irmã Lina]";
+				mes "^3131FFÓ santo e venerável,";
+				mes "nós oramos para você. Por favor mostre";
+				mes "a sua misericórdia e nos guie";
+				mes "com sua luz. Nos dê a";
+				mes "força para caminhar no caminho do";
+				mes "amor e do sacrifício. Martírio!^000000";
+				skill "PR_REDEMPTIO",1,0;
+				next;
+				mes "[Irmã Lina]";
+				mes "Acho que...";
+				mes "Você deve ser capaz";
+				mes "de utilizar o Martírio";
+				mes "agora. Eu espero que você use-o";
+				mes "de forma correta em suas aventuras~";
+				close;
+			}
+			else {
+				mes "[Irmã Lina]";
+				mes "Eu sempre estarei orando";
+				mes "por sua segurança. Seja cuidadoso,";
+				mes "e eu espero que você possa trazer";
+				mes "amor e compaixão para todos";
+				mes "que encontrar em sua jornada.";
+				close;
+			}
+		}
+		else if (SACERDOTE_HB == 0) {
+			set martir,1014;
+			if (getskilllv("PR_REDEMPTIO")) {
+				mes "[Irmã Lina]";
+				mes "Eu sempre estarei orando";
+				mes "por sua segurança. Seja cuidadoso,";
+				mes "e eu espero que você possa trazer";
+				mes "amor e compaixão para todos";
+				mes "que encontrar em sua jornada.";
+				set SACERDOTE_HB,100;
+				close;
+			}
+			mes "[Irmã Lina]";
+			mes "Por favor tenha misericórdia";
+			mes "e espalhe sua luz";
+			mes "pelo mundo. Guie-a com";
+			mes "sua benevolência e sua sabedoria...";
+		  mes "Abençoe, e que ela possa";
+		  mes "ser protegida pela sua graça.";
+			next;
+			select("Por quem você está orando?");
+			mes "[Irmã Lina]";
+			mes "Nossa! Você me assustou!";
+			mes "Por quem estou orando?";
+			mes "Bem, certa vez conheci uma jovem,";
+			mes "religiosa e brincalhona que";
+			mes "também era sem nenhum tipo de vergonha. Eu tenho";
+			mes "muitas recordações alegres dela...";
+			next;
+			mes "[Irmã Lina]";
+			mes "Um dia, um grupo de aventureiros";
+			mes "veito até a ^FFFFFFIgreja de Prontera^000000 na esperança da contratação de um sacerdote para acompanhá-los";
+			mes "até ^3131DDGlast Heim^000000. Mas ela deveria ser a única";
+			mes "Noviça que pretendia se tornar Sacerdotisa a estar disponível.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Eu me lembro que ela era";
+			mes "tão determinada a se juntar aos";
+			mes "aventureiros, e não tínhamos";
+			mes "escolha a não ser deixá-la ir.";
+			mes "Ainda assim, muitos de nós acreditávamos";
+			mes "que era muito perigoso...";
+			next;
+			mes "[Irmã Lina]";
+			mes "Ouvi dizer que, num primeiro momento, a sua";
+			mes "desorganizada equipe foi capaz de";
+			mes "exterminar um grande número de monstros,";
+			mes "mas apoiando-os como um sacerdote";
+			mes "deve ter sido difícil para ela...";
+			next;
+			mes "[Irmã Lina]";
+			mes "Em seguida, aconteceu a tragédia.";
+			mes "Cercados por Andarilhos,";
+			mes "os aventureiros caíram";
+			mes "em derrota, um por um. Logo,";
+			mes "a jovem Sacerdotisa era a única do grupo ainda de pé.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Sozinha contra uma impossível";
+			mes "probabilidade, aquela pobre menina não tinha";
+			mes "escolha a não ser tentar uma desesperada";
+			mes "aposta. Ela começou a entoar";
+			mes "a santa magia antiga...";
+			next;
+			select("Antiga magia...?");
+			mes "[Irmã Lina]";
+			mes "Sim! ^FF0000Martírio^000000!";
+			mes "Uma habilidade que só os";
+			mes "mais talentoso Sacerdotes";
+			mes "podem realizar! E aqui ela";
+			mes "era, uma jovem Sacerdotisa com muita";
+			mes "pouca experiência, e estava tentando usá-la!";
+			next;
+			mes "[Irmã Lina]";
+			mes "Martírio é a última";
+			mes "habilidade-recurso que pode ser";
+			mes "utilizada nobremente para salvar";
+			mes "vidas de outras pessoas, ao custo";
+			mes "de ^3131FFsacrificar sua própria vida^000000.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Sim, também me lembro";
+			mes "que ela não estava muito interessada";
+			mes "em estudar as habilidades de Sacerdote e";
+			mes "as de Noviço. Surpreendentemente,";
+			mes "ela tinha aprendido o suficiente para";
+			mes "utilizar o Martírio...";
+			next;
+			mes "[Irmã Lina]";
+			mes "Milagrosamente, ela conseguiu";
+			mes "reviver todos os membros do seu grupo.";
+			mes "E eles usaram rapidamente um Fruto de Yggdrasil";
+			mes "para restaurarem suas vidas, e logo derrotaram os Andarilhos e";
+			mes "voltaram para casa em segurança.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Devido a este sucesso, ela";
+			mes "foi promovida a Suma Sacerdotisa,";
+			mes "mesmo tendo cometido muitos";
+			mes "erros no passado. Agora, ela viaja o mundo ajudando os aventureiros";
+			mes "da forma como pode.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Mas, bem, ela";
+			mes "será sempre corajosa";
+			mes "e uma menina alegre para mim.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Espere, você ainda não";
+			mes "respondeu a minha pergunta.";
+			mes "Você está orando por essa";
+			mes "Sumo Sacerdotisa? E se sim, ela";
+			mes "corre algum tipo de perigo?";
+			next;
+			mes "[Irmã Lina]";
+			mes "A alguns meses atrás,";
+			mes "ela foi até uma missão em";
+			mes "^3131FFLighthalzen^000000, uma cidade";
+			mes "da República de Schwartzwald. E eu estou";
+			mes "preocupado já que não";
+			mes "ouço falar dela faz um tempo.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Eu venho aqui para rezar por";
+			mes "ela todos os dias, na esperança de que";
+			mes "ela volte em segurança e";
+			mes "compartilhe histórias de suas aventuras";
+			mes "comigo. Ah, iremos conversar a noite inteira! Será muito divertido!";
+			next;
+			mes "[Irmã Lina]";
+			mes "Deus, acho";
+			mes "que falei muito! Me";
+			mes "desculpe por tomar seu tempo, você";
+			mes "tem algum lugar para ir? Quero que saiba,";
+			mes "que eu estarei orando por sua segurança~ ^FFFFFF~^000000";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Antes de ir, por favor";
+			mes "pode me dizer o nome da";
+			mes "Suma Sacerdotisa que você estava";
+			mes "falando? Se eu vê-la,";
+			mes "irei pedir para que ela entre em contato com você.";
+			next;
+			mes "[Irmã Lina]";
+			mes "Ah, muito obrigado! O nome dela";
+			mes "é Suma Sacerdotisa Sorin. Melhor,";
+			mes "^3131FFMargaretha Sorin^000000. Se você";
+			mes "por acaso encontrá-la, por favor";
+			mes "diga a ela que eu estou";
+			mes "orando por sua segurança.";
+			set SACERDOTE_HB,1;
+			close;
+		}
+		else if (SACERDOTE_HB == 1) {
+			mes "[Irmã Lina]";
+			mes "Olá~";
+			mes "Como você está hoje";
+			next;
+			if (select("Por favor me ensine o ^3131FFMartírio^000000.:Cancelar") == 1) {
+				mes "[Irmã Lina]";
+				mes "Hum, Martírio é";
+				mes "uma boa habilidade para você aprender~";
+				mes "É difícil de utilizá-la, mas quando conseguir, você poderá reviver todos";
+				mes "os membros derrotados do seu Grupo.";
+				next;
+				mes "[Irmã Lina]";
+				mes "Naturalmente, a desvantagem";
+				mes "é que você deve ^3131FFsacrificar";
+				mes "sua própria vida^000000 afim de";
+				mes "usar a habilidade. Agora, vamos aprender o";
+				mes "Martírio, primeiro você deve";
+				mes "aprender a ^3131FFRessurreição no Nível 1^000000.";
+				next;
+				mes "[Irmã Lina]";
+				mes "Ah, você deve";
+				mes "também me trazer";
+				mes "^3131FF30 Águas Benta e";
+				mes "20 Gemas Azul^000000";
+				mes "assim você poderá";
+				mes "aprender a habilidade.";
+				set SACERDOTE_HB,2;
+				next;
+				mes "[Irmã Lina]";
+				mes "Mas se você falhar ao";
+				mes "aprender Martírio, você irá";
+				mes "perder 1 Água Benta e";
+				mes "1 Gema Azul e";
+				mes "você terá que tentar novamente...";
+				close;
+			}
+			mes "[Irmã Lina]";
+			mes "Orar me dá um";
+			mes "senso de paz e";
+			mes "conforto. Talvez essa";
+			mes "seja a única razão";
+			mes "para que eu escolhesse essa classe...";
+			close;
+		}
+		else if (SACERDOTE_HB == 2) {
+			if (getskilllv("ALL_RESURRECTION") > 0) {
+				if (countitem(523) > 29 && countitem(717) > 19) {
+					mes "[Irmã Lina]";
+					mes "Parece que você possui";
+					mes "todos os requisitos";
+					mes "necessários para aprender o Martírio.";
+					mes "Você está pronto para tentar? Se você";
+					mes "falhar, você irá perder 1 Água Benta";
+					mes "e 1 Gema Azul, certo?";
+					next;
+					mes "[Irmã Lina]";
+					mes "Agora, por favor";
+					mes "concentre-se e repita";
+					mes "essa oração especial logo depois de mim.";
+					next;
+					mes "[Irmã Lina]";
+				  mes "^3131FFÓ santo e venerável,";
+				  mes "nós oramos para você. Por favor mostre";
+				  mes "a sua misericórdia e nos guie";
+				  mes "com sua luz. Nos dê a";
+				  mes "força para caminhar no caminho do";
+				  mes "amor e do sacrifício. Martírio!^000000";
+					next;
+					set .@martir_s,JobLevel+getskilllv("ALL_RESURRECTION");
+					set .@martir_r,rand(1,100);
+					if ( .@martir_s < 31 ) {
+						if ( .@martir_r > 20 && .@martir_r < 41 )
+							set .@sucesso,1;
+					} else if ( .@martir_s < 41 ) {
+						if ( .@martir_r > 10 && .@martir_r < 41 )
+							set .@sucesso,1;
+					} else {
+						if ( .@martir_r > 10 && .@martir_r < 51 )
+							set .@sucesso,1;
+					}
+
+					if (.@sucesso) {
+						specialeffect2 EF_HEALSP;
+						mes "[Irmã Lina]";
+						mes "Parabéns!";
+						mes "Você conseguiu";
+						mes "aprender o Martírio!";
+						mes "Por favor lembre de";
+						mes "usar essa habilidade apenas em";
+						mes "situações críticas.";
+						delitem 717,20; //Gema Azul
+						delitem 523,30; //Água Benta
+						set SACERDOTE_HB,100;
+						skill "PR_REDEMPTIO",1,0;
+						close;
+					}
+					else {
+						specialeffect2 EF_POISONHIT;
+						mes "[Irmã Lina]";
+						mes "Ah não! Me desculpe,";
+						mes "mas eu falhei ao";
+						mes "ensinar Martírio. Bem,";
+						mes "eu estarei esperando aqui,";
+						mes "para que possamos tentar novamente quando";
+						mes "você estiver pronto, certo?";
+						delitem 717,1; //Gema Azul
+						delitem 523,1; //Água Benta
+						close;
+					}
+
+				}
+				else {
+					mes "[Irmã Lina]";
+					mes "Se você deseja aprender";
+					mes "o Martírio, por favor me traga";
+					mes "^3131FF20 Gemas Azul^000000 e";
+					mes "^3131FF30 Águas Benta^000000. Ah, e";
+					mes "também é necessário aprender antes ^3131FFResurreição";
+					mes "Nível 1^000000.";
+					close;
+				}
+			}
+			else {
+				mes "[Irmã Lina]";
+				mes "Se você deseja aprender";
+				mes "o Martírio, por favor me traga";
+				mes "^3131FF20 Gemas Azui^000000 e";
+				mes "^3131FF30 Águas Benta^000000. Ah, e";
+				mes "também é necessário aprender antes ^3131FFResurreição";
+				mes "Nível 1^000000.";
+				close;
+			}
+		}
+	}
+	else {
+		mes "[Irmã Lina]";
+		mes "Por favor tenha misericórdia";
+		mes "e espalhe sua luz";
+		mes "pelo mundo. Guie-a com";
+		mes "sua benevolência e sua sabedoria...";
+		mes "Abençoe, e que ela possa";
+		mes "ser protegida pela sua graça.";
+		close;
+	}
+}

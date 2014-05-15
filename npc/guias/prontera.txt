@@ -1,0 +1,424 @@
+//    ________________________________________________________
+//   /                                                        \
+//   |       _           _   _   _                            |
+//   |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+//   |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+//   |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+//   |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+//   |                                                        |
+//   |                    brAthena Script                     |
+//   |--------------------------------------------------------|
+//   | Nome do Script: prontera.txt                           |
+//   |--------------------------------------------------------|
+//   | Criado por: eA/rA/brA Dev. Team                        |
+//   |--------------------------------------------------------|
+//   | Versões eA/rA/brA: 1.0/1.1/1.4                         |
+//   |--------------------------------------------------------|
+//   | Descrição: Guias da Cidade de Prontera.                |
+//   |--------------------------------------------------------|
+//   | Changelog:                                             |
+//   | 1.0 Criado Cabeçalho [Megasantos]                      |
+//   | 1.1 Otimização [Holy & Hold]                           |
+//   | 1.2 Tradução PT-BR [Holy & Protimus]                   |
+//   | 1.3 Formatação nos Diálogos [lututuiBR & Holy]         |
+//   | 1.4 Atualização no sistema de navegação [lututuiBR]    |
+//   |--------------------------------------------------------|
+//   | - Anotações                                            |
+//   \________________________________________________________/
+
+prontera,154,187,4	script	Guia#01prontera	8W_SOLDIER,{
+	cutin "prt_soldier",2;
+	mes "[Guia de Prontera]";
+	if (checkversion(0) == 1) {
+		mes "Bem-vindo a ^8B4513Prontera^000000, a linda Capital do Reino de Rune-Midgard.";
+		mes "Você deseja conhecer a cidade?";
+		F_Navi("[Guia de Prontera]");
+		set .@str$, "Gostaria de verificar outras localizações?";
+		next;
+		while (1) {
+			switch(select("[ Principais Lugares ]:[ Mercadores & Ajudantes ]:Remover marcadores do mini-mapa:Cancelar")) {
+			case 1:
+				set .@loop,1;
+				while (.@loop) {
+					switch(select("[ Loja de Utilidades ]:[ Loja de Armas & Armaduras ]:[ Forja ]:[ Santuário ]:[ Oficial da Cavalaria ]:[ Estalagem ]:[ Taverna ]:[ Livraria ]:[ Castelo de Prontera ]:[ Casa em Prontera ]:[ Prefeitura ]:Menu Anterior")) {
+					case 1:
+						callsub L_Mark, F_Navi("Loja de Utilidades","prontera,134,221","^B9062F");
+						mes .@str$;
+						viewpoint 1,134,221,0,0xFF0000;
+						next;
+						break;
+					case 2:
+						callsub L_Mark, F_Navi("Loja de Armas & Armaduras","prontera,175,220","^0000FF");
+						mes .@str$;
+						viewpoint 1,175,220,1,0x0A82FF;
+						next;
+						break;
+					case 3:
+						callsub L_Mark, F_Navi("Forja","prontera,179,184","^FF5400");
+						mes .@str$;
+						viewpoint 1,179,184,2,0xFFB400;
+						next;
+						break;
+					case 4:
+						mes "[Guia de Prontera]";
+						mes "O "+F_Navi("Santuário de Prontera","prontera,236,316","^006400")+" é o lugar onde é possível se tornar um Noviço, ele está localizado no extremo nordeste de Prontera.";
+						mes "Deixe-me marcar para você a localização em seu mini-mapa. Gostaria de verificar outras localizações?";
+						viewpoint 1,236,316,3,0xAAFF00;
+						next;
+						break;
+					case 5:
+						mes "[Guia de Prontera]";
+						mes "O "+F_Navi("Oficial da Cavalaria","prontera,46,345")+" estará disponível lá caso você queira se tornar um ^7F3300Cavaleiro^000000 ou se inscrever para o ^7F3300Esgoto^000000.";
+						mes .@str$;
+						viewpoint 1,46,345,4,0xD2691E;
+						next;
+						break;
+					case 6:
+						callsub L_Mark, F_Navi("Estalagem","prontera,203,191","^800080");
+						mes .@str$;
+						viewpoint 1,204,191,5,0xDA70D6;
+						next;
+						break;
+					case 7:
+						callsub L_Mark, "^B9062FTavernas^000000";
+						mes "Apenas a taverna do "+F_Navi("norte","prontera,208,154","^B9062F")+" está aberta por enquanto.";
+						mes .@str$;
+						viewpoint 1,208,154,6,0xFF0000;
+						viewpoint 1,46,67,7,0xFF0000;
+						next;
+						break;
+					case 8:
+						mes "[Guia de Prontera]";
+						mes "A ^0000FFLivraria^000000 é onde você poderá encontrar informações úteis, como a Enciclopédia de Monstros.";
+						mes "Atualmente existem duas Bibliotecas na área norte de Prontera.";
+						mes "Uma a "+F_Navi("nordeste","prontera,120,264")+" e a outra a "+F_Navi("noroeste","prontera,192,264")+".";
+						mes .@str$;
+						viewpoint 1,120,264,8,0x0A82FF;
+						viewpoint 1,192,264,9,0x0A82FF;
+						next;
+						break;
+					case 9:
+						mes "[Guia de Prontera]";
+						mes "O "+F_Navi("Castelo de Prontera","prontera,156,360","^FF5400")+" está ao norte daqui, e seu portão de trás está inteligado ao norte dos Campos de Prontera.";
+						mes "Deixe me marcar o Castelo em seu mini-mapa.";
+						mes .@str$;
+						viewpoint 1,156,360,10,0xFFB400;
+						next;
+						break;
+					case 10:
+						callsub L_Mark, F_Navi("Casa em Prontera","prontera,133,183","^006400");
+						mes .@str$;
+						viewpoint 1,133,183,11,0xAAFF00;
+						next;
+						break;
+					case 11:
+						mes "[Guia de Prontera]";
+						mes "Deixe-me marcar para você a localização da "+F_Navi("Prefeitura","prontera,75,91","^7F3300")+" em seu mini-mapa.";
+						mes "Há um cabelereiro lá que pode mudar a cor de seu cabelo.";
+						mes .@str$;
+						viewpoint 1,75,91,12,0xD2691E;
+						next;
+						break;
+					case 12:
+						set .@loop,0;
+						break;
+					}
+				}
+				break;
+			case 2:
+				set .@loop,1;
+				while (.@loop) {
+					switch(select("[ Oficial de Teletransporte do Éden ]:[ Criador de Pecopecos ]:[ Domador de Feras ]:[ Artilheiro Mágico ]:[ Removedor de Peco Pecos ]:[ Comerciantes ]:[ Guilda de Mercenários ]:[ Hipnotizadora ]:[ Funcionárias Kafra ]:[ Leablem ]:[ Aprendiz de Artesão ]:[ Loja de Bichinhos ]:Menu Anterior")) {
+					case 1:
+						callsub L_Mark, F_Navi("Oficial de Teletransporte do Éden","prontera,124,76","^800080"),1;
+						mes .@str$;
+						viewpoint 1,124,76,13,0xDA70D6;
+						next;
+						break;
+					case 2:
+						mes "[Guia de Prontera]";
+						mes "Dois ^0000FFCriadores de Pecopecos^000000 estão disponíveis, um para ^0000FFCavaleiros^000000 a "+F_Navi("noroeste","prontera,55,350","^0000FF")+" e o outro para ^0000FFTemplários^000000 a "+F_Navi("nordeste","prontera,232,310","^0000FF")+".";
+						viewpoint 1,55,350,14,0x0A82FF;
+						viewpoint 1,232,310,15,0x0A82FF;
+						next;
+						break;
+					case 3:
+						mes "[Guia de Prontera]";
+						mes "O "+F_Navi("Domador de Criaturas","prontera,131,213","^FF5400")+" fornece serviços para ^FF5400Cavaleiros Rúnicos^000000 e ^FF5400Guardiões Reais^000000.";
+						mes "Deixe-me marcar para você a sua localização em seu mini-mapa. Gostaria de verificar outras localizações?";
+						viewpoint 1,131,213,16,0xFFB400;
+						next;
+						break;
+					case 4:
+						mes "[Guia de Prontera]";
+						mes "O "+F_Navi("Artilheiro Mágico","prontera,163,178","^006400")+" fornece serviços para ^006400Mecânicos^000000.";
+						mes "Deixe-me marcar para você a sua localização em seu mini-mapa.";
+						mes .@str$;
+						viewpoint 1,163,178,17,0xAAFF00;
+						next;
+						break;
+					case 5:
+						mes "[Guia de Prontera]";
+						mes "Se você estiver interessado em remover seu Peco Peco, por favor fale com o "+F_Navi("Removedor de Peco Pecos","prontera,125,208","^7F3300")+" próximo a fonte central.";
+						mes .@str$;
+						viewpoint 1,125,208,18,0xD2691E;
+						next;
+						break;
+					case 6:
+						mes "[Guia de Prontera]";
+						mes "O Vendedor de Runas, o Vendedor de Amatsu e outros "+F_Navi("comerciantes","prontera,178,244","^800080")+" foram marcados em seu mini-mapa.";
+						mes .@str$;
+						viewpoint 1,168,228,19,0xDA70D6;
+						next;
+						break;
+					case 7:
+						callsub L_Mark, F_Navi("Locador de Mercenários","prontera,35,337","^0000FF"),1;
+						mes .@str$;
+						viewpoint 1,35,337,20,0x0A82FF;
+						next;
+						break;
+					case 8:
+						mes "[Guia de Prontera]";
+						mes "A ^FF5400Hipnotizadora^000000 ajuda avetureiros iniciantes a resetarem suas habilidades.";
+						mes "Ela foi movida para Izlude, a cidade-satélite de Prontera a sudeste.";
+						mes .@str$;
+						//viewpoint 1,146,232,21,0xFFB400;
+						next;
+						break;
+					case 9:
+						callsub L_Mark, "^006400Funcionárias Kafra^000000",1;
+						mes .@str$;
+						viewpoint 1,152,326,22,0xAAFF00;
+						viewpoint 1,30,207,23,0xAAFF00;
+						viewpoint 1,282,200,24,0xAAFF00;
+						viewpoint 1,151,29,25,0xAAFF00;
+						viewpoint 1,146,89,26,0xAAFF00;
+						next;
+						break;
+					case 10:
+						mes "[Guia de Prontera]";
+						mes F_Navi("Leablem","prontera,244,169","^0000FF")+" é um técnico que pode adicionar ^0000FFslots^000000 em armas e armaduras.";
+						mes .@str$;
+						viewpoint 1,244,169,27,0x0A82FF;
+						next;
+						break;
+					case 11:
+						callsub L_Mark, F_Navi("Aprendiz de Artesão","prontera,165,60","^800080"),1;
+						mes .@str$;
+						viewpoint 1,165,60,28,0xDA70D6;
+						next;
+						break;
+					case 12:
+						callsub L_Mark, F_Navi("Loja de Bichinhos","prontera,218,211"),1;
+          				mes .@str$;
+          				viewpoint 1,218,211,29,0xFF0000;
+						next;
+						break; 
+					case 13:
+						set .@loop,0;
+						break;
+					}
+				}
+				break;
+			case 3:
+				mes "[Guia de Prontera]";
+				mes "Claro, irei remover todos os pontos marcados de seu mini-mapa.";
+				mes "Há mais algo que eu possa fazer por você?";
+				viewpoint 2,1,1,0,0xFFFF00;
+				viewpoint 2,1,1,1,0x000000;
+				viewpoint 2,1,1,2,0xFF0000;
+				viewpoint 2,1,1,3,0xFFFF00;
+				viewpoint 2,1,1,4,0xFFFF00;
+				viewpoint 2,1,1,5,0xFFFF00;
+				viewpoint 2,1,1,6,0xFFFF00;
+				viewpoint 2,1,1,7,0xFFFF00;
+				viewpoint 2,1,1,8,0xFFFF00;
+				viewpoint 2,1,1,9,0xFFFF00;
+				viewpoint 2,1,1,10,0xFFFF00;
+				viewpoint 2,1,1,11,0xFFFF00;
+				viewpoint 2,1,1,12,0xFFFF00;
+				viewpoint 2,1,1,13,0xFFFF00;
+				viewpoint 2,1,1,14,0xFFFF00;
+				viewpoint 2,1,1,15,0xFFFF00;
+				viewpoint 2,1,1,16,0xFFFF00;
+				viewpoint 2,1,1,17,0xFFFF00;
+				viewpoint 2,1,1,18,0xFFFF00;
+				viewpoint 2,1,1,19,0xFFFF00;
+				viewpoint 2,1,1,20,0xFFFF00;
+				//viewpoint 2,1,1,21,0xFFFF00;
+				viewpoint 2,1,1,22,0xFFFF00;
+				viewpoint 2,1,1,23,0xFFFF00;
+				viewpoint 2,1,1,24,0xFFFF00;
+				viewpoint 2,1,1,25,0xFFFF00;
+				viewpoint 2,1,1,26,0xFFFF00;
+				viewpoint 2,1,1,27,0xFFFF00;
+				viewpoint 2,1,1,28,0xFFFF00;
+				viewpoint 2,1,1,29,0xFFFF00;
+				next;
+				break;
+			case 4:
+				mes "[Guia de Prontera]";
+				mes "Aproveite sua estadia.";
+				close2;
+				cutin "prt_soldier",255;
+				end;
+			}
+		}
+	} else {
+		mes "Bem-vindo a Prontera, capital de Midgard.";
+		mes "Nós estamos aqui para ajudar os visitantes da cidade.";
+		mes "Se você tem alguma dúvida, consulte-nos.";
+		mes "Se esta é a sua primeira vez utilizando um guia, por favor selecione 'Tutorial'.";
+		set .@loop1,1;
+		while (.@loop1) {
+			next;
+			switch(select("Indicações.:Limpar indicações do minimapa.:Tutorial.:Cancelar")) {
+			case 1:
+				mes "[Guia de Prontera]";
+				mes "Por favor, selecione uma das opções.";
+				if (.@compass_check == 0) {
+					mes "Você gostaria que as indicações permaneçam no mini-mapa?";
+					next;
+					if (select("Sim:Não") == 1) set .@compass_check,1;
+				}
+				set .@loop2,1;
+				while (.@loop2) {
+					if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+					else next;
+		
+					switch(select("Associação dos Espadachins.:^0000FFCatedral^000000.:Cavalaria de Prontera.:Loja de Armas.:Loja de Ferramentas.:Estalagem.:Posto de Trocas.:Bar.:Biblioteca.:Agência de Empregos.:Castelo de Prontera.:Prefeitura.:Cancelar")) {
+					case 1:
+						mes "[Guia de Prontera]";
+						mes "A Associação dos Espadachins, aonde pode-se tornar um deles, foi mudada para a nossa cidade satelite, Izlude.";
+						mes "Agora temos apenas um prédio vazio";
+						if (.@compass_check)
+							viewpoint 1,237,41,4,0x00FF00;
+						break;
+					case 2:
+						mes "[Guia de Prontera]";
+						mes "A 'Catedral' se encontra na ponta nordeste da cidade, lá é possivel se tornar um Noviço.";
+						if (.@compass_check)
+							viewpoint 1,236,316,5,0xFF0000;
+						break;
+					case 3:
+						mes "[Guia de Prontera]";
+						mes "A 'Cavalaria de Prontera' se encontra na ponta nordeste da cidade.";
+						mes "É lá que Espadachins se tornam Cavaleiros.";
+						if (.@compass_check)
+							viewpoint 1,46,345,6,0x00FF00;
+						break;
+					case 4:
+						mes "[Guia de Prontera]";
+						mes "A 'Loja de Armas' se encontra ao nordeste da fonte, no centro da cidade.";
+						if (.@compass_check)
+							viewpoint 1,175,220,7,0xFF00FF;
+						break;
+					case 5:
+						mes "[Guia de Prontera]";
+						mes "A 'Loja de Ferramentas' se encontra a noroeste da fonte, no centro da cidade.";
+						if (.@compass_check)
+							viewpoint 1,134,221,8,0xFF00FF;
+						break;
+					case 6:
+						mes "[Guia de Prontera]";
+						mes "A 'Estalagem' se encontra tanto do lado leste quando do oeste da fonte, no centro da cidade.";
+						if (.@compass_check) {
+							viewpoint 1,204,191,9,0xFF00FF;
+							viewpoint 1,107,192,10,0xFF00FF;
+						}
+						break;
+					case 7:
+						mes "[Guia de Prontera]";
+						mes "O 'Posto de Troca' se encontra ao sudeste da fonte, no centro da cidade.";
+						if (.@compass_check)
+							viewpoint 1,179,184,11,0x00FF00;
+						break;
+					case 8:
+						mes "[Guia de Prontera]";
+						mes "O 'Bar' se encontra ao sudeste da fonte, atrás do Posto de Troca, no centro da cidade.";
+						if (.@compass_check)
+							viewpoint 1,208,154,12,0x00FF00;
+						break;
+					case 9:
+						mes "[Guia de Prontera]";
+						mes "Se você for um pouco para o nordeste, a partir da fonte no centro da cidade, você encontrará os dois prédios da 'Biblioteca'";
+						if (.@compass_check) {
+							viewpoint 1,120,267,13,0x00FF00;
+							viewpoint 1,192,267,14,0x00FF00;
+						}
+						break;
+					case 10:
+						mes "[Guia de Prontera]";
+						mes "A 'Agencia de Empregos' se encontra a sudoeste da fonte, no centro da cidade.";
+						if (.@compass_check)
+							viewpoint 1,133,183,15,0x00FF00;
+						break;
+					case 11:
+						mes "[Guia de Prontera]";
+						mes "O 'Castelo de Prontera' se encontra no extremo norte da  cidade.";
+						mes "Você pode atravessar o Castelo, você chegará ao campos nortes.";
+						if (.@compass_check)
+							viewpoint 1,156,360,16,0x00FF00;
+						break;
+					case 12:
+						mes "[Guia de Prontera]";
+						mes "A 'Prefeitura da Cidade' se encontra na ponta sudoeste da cidade.";
+						if (.@compass_check)
+							viewpoint 1,75,91,17,0x01FF01;
+						break;
+					case 13:
+						mes "[Guia de Prontera]";
+						mes "Se você deseja apagar as indicações do seu mini-mapa, por favor selecione 'Limpar indicações'.";
+						set .@loop2,0;
+						break;
+					}
+				}
+				break;
+			case 2:
+				viewpoint 2,237,41,4,0x00FF00;
+				viewpoint 2,237,41,5,0x0000FF;
+				viewpoint 2,46,345,6,0x00FF00;
+				viewpoint 2,175,220,7,0xFF0000;
+				viewpoint 2,134,221,8,0xFF0000;
+				viewpoint 2,204,191,9,0xFF0000;
+				viewpoint 2,107,192,10,0xFF0000;
+				viewpoint 2,179,184,11,0x00FF00;
+				viewpoint 2,208,154,12,0x00FF00;
+				viewpoint 2,120,267,13,0x00FF00;
+				viewpoint 2,192,267,14,0x00FF00;
+				viewpoint 2,133,183,15,0x00FF00;
+				viewpoint 2,156,360,16,0x00FF00;
+				viewpoint 2,75,91,17,0x00FF00;
+				set .@compass_check,0;
+				break;
+			case 3:
+				mes "[Guia de Prontera]";
+				mes "Nós fomos exaustivamente treinados para servi-lo da melhor maneira possivel e sem falhas.";
+				mes "Assim você tem a garantia das melhores indicações possiveis.";
+				next;
+				mes "[Guia de Prontera]";
+				mes "As indicações que lhe daremos podem ser marcadas no seu mini-mapa.";
+				mes "Para visualizar o seu mini-mapa, aperte 'ctrl+tab', ou clique no botão 'mapa' no menu principal.";
+				mes "Controle o seu 'zoom' no mini-mapa por meio dos símbolos '+' e '-'.";
+				break;
+			case 4:
+				mes "[Guia de Prontera]";
+				mes "Espero que você tenha uma jornada segura e aproveite sua estadia.";
+				close2;
+				set .@loop1,0;
+				break;
+			}
+		}
+		cutin "prt_soldier",255;
+		end;
+	}
+	end;
+L_Mark:
+	mes "[Guia de Prontera]";
+	mes "Deixe-me marcar a localização para "+getarg(0)+" no seu mini-mapa";
+	return; 
+}
+prontera,282,208,2	duplicate(Guia#01prontera)	Guia Leste#02prontera	8W_SOLDIER
+prontera,29,200,6	duplicate(Guia#01prontera)	Guia Oeste#03prontera	8W_SOLDIER
+prontera,160,29,0	duplicate(Guia#01prontera)	Guia Sul#04prontera	8W_SOLDIER
+prontera,151,330,4	duplicate(Guia#01prontera)	Guia Norte#05prontera	8W_SOLDIER
